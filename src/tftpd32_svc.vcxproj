@@ -21,6 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F6533807-DC90-41CD-A8E4-0785DB31B92A}</ProjectGuid>
     <RootNamespace>tftpd32_svc</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -69,7 +70,7 @@
     <OutDir>\tftpd32\BIN\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>\tftpd32\BIN\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\others\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IntDir>\tftpd32\BIN\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
@@ -78,11 +79,12 @@
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IntDir>\tftpd32\BIN\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)obj\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.exe</TargetExt>
     <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.</IncludePath>
+    <LibraryPath>$(SolutionDir)obj\$(PlatformShortName)\libs\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>\tftpd32\BIN\$(Configuration)\</OutDir>
