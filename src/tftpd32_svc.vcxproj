@@ -67,16 +67,17 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>\tftpd32\BIN\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\others\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)\others\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IntDir>\tftpd32\BIN\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)obj\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetExt>.exe</TargetExt>
     <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.</IncludePath>
+    <LibraryPath>$(SolutionDir)obj\$(PlatformShortName)\libs\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IntDir>$(SolutionDir)obj\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
@@ -87,36 +88,35 @@
     <LibraryPath>$(SolutionDir)obj\$(PlatformShortName)\libs\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>\tftpd32\BIN\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\others\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IntDir>\tftpd32\BIN\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)obj\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetExt>.exe</TargetExt>
     <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
+    <LibraryPath>$(SolutionDir)obj\$(PlatformShortName)\libs\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>\tftpd32\BIN\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\others\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>\tftpd32\BIN\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)obj\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetExt>.exe</TargetExt>
     <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
+    <LibraryPath>$(SolutionDir)obj\$(PlatformShortName)\libs\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;MSVC;TFTPD32;SERVICE_EDITION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>\tftpd32\source\_common;\tftpd32\source\%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeaderOutputFile>\Tftpd32\ipch\$(TargetName).pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>shell32.lib;ws2_32.lib;comctl32.lib;iphlpapi.lib;libs.$(PlatformShortName).lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>\tftpd32\BIN\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <Version>4.63</Version>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE,"5.01" %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -130,9 +130,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;MSVC;TFTPD32;SERVICE_EDITION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>\tftpd32\source\_common;\tftpd32\source\%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeaderOutputFile>\Tftpd32\ipch\$(TargetName).pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -154,18 +152,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;MSVC;TFTPD32;SERVICE_EDITION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>\tftpd32\source\_common;\tftpd32\source\%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <PrecompiledHeaderOutputFile>\Tftpd32\ipch\$(TargetName).pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>shell32.lib;ws2_32.lib;comctl32.lib;iphlpapi.lib;libs.$(PlatformShortName).lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>\tftpd32\BIN\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <Version>4.63</Version>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE,"5.01" %(AdditionalOptions)</AdditionalOptions>
     </Link>
