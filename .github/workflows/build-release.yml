@@ -1,0 +1,43 @@
+name: MSBuild
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+env:
+  SOLUTION_FILE_PATH: .
+  BUILD_CONFIGURATION: Release
+permissions:
+  contents: read
+jobs:
+  Build:
+    strategy:
+      matrix:
+        architecture: [x86, x64]
+    runs-on: windows-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.3.1
+      with:
+        msbuild-architecture: ${{ matrix.architecture }}
+    - name: Restore NuGet packages
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+    - name: Build
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=${{ matrix.architecture }} ${{env.SOLUTION_FILE_PATH}}
+    - name: Copy the readme and license files
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: |
+        cp license.md ./bin/Release/license.txt
+        cp readme.txt ./bin/Release/readme.txt
+    - name: Get short SHA
+      run: echo "SHORT_SHA=$("${{ github.sha }}".SubString(0, 8))" >> $env:GITHUB_ENV
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v3
+      if: ${{ github.event_name == 'push' }}
+      with:
+        name: tftpd64-${{ matrix.architecture }}-${{ env.SHORT_SHA }}
+        path: ./bin/Release/
