@@ -6,10 +6,10 @@ The code is splitted into 2 parts :
 
 They communicate together by messages sent through a TCP socket. In addition to separate processing and display, this allow a remote monitoring for the service edition.
 
-_common and _libs directories contains files which belongs to both parts.
-GUI processing is in the _gui directory.
-Demon and background processing is found into _services directory.
-Initializations are in the _main directory
+common and libs directories contains files which belongs to both parts.
+GUI processing is in the gui directory.
+Demon and background processing is found into services directory.
+Initializations are in the main directory
 
 tftpd32.sln and .vcxproj files are the project files necessary for building the executables with Visual Studio.
 

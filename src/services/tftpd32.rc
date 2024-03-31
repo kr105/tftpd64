@@ -3,7 +3,7 @@
 //
 
 #include <windows.h>
-#include "../_gui/tftpd32.h"
+#include "../gui/tftpd32.h"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -35,7 +35,7 @@
 			VALUE "Translation", 0x040C, 1252
 		}
 	}
-		
+
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -48,4 +48,3 @@
 IDI_TFTPD32NEW      ICON    DISCARDABLE     "tftpd32_new.ico"
 IDI_TFTPD32      ICON    DISCARDABLE     "tftpd32.ico"
 IDI_TFTPD32KILL  ICON    DISCARDABLE     "tftpd32kill.ico"
-

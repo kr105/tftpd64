@@ -76,14 +76,14 @@
     <IntDir>\tftpd32\BIN\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetExt>.exe</TargetExt>
     <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IntDir>\tftpd32\BIN\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.exe</TargetExt>
     <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>\tftpd32\BIN\$(Configuration)\</OutDir>
@@ -92,7 +92,7 @@
     <IntDir>\tftpd32\BIN\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetExt>.exe</TargetExt>
     <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>\tftpd32\BIN\$(Configuration)\</OutDir>
@@ -101,7 +101,7 @@
     <IntDir>\tftpd32\BIN\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetExt>.exe</TargetExt>
     <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -200,29 +200,29 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include=".\_common\dialog_common.c" />
-    <ClCompile Include=".\_common\setinifilename.c" />
-    <ClCompile Include=".\_gui\about.c" />
-    <ClCompile Include=".\_gui\browse.c" />
-    <ClCompile Include=".\_gui\gui_bootpd.c" />
-    <ClCompile Include=".\_gui\gui_bootpd_settings.c" />
-    <ClCompile Include=".\_gui\gui_dialog.c" />
-    <ClCompile Include=".\_gui\gui_dns.c" />
-    <ClCompile Include=".\_gui\gui_gauges.c" />
-    <ClCompile Include=".\_gui\gui_log.c" />
-    <ClCompile Include=".\_gui\gui_main.c" />
-    <ClCompile Include=".\_gui\gui_move_win.c" />
-    <ClCompile Include=".\_gui\gui_settings.c" />
-    <ClCompile Include=".\_gui\gui_syslogd.c" />
-    <ClCompile Include=".\_gui\gui_tftpd.c" />
-    <ClCompile Include=".\_gui\gui_tftp_dir.c" />
-    <ClCompile Include=".\_gui\tftp_cli.c" />
-    <ClCompile Include=".\_main\cmd_line.c" />
-    <ClCompile Include=".\_main\GUI main.c" />
-    <ClCompile Include=".\_main\service edition.c" />
+    <ClCompile Include=".\common\dialog_common.c" />
+    <ClCompile Include=".\common\setinifilename.c" />
+    <ClCompile Include=".\gui\about.c" />
+    <ClCompile Include=".\gui\browse.c" />
+    <ClCompile Include=".\gui\gui_bootpd.c" />
+    <ClCompile Include=".\gui\gui_bootpd_settings.c" />
+    <ClCompile Include=".\gui\gui_dialog.c" />
+    <ClCompile Include=".\gui\gui_dns.c" />
+    <ClCompile Include=".\gui\gui_gauges.c" />
+    <ClCompile Include=".\gui\gui_log.c" />
+    <ClCompile Include=".\gui\gui_main.c" />
+    <ClCompile Include=".\gui\gui_move_win.c" />
+    <ClCompile Include=".\gui\gui_settings.c" />
+    <ClCompile Include=".\gui\gui_syslogd.c" />
+    <ClCompile Include=".\gui\gui_tftpd.c" />
+    <ClCompile Include=".\gui\gui_tftp_dir.c" />
+    <ClCompile Include=".\gui\tftp_cli.c" />
+    <ClCompile Include=".\main\cmd_line.c" />
+    <ClCompile Include=".\main\GUI main.c" />
+    <ClCompile Include=".\main\service edition.c" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include=".\_gui\tftpd32.rc" />
+    <ResourceCompile Include=".\gui\tftpd32.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

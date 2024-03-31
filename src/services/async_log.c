@@ -13,7 +13,7 @@
 #include <stdlib.h>
 
 #include "threading.h"
-#include "..\_libs\event_log\eventlog.h"
+#include "..\libs\event_log\eventlog.h"
 
 
 ///////////////////////////////
@@ -35,18 +35,18 @@ HANDLE hLog;
 int    dummy=0;
 DWORD  dwPos;
 	// Loop since the file may be already opened by another thread
-	Ark=0 ; 
+	Ark=0 ;
 	do
 	{
 		Ark++;
-	    hLog = CreateFile ( filename, 
-							GENERIC_WRITE, 
+	    hLog = CreateFile ( filename,
+							GENERIC_WRITE,
 							FILE_SHARE_READ,	// permit read operations
-							NULL, 
+							NULL,
 							OPEN_ALWAYS,		// open or create
 							FILE_ATTRIBUTE_NORMAL,
 							NULL );
-	    if (hLog==INVALID_HANDLE_VALUE) Sleep (50); 
+	    if (hLog==INVALID_HANDLE_VALUE) Sleep (50);
 	}
 	while (hLog==INVALID_HANDLE_VALUE &&  Ark<3);
 
@@ -100,46 +100,46 @@ static struct S_Pacing
 		  if ( sPacing.count> PER_THREAD_PER_SEC_MAX_MSG )    return;
 	}
 	else
-    {     
-		  sPacing.time = dNow; 
+    {
+		  sPacing.time = dNow;
 		  sPacing.count = 0;
 	}
 
     // format the string with wsprintf and timestamp
-    szBuf [sizeof szBuf - 1] = 0; 
+    szBuf [sizeof szBuf - 1] = 0;
     GetLocalTime (&sTime);
     va_start( marker, szFmt );     /* Initialize variable arguments. */
 #ifdef MSVC
-    lpTxt += vsprintf_s (lpTxt, 
-                         szBuf + sizeof szBuf - lpTxt -1  , 
-                         szFmt, 
+    lpTxt += vsprintf_s (lpTxt,
+                         szBuf + sizeof szBuf - lpTxt -1  ,
+                         szFmt,
                          marker);
-    sprintf_s ( lpTxt, 
-                szBuf + sizeof szBuf - lpTxt -1  , 
-                " [%02d/%02d %02d:%02d:%02d.%03d]", 
+    sprintf_s ( lpTxt,
+                szBuf + sizeof szBuf - lpTxt -1  ,
+                " [%02d/%02d %02d:%02d:%02d.%03d]",
                 sTime.wDay, sTime.wMonth,
                 sTime.wHour, sTime.wMinute, sTime.wSecond, sTime.wMilliseconds );
 #else
     lpTxt += vsprintf (lpTxt, szFmt, marker);
-    wsprintf (lpTxt, " [%02d/%02d %02d:%02d:%02d.%03d]", 
+    wsprintf (lpTxt, " [%02d/%02d %02d:%02d:%02d.%03d]",
               sTime.wDay, sTime.wMonth,
               sTime.wHour, sTime.wMinute, sTime.wSecond, sTime.wMilliseconds );
 #endif
     lpTxt += sizeof (" [00/00 00:00:00.000]");
 
 	// push the message into queue
-    SendMsgRequest ( C_LOG, szBuf, (int) (lpTxt - szBuf), FALSE, FALSE ); 
+    SendMsgRequest ( C_LOG, szBuf, (int) (lpTxt - szBuf), FALSE, FALSE );
 	// Add the log into the file
 	if (sSettings.szTftpLogFile[0]!=0)
 	{
-		AppendToFile (sSettings.szTftpLogFile, szBuf, (int) (lpTxt - szBuf - 1)); 
+		AppendToFile (sSettings.szTftpLogFile, szBuf, (int) (lpTxt - szBuf - 1));
 	} // Log into file
-	
+
 } // LOG
 
 
 ///////////////////////////////
-// Synchronous send 
+// Synchronous send
 ///////////////////////////////
 
 // Report an error to the GUI, also goes into the event log
@@ -151,16 +151,16 @@ char     szBuf [LOGSIZE];
     szBuf[LOGSIZE-1]=0;
     va_start( marker, szFmt );     /* Initialize variable arguments. */
 #ifdef MSVC
-    vsprintf_s (szBuf, 
-                sizeof szBuf -1  , 
-                szFmt, 
+    vsprintf_s (szBuf,
+                sizeof szBuf -1  ,
+                szFmt,
                 marker);
 #else
     vsprintf (szBuf, szFmt, marker);
 #endif
 
 	// push the message into queue -> don't block thread but retain msg
-    SendMsgRequest ( C_ERROR, szBuf, lstrlen (szBuf), FALSE, TRUE ); 
+    SendMsgRequest ( C_ERROR, szBuf, lstrlen (szBuf), FALSE, TRUE );
 	va_end (marker);
 
 	if (sSettings.bEventLog)
@@ -177,18 +177,15 @@ char     szBuf [LOGSIZE];
     szBuf[LOGSIZE-1]=0;
     va_start( marker, szFmt );     /* Initialize variable arguments. */
 #ifdef MSVC
-    vsprintf_s (szBuf, 
-                sizeof szBuf -1  , 
-                szFmt, 
+    vsprintf_s (szBuf,
+                sizeof szBuf -1  ,
+                szFmt,
                 marker);
 #else
     vsprintf (szBuf, szFmt, marker);
 #endif
 
 	// push the message into queue -> block until msg sent
-    SendMsgRequest ( C_WARNING, szBuf, lstrlen (szBuf), FALSE, FALSE ); 
+    SendMsgRequest ( C_WARNING, szBuf, lstrlen (szBuf), FALSE, FALSE );
 	va_end (marker);
 } // SVC_WARNING
-
-
-

@@ -3,9 +3,9 @@
 // Projet TFTPD32.   April 2007 Ph.jounin
 // File service stuff.c:  services procedures
 //
-// derivative work from sdk_service.cpp 
+// derivative work from sdk_service.cpp
 //                 by Craig Link - Microsoft Developer Support
-// 
+//
 // source released under European Union Public License
 //
 //
@@ -15,7 +15,7 @@
 #include <winsvc.h>
 #include <stdio.h>
 #include "service stuff.h"
-#include "_libs/log/LogToMonitor.h"
+#include "libs/log/LogToMonitor.h"
 
 
 static SERVICE_STATUS_HANDLE   sshStatusHandle;
@@ -243,7 +243,7 @@ void CmdInstallService()
 			OsVer.dwOSVersionInfoSize = sizeof(OsVer);
 			if(     GetVersionEx(&OsVer) != 0
 				&&  OsVer.dwMajorVersion >= 5
-				&&  OsVer.dwPlatformId == VER_PLATFORM_WIN32_NT ) 
+				&&  OsVer.dwPlatformId == VER_PLATFORM_WIN32_NT )
 				// Add a description if OS >= Win2k
 			{
 					ServiceDesc.lpDescription = SZSERVDESCRIPTION;
