@@ -1,8 +1,33 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
+﻿# Windows
+[Dd]esktop.ini
+ehthumbs.db
+ehthumbs_vista.db
+[Tt]humbs.db
 
-/.vs/tftpd32/v15
-/.vs/tftpd32/v16/Preview
-/obj/Win32/Release
-/.vs/tftpd32/v16
+# Backups
+*.bak
+
+# Logs
+*.log
+
+# Temporary
+*~
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Build
+bin/
+obj/
+Debug/
+Release/
+x86/
+x64/
+
+# Visual C++
+*.aps
+
+# Visual Studio
+*.user
+.vs/
