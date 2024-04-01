@@ -33,13 +33,6 @@
             "NO WARRANTY\r\n\r\n"
             "Full credits will be given into release version\r\n"
             "Offical site: http://tftpd32.jounin.net";
-#elif defined BAE_SYSTEMS_LEN_WHITE
-const char LICENSE_TFTPD32 [] =
-"\r\n\r\n"
-"          Tftpd32 Standalone Edition\r\n\r\n"
-"       copyrighted 2007 by Philippe Jounin,\r\n"
-"        provided by BAE Systems Australia\r\n"
-"     for the Australian Department of Defence\r\n\r\n";
 #elif defined TFTP_CLIENT_ONLY
 const char LICENSE_TFTPD32 [] =
 "TFTPD32_Client is copyrighted 2019 by Philippe Jounin (philippe@jounin.net) "

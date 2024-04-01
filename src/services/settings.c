@@ -160,10 +160,6 @@ BOOL Tftpd32ReadSettings(void) {
     else
         GetCurrentDirectory(sizeof sSettings.szWorkingDirectory,
                             sSettings.szWorkingDirectory);
-    // release for the Australian Department of defence
-#ifdef BAE_SYSTEMS_LEN_WHITE
-  sSettings.uServices = TFTPD32_TFTP_SERVER;
-#endif
     // Tftp assigned to a physical interface ?
     sSettings.bTftpOnPhysicalIf = sSettings.szTftpLocalIP[0] != 0 && !isdigit(sSettings.szTftpLocalIP[0]);
     return Rc;
