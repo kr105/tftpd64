@@ -131,29 +131,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include=".\common\dialog_common.c" />
-    <ClCompile Include=".\common\setinifilename.c" />
-    <ClCompile Include=".\gui\about.c" />
-    <ClCompile Include=".\gui\browse.c" />
-    <ClCompile Include=".\gui\gui_bootpd.c" />
-    <ClCompile Include=".\gui\gui_bootpd_settings.c" />
-    <ClCompile Include=".\gui\gui_dialog.c" />
-    <ClCompile Include=".\gui\gui_dns.c" />
-    <ClCompile Include=".\gui\gui_gauges.c" />
-    <ClCompile Include=".\gui\gui_log.c" />
-    <ClCompile Include=".\gui\gui_main.c" />
-    <ClCompile Include=".\gui\gui_move_win.c" />
-    <ClCompile Include=".\gui\gui_settings.c" />
-    <ClCompile Include=".\gui\gui_syslogd.c" />
-    <ClCompile Include=".\gui\gui_tftpd.c" />
-    <ClCompile Include=".\gui\gui_tftp_dir.c" />
-    <ClCompile Include=".\gui\tftp_cli.c" />
-    <ClCompile Include=".\main\cmd_line.c" />
-    <ClCompile Include=".\main\GUI main.c" />
-    <ClCompile Include=".\main\service edition.c" />
+    <ClCompile Include="common\dialog_common.c" />
+    <ClCompile Include="common\setinifilename.c" />
+    <ClCompile Include="gui\about.c" />
+    <ClCompile Include="gui\browse.c" />
+    <ClCompile Include="gui\gui_bootpd_settings.c" />
+    <ClCompile Include="gui\gui_bootpd.c" />
+    <ClCompile Include="gui\gui_dialog.c" />
+    <ClCompile Include="gui\gui_dns.c" />
+    <ClCompile Include="gui\gui_gauges.c" />
+    <ClCompile Include="gui\gui_log.c" />
+    <ClCompile Include="gui\gui_main.c" />
+    <ClCompile Include="gui\gui_move_win.c" />
+    <ClCompile Include="gui\gui_settings.c" />
+    <ClCompile Include="gui\gui_syslogd.c" />
+    <ClCompile Include="gui\gui_tftp_dir.c" />
+    <ClCompile Include="gui\gui_tftpd.c" />
+    <ClCompile Include="gui\tftp_cli.c" />
+    <ClCompile Include="main\cmd_line.c" />
+    <ClCompile Include="main\GUI main.c" />
+    <ClCompile Include="main\service edition.c" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include=".\gui\tftpd32.rc" />
+    <ResourceCompile Include="gui\tftpd32.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

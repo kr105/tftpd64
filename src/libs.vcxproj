@@ -103,22 +103,22 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="libs\GUI\centerchild.c" />
-    <ClCompile Include="libs\GUI\Cmsgbox.c" />
     <ClCompile Include="libs\dump\dump.c" />
     <ClCompile Include="libs\event_log\eventlog.c" />
+    <ClCompile Include="libs\GUI\centerchild.c" />
+    <ClCompile Include="libs\GUI\Cmsgbox.c" />
+    <ClCompile Include="libs\GUI\listview.c" />
+    <ClCompile Include="libs\GUI\window.c" />
     <ClCompile Include="libs\lasterr\lasterr.c" />
     <ClCompile Include="libs\linked_list\linked_list.c" />
-    <ClCompile Include="libs\GUI\listview.c" />
     <ClCompile Include="libs\log\LogToMonitor.c" />
     <ClCompile Include="libs\md5\md5.c" />
     <ClCompile Include="libs\mini_tcp4u\mini_tcp4u.c" />
+    <ClCompile Include="libs\mini_tcp4u\tcp4u_exchg.c" />
+    <ClCompile Include="libs\mini_tcp4u\udp4u.c" />
     <ClCompile Include="libs\ping_api\ping_api.c" />
     <ClCompile Include="libs\registry\registry.c" />
     <ClCompile Include="libs\scandir\scandir.c" />
-    <ClCompile Include="libs\mini_tcp4u\tcp4u_exchg.c" />
-    <ClCompile Include="libs\mini_tcp4u\udp4u.c" />
-    <ClCompile Include="libs\GUI\window.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\convert\convert.c" />

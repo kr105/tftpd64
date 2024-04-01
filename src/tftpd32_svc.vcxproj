@@ -131,30 +131,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include=".\common\dialog_common.c" />
-    <ClCompile Include=".\common\setinifilename.c" />
-    <ClCompile Include=".\main\service edition.c" />
-    <ClCompile Include=".\main\service stuff.c" />
-    <ClCompile Include=".\main\Svc main.c" />
-    <ClCompile Include=".\services\async_log.c" />
-    <ClCompile Include=".\services\bootpd.c" />
-    <ClCompile Include=".\services\bootpd_console.c" />
-    <ClCompile Include=".\services\bootpd_util.c" />
-    <ClCompile Include=".\services\console_actions.c" />
-    <ClCompile Include=".\services\dns.c" />
-    <ClCompile Include=".\services\ip_thread.c" />
-    <ClCompile Include=".\services\ip_util.c" />
-    <ClCompile Include=".\services\registry_thread.c" />
-    <ClCompile Include=".\services\service_main.c" />
-    <ClCompile Include=".\services\settings.c" />
-    <ClCompile Include=".\services\sntpd.c" />
-    <ClCompile Include=".\services\start_threads.c" />
-    <ClCompile Include=".\services\syslogd.c" />
-    <ClCompile Include=".\services\tftpd_main.c" />
-    <ClCompile Include=".\services\tftpd_thread.c" />
-    <ClCompile Include=".\services\tftpd_util.c" />
-    <ClCompile Include=".\services\tftp_dbg.c" />
-    <ClCompile Include=".\services\to_console.c" />
+    <ClCompile Include="common\dialog_common.c" />
+    <ClCompile Include="common\setinifilename.c" />
+    <ClCompile Include="main\service edition.c" />
+    <ClCompile Include="main\service stuff.c" />
+    <ClCompile Include="main\Svc main.c" />
+    <ClCompile Include="services\async_log.c" />
+    <ClCompile Include="services\bootpd_console.c" />
+    <ClCompile Include="services\bootpd_util.c" />
+    <ClCompile Include="services\bootpd.c" />
+    <ClCompile Include="services\console_actions.c" />
+    <ClCompile Include="services\dns.c" />
+    <ClCompile Include="services\ip_thread.c" />
+    <ClCompile Include="services\ip_util.c" />
+    <ClCompile Include="services\registry_thread.c" />
+    <ClCompile Include="services\service_main.c" />
+    <ClCompile Include="services\settings.c" />
+    <ClCompile Include="services\sntpd.c" />
+    <ClCompile Include="services\start_threads.c" />
+    <ClCompile Include="services\syslogd.c" />
+    <ClCompile Include="services\tftp_dbg.c" />
+    <ClCompile Include="services\tftpd_main.c" />
+    <ClCompile Include="services\tftpd_thread.c" />
+    <ClCompile Include="services\tftpd_util.c" />
+    <ClCompile Include="services\to_console.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="services\tftpd32.rc" />
