@@ -11,4 +11,3 @@
 /* Ajout du cast (unsigned char)                                  */
 /* -------------------------------------------------------------- */
 void BinDump (LPCSTR cp, int nLen, LPCSTR szPrefix);
-void OutputDebugStringW95 (LPCTSTR lpOutputString);

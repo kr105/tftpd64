@@ -46,86 +46,7 @@
 #include <windows.h>
 #include <ctype.h>
 
-#include <process.h>
-
 #include "dump.h"
-
-void OutputDebugStringW95(LPCTSTR lpOutputString) {
-    HANDLE heventDBWIN; /* DBWIN32 synchronization object */
-    HANDLE heventData;  /* data passing synch object */
-    HANDLE hSharedFile; /* memory mapped file shared data */
-    LPSTR lpszSharedMem;
-    /*
-        Do a regular OutputDebugString so that the output is
-        still seen in the debugger window if it exists.
-
-        This ifdef is necessary to avoid infinite recursion
-        from the inclusion of W95TRACE.H
-    */
-#ifdef _UNICODE
-    OutputDebugStringW(lpOutputString);
-#else
-    OutputDebugStringA(lpOutputString);
-#endif
-
-    /* bail if it's not Win95 */
-    {
-        OSVERSIONINFO VerInfo;
-        VerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-        GetVersionEx(&VerInfo);
-        if (VerInfo.dwPlatformId != VER_PLATFORM_WIN32_WINDOWS)
-            return;
-    }
-
-    /* make sure DBWIN is open and waiting */
-    heventDBWIN = OpenEvent(EVENT_MODIFY_STATE, FALSE, "DBWIN_BUFFER_READY");
-    if (!heventDBWIN) {
-        //MessageBox(NULL, "DBWIN_BUFFER_READY nonexistent", NULL, MB_OK);
-        return;
-    }
-
-    /* get a handle to the data synch object */
-    heventData = OpenEvent(EVENT_MODIFY_STATE, FALSE, "DBWIN_DATA_READY");
-    if (!heventData) {
-        // MessageBox(NULL, "DBWIN_DATA_READY nonexistent", NULL, MB_OK);
-        CloseHandle(heventDBWIN);
-        return;
-    }
-
-    hSharedFile = CreateFileMapping((HANDLE)-1, NULL, PAGE_READWRITE, 0, 4096, "DBWIN_BUFFER");
-    if (!hSharedFile) {
-        //MessageBox(NULL, "DebugTrace: Unable to create file mapping object DBWIN_BUFFER", "Error", MB_OK);
-        CloseHandle(heventDBWIN);
-        CloseHandle(heventData);
-        return;
-    }
-
-    lpszSharedMem = (LPSTR)MapViewOfFile(hSharedFile, FILE_MAP_WRITE, 0, 0, 512);
-    if (!lpszSharedMem) {
-        //MessageBox(NULL, "DebugTrace: Unable to map shared memory", "Error", MB_OK);
-        CloseHandle(heventDBWIN);
-        CloseHandle(heventData);
-        return;
-    }
-
-    /* wait for buffer event */
-    WaitForSingleObject(heventDBWIN, INFINITE);
-
-    /* write it to the shared memory */
-    *((LPDWORD)lpszSharedMem) = _getpid();
-    lstrcpy(lpszSharedMem + sizeof(DWORD), lpOutputString);
-
-    /* signal data ready event */
-    SetEvent(heventData);
-
-    /* clean up handles */
-    CloseHandle(hSharedFile);
-    CloseHandle(heventData);
-    CloseHandle(heventDBWIN);
-
-    return;
-}
-
 
 /* -------------------------------------------------------------- */
 /* dump a binary or text frame. The output is the debug window    */
@@ -177,7 +98,7 @@ void BinDump(LPCSTR cp, int nLen, LPCSTR szPrefix) {
             szLine[nPos++] = isprint(cp[count + col]) ? cp[count + col] : '.';
         }
         lstrcpy(&szLine[nPos], "\n");
-        OutputDebugStringW95(szLine);
+        OutputDebugString(szLine);
 
         count += col;
     } /* while buffer nor printed */
