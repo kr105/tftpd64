@@ -62,7 +62,7 @@
 #pragma pack(1)
 #include "common\dialog_socket.h"
 #pragma pack()
-#include "common\dialogCommon.h"
+#include "common\dialog_common.h"
 
 #include "gui\gui_functions.h"
 
