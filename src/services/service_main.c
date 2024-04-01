@@ -33,9 +33,9 @@ void StartTftpd32Services(void* param) {
 #ifndef TFTP_CLIENT_ONLY
     Tftpd32ReadSettings();
 #else
-	sSettings.uServices = TFTPD32_TFTP_CLIENT;
+    sSettings.uServices = TFTPD32_TFTP_CLIENT;
 #endif
-    //	DHCPReadConfig ();
+    // DHCPReadConfig ();
 
     // starts worker threads
     StartMultiWorkerThreads(FALSE);

@@ -12,7 +12,7 @@
 
 #include <stdio.h>          // sscanf is used
 #include <process.h>        // endthread + beginthread
-#include <iphlpapi.h>		// ARP table management
+#include <iphlpapi.h>       // ARP table management
 
 #include "threading.h"
 #include "bootpd_functions.h"
@@ -44,7 +44,7 @@ const struct S_PXE_Option93_Architecture sPXE_Architecture[] =
  * arguments and checks their validity.
  * Add the interface number and IP to an MIB_IPNETROW structure
  * and remove the entry from the ARP cache.
- * Code adapted from ReactOS 
+ * Code adapted from ReactOS
  */
 int ArpDeleteHost(struct in_addr addr) {
     PMIB_IPNETTABLE pIpNetTable = NULL;
@@ -81,7 +81,7 @@ int ArpDeleteHost(struct in_addr addr) {
 cleanup:
     if (pIpNetTable != NULL) free(pIpNetTable);
     return 0;
-} // ArpDeleteHost 
+} // ArpDeleteHost
 
 /*
  * Searches adapters for the one that has an IP addressed assigned to
@@ -186,7 +186,7 @@ int TranslateParam2Value(char* buffer, int len, const char* opt_val, struct in_a
     // the number of bytes used by n hexa digit 0xABCDE which has 5 digits will form a 4-byte number)
     static const char cvt[] = {0, 1, 1, 2, 2, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8};
     if (opt_val[1] == ' ') {
-        p = opt_val + 2; // p points on data 
+        p = opt_val + 2; // p points on data
         switch (opt_val[0]) {
             case 'a': // list of IP address
                 for (nIPAddr = 0; *p != 0 && nIPAddr * 4 < len - 4; nIPAddr++) {
@@ -200,10 +200,10 @@ int TranslateParam2Value(char* buffer, int len, const char* opt_val, struct in_a
                 TranslateExp(sz, buffer, ip, tMac, iLastArch);
                 buffer[len - 1] = 0;
                 return lstrlen(buffer);
-            case 'I': // integer 
+            case 'I': // integer
                 *(unsigned short*)buffer = atoi(p);
                 return sizeof(unsigned short);
-            case 'i': // integer 
+            case 'i': // integer
                 *(unsigned long*)buffer = atoi(p);
                 return sizeof(unsigned long);
             case 'N': // integer network order
@@ -417,10 +417,10 @@ char* TranslateExp(const char* exp, char* to, struct in_addr ip, const char* tMa
     } else
         lstrcpyn(to, exp, DHCP_FILE_LEN - 1);
 
-    // truncate 
+    // truncate
     to[DHCP_FILE_LEN - 1] = 0;
     return to;
-} // TranslateExp 
+} // TranslateExp
 
 
 ///////////////////////////////////////////
@@ -573,7 +573,7 @@ void ZeroRenewTime(struct LL_IP* pCur) {
         AsyncSaveKey(TFTPD32_DHCP_KEY, key, t, strlen(t) + 1, REG_SZ, szTftpd32IniFile);
 }
 
-//Completely renumbers and rewrites the lease list from current membory.  
+//Completely renumbers and rewrites the lease list from current membory.
 void ReorderLeases() {
     int i;
     AsyncSaveKey(TFTPD32_DHCP_KEY,
@@ -610,9 +610,9 @@ void LoadLeases(void) {
     //tracking the index to the lease file and the index to the allocated list
     int leaseindex, allocindex;
 
-    // From Nick : I realized that there was a race condition in that code, 
+    // From Nick : I realized that there was a race condition in that code,
     // particularly with the reading and saving of KEY_LEASE_NUMLEASES
-    // I’ve added a function, which LoadLeases calls immediately on entry:
+    // Iï¿½ve added a function, which LoadLeases calls immediately on entry:
     WaitForMsgQueueToFinish(LL_ID_SETTINGS);
 
     nAllocatedIP = 0;
@@ -696,13 +696,13 @@ void FreeLeases(BOOL freepool) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // Data Base Queries
-// Retrieve a DHCP item in the data base 
+// Retrieve a DHCP item in the data base
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // Search in the list by IP
 struct LL_IP* DHCPSearchByIP(const struct in_addr* pAddr, BOOL* wasexpired) {
-    //	int  Ark;
+    // int  Ark;
     struct LL_IP** pArk;
     struct LL_IP key, *pkey;
     time_t expire;
@@ -719,16 +719,16 @@ struct LL_IP* DHCPSearchByIP(const struct in_addr* pAddr, BOOL* wasexpired) {
     return NULL;
 
 #if 0
-	for (Ark = 0 ;
-		 Ark<nAllocatedIP && ! (tFirstIP[Ark]->dwIP.s_addr==pAddr->s_addr) ;
-		 Ark++ );
+    for (Ark = 0 ;
+         Ark<nAllocatedIP && ! (tFirstIP[Ark]->dwIP.s_addr==pAddr->s_addr) ;
+         Ark++ );
 
-	if(Ark < nAllocatedIP)
-	{
-		*wasexpired = (tFirstIP[Ark]->tRenewed==0) || (expire > tFirstIP[Ark]->tRenewed);
-		return tFirstIP[Ark];
-	}
-	return NULL;
+    if(Ark < nAllocatedIP)
+    {
+        *wasexpired = (tFirstIP[Ark]->tRenewed==0) || (expire > tFirstIP[Ark]->tRenewed);
+        return tFirstIP[Ark];
+    }
+    return NULL;
 #endif
 } // DHCPSearchByIP
 
@@ -774,7 +774,7 @@ DWORD dwSize;
                       0,                        // Reserved.
                       KEY_READ,                // Requesting read access.
                     & hKey) == ERROR_SUCCESS;                    // Address of key to be returned.
-   
+
    if (Rc)  READKEY (haddrtoa(pMac, nMacLen), szIP);
    CloseHandle (hKey);
 
@@ -786,9 +786,9 @@ return NULL;
 
 
 // ---------------------------------------------------------------------
-// Sample code PJO Nov 2013  
+// Sample code PJO Nov 2013
 // send a broadcaast on all interfaces except the loopback
-// that was used as POC to show how badly Windows 7 manage broadcasts  
+// that was used as POC to show how badly Windows 7 manage broadcasts
 // ---------------------------------------------------------------------
 int DHCPSendFrom(struct sockaddr_in* pFrom, struct sockaddr_in* pTo, struct dhcp_packet* pDhcpPkt, int nSize);
 #define CLASS_A_LOOPBACK  127

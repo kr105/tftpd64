@@ -5,21 +5,20 @@
 // File registry.h: Settings
 //
 // source released under artistic License (see license.txt)
-// 
+//
 //////////////////////////////////////////////////////
 
 // registry key :
 //      HKEY_LOCAL_MACHINE\SOFTWARE\TFTPD32
 
-int ReadKey (const char *szRegPath, const char *szKey, 
+int ReadKey (const char *szRegPath, const char *szKey,
             void *buf, int BufSize, int nType,
              const char *szIniFile);
-int AsyncSaveKey (const char *szRegPath, const char *szKey, 
+int AsyncSaveKey (const char *szRegPath, const char *szKey,
                   void *buf, int BufSize, int nType,
                   const char *szIniFile);
-int SaveKey (const char *szRegPath, const char *szKey, 
+int SaveKey (const char *szRegPath, const char *szKey,
              void *buf, int BufSize, int nType,
              const char *szIniFile);
 int InitAsyncSaveKey ();
 int CleanupAsyncSaveKey ();
-

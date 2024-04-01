@@ -33,7 +33,7 @@ int PASCAL WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     // Quick Uninstaller
     // ------------------------------------------
     if (lstrcmpi("-uninstall", lpszCmdLine) == 0) {
-        // destroy the registry entries but not the ini file 
+        // destroy the registry entries but not the ini file
         Tftpd32DestroySettings();
         return 0;
     }

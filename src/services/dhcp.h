@@ -158,7 +158,7 @@ struct dhcp_packet {
 #define DHO_DHCP_CLIENT_IDENTIFIER      61
 #define DHO_NWIP_DOMAIN_NAME            62
 #define DHO_NWIP_SUBOPTIONS             63
-#define DHO_TFTP_SERVER					66
+#define DHO_TFTP_SERVER                 66
 #define DHO_USER_CLASS                  77
 #define DHO_FQDN                        81
 #define DHO_DHCP_AGENT_OPTIONS          82
@@ -206,5 +206,3 @@ struct dhcp_packet {
 #define FQDN_DOMAINNAME           7
 #define FQDN_FQDN                 8
 #define FQDN_SUBOPTION_COUNT      8
-
-

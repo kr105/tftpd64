@@ -53,7 +53,7 @@ void LB_LOG(HWND hListBox, const char* szTxt) {
     SendMessage(hListBox, LB_SETITEMDATA, Ark, (LPARAM)dwExtent);
     ReleaseDC(hListBox, hDC);
 
-    // search the longest text 
+    // search the longest text
     dwMaxExtent = 0;
     NbMsg = (int)SendMessage(hListBox, LB_GETCOUNT, 0, 0);
     for (Ark = NbMsg; Ark >= 0; Ark--) {

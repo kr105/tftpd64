@@ -4,7 +4,7 @@
 // File bootpd_util.h:   dhcp module data structure
 //
 // released under artistic license (see license.txt)
-// 
+//
 //////////////////////////////////////////////////////
 
 
@@ -23,13 +23,13 @@ struct LL_IP
 {
    struct in_addr     dwIP;            // assignated address
    char               sMacAddr[16];    // MAC Address of the client
-   time_t             tAllocated;      // time of assignation 
+   time_t             tAllocated;      // time of assignation
    time_t             tRenewed;        // time of client ack
-   int                dwAllocNum;      // the number this record occupies in the ini file             
+   int                dwAllocNum;      // the number this record occupies in the ini file
 };
 
 extern struct LL_IP **tFirstIP;   // sorted array of pointers on struct LL_IP
-extern struct LL_IP **tMAC;		  //sorted Pointers to elements in tFirstIP, indexed by MAC addr
+extern struct LL_IP **tMAC;       //sorted Pointers to elements in tFirstIP, indexed by MAC addr
 extern  int            nAllocatedIP;    // number of item allocated (even if never acked)
 
 
@@ -72,7 +72,7 @@ extern struct S_DHCP_Param  sParamDHCP;
 extern struct S_DHCP_Param  sGuiParamDHCP;
 
 // written by Cengiz Beytas, it has been rewritten by Jesus Soto
-// int FindAdapterIP(char *szIP, DWORD *pdwAdapter, DWORD *pdwFirstAdapter);// 
+// int FindAdapterIP(char *szIP, DWORD *pdwAdapter, DWORD *pdwFirstAdapter);//
 // struct in_addr DlgItem2Address (HWND hWnd, int nDlgItem, const char *szDescr, BOOL bStrict);
 
 

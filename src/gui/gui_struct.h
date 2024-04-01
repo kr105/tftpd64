@@ -6,7 +6,7 @@
 struct S_TftpGui
 {
     // identifier
-    DWORD   dwTransferId;       
+    DWORD   dwTransferId;
     // items to be displayed
     char   *filename;
     SOCKADDR_STORAGE stg_addr;

@@ -59,7 +59,7 @@ int Gui_StopTftpService(SOCKET sService) {
     LogToMonitor("GUI Stopping TFTP service\n");
     Rc = SendMsg(sService, C_TFTP_TERMINATE, "", 1);
     return Rc;
-} // Gui_StopTftpService 
+} // Gui_StopTftpService
 
 int Gui_StopDhcpService(SOCKET sService) {
     int Rc;
@@ -115,21 +115,21 @@ int Gui_SaveSettings(SOCKET sService, struct S_Tftpd32Settings* pset) {
     LogToMonitor("Saving global Settings\n");
     Rc = SendMsg(sService, C_TFTP_WRQ_SETTINGS, pset, sizeof *pset);
     return Rc;
-} // Gui_SaveSettings 
+} // Gui_SaveSettings
 
 int Gui_SaveDhcpSettings(SOCKET sService, struct S_DHCP_Param* pset) {
     int Rc;
     LogToMonitor("Saving DHCP Settings\n");
     Rc = SendMsg(sService, C_DHCP_WRQ_SETTINGS, pset, sizeof *pset);
     return Rc;
-} // Gui_SaveSettings 
+} // Gui_SaveSettings
 
 int Gui_RequestWorkingDir(SOCKET sService) {
     int Rc;
     LogToMonitor("Requesting Working Directory\n");
     Rc = SendMsg(sService, C_RRQ_WORKING_DIR, "", 1);
     return Rc;
-} // Gui_RequestWorkingDir 
+} // Gui_RequestWorkingDir
 
 int Gui_RequestRunningServices(SOCKET sService) {
     int Rc;
@@ -150,7 +150,7 @@ int Gui_RequestListDirectory(SOCKET sService) {
     LogToMonitor("Requesting Directory Content\n");
     Rc = SendMsg(sService, C_RRQ_DIRECTORY_CONTENT, "", 1);
     return Rc;
-} // Gui_RequestWorkingDir 
+} // Gui_RequestWorkingDir
 
 ////////////////////////////////////////////
 // Messages receivd FROM the services
@@ -180,7 +180,7 @@ static int GuiTFTPNew(HWND hMainWnd, const struct S_TftpTrfNew* pTrf) {
     return 0;
 } // GuiNewTrf
 
-// terminates a transfer 
+// terminates a transfer
 static int GuiTFTPEnd(HWND hMainWnd, struct S_TftpTrfEnd* pTrf) {
     struct S_TftpGui *pTftpGui, *pTftpPrev;
 
@@ -191,7 +191,7 @@ static int GuiTFTPEnd(HWND hMainWnd, struct S_TftpTrfEnd* pTrf) {
          pTftpGui = pTftpGui->next)
         pTftpPrev = pTftpGui;
     // in the standalone edition, the structure has been created by this
-    // very process. 
+    // very process.
 #ifdef STANDALONE_EDITION
     if (pTftpGui == NULL) {
         OutputDebugString("transfert not found");
@@ -206,12 +206,12 @@ static int GuiTFTPEnd(HWND hMainWnd, struct S_TftpTrfEnd* pTrf) {
     pTftpGui->stat = pTrf->stat;
     Gui_TftpReporting(GetDlgItem(hMainWnd, IDC_LV_TFTP), pTftpGuiFirst);
 
-    // detach leaf 
+    // detach leaf
     if (pTftpPrev != NULL) pTftpPrev->next = pTftpGui->next;
     else pTftpGuiFirst = pTftpGui->next;
 
     // now we can play with the leaf : it belongs no more to the linked list
-    // update stat 
+    // update stat
     // pTftpGui->stat = pTrf->stat;
     // Gui_TftpReporting (GetDlgItem (hMainWnd, IDC_LV_TFTP), pTftpGuiFirst);
 

@@ -5,7 +5,7 @@
 //
 //
 // source released under European Union Public License
-// 
+//
 //////////////////////////////////////////////////////
 
 #include <windows.h>

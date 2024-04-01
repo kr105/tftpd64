@@ -3,16 +3,16 @@
 // Projet TFTPD32.   April 2007 Ph.jounin
 // File service stuff.c:  services procedures
 //
-// derivative work from sdk_service.cpp 
+// derivative work from sdk_service.cpp
 //                 by Craig Link - Microsoft Developer Support
-// 
+//
 // source released under artistic license (see license.txt)
 //
 //////////////////////////////////////////////////////
 
 
 #define SZSERVICEDISPLAYNAME  "Tftpd32 service edition"
-#define SZSERVICENAME		  "Tftpd32_svc"
+#define SZSERVICENAME         "Tftpd32_svc"
 #define SZDEPENDENCIES        NULL
 #define SZSERVDESCRIPTION     "Tftpd32 operates a TFTP server"
 

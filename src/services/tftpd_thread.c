@@ -74,7 +74,7 @@ BOOL SecAllowSecurity(const char* szFile, int op_code) {
             if (bForward && op_code == TFTP_RRQ) return TRUE;
             SetLastError(ERROR_DIRECTORY);
             return FALSE;
-    } // type de sécurité
+    } // type de sï¿½curitï¿½
     return FALSE;
 } // SecAllowSecurity
 
@@ -152,7 +152,7 @@ static void SecFileName(char* szFile) {
     }
     if (szFile[1] == ':') szFile[0] = toupper(szFile[0]);
     // Si option Virtual Root : Suppression de '\\'
-    // sera traité à partir du répertoire courant
+    // sera traitï¿½ ï¿½ partir du rï¿½pertoire courant
     if (sSettings.bVirtualRoot && szFile[0] == '\\')
         memmove(szFile, szFile + 1, lstrlen(szFile));
 } // SecFileName
@@ -171,7 +171,7 @@ static char* TftpExtendFileName(struct LL_TftpInfo* pTftp,
     lstrcpy(szExtName, sSettings.szWorkingDirectory);
     nLength = lstrlen(szExtName);
     if (nLength > 0 && szExtName[nLength - 1] != '\\') szExtName[nLength++] = '\\';
-    // virtual root has already been processed 
+    // virtual root has already been processed
     lstrcpy(szExtName + nLength, szShortName);
     return szExtName;
 } // TftpExtendFileName
@@ -313,7 +313,7 @@ static int DecodConnectData(struct LL_TftpInfo* pTftp) {
     //-------------------------   Verify Frame validity  -------------------------
     // terminate the strings
     // PJO: 01 january 2017
-    //tp->th_stuff [TFTP_SEGSIZE - TFTP_DATA_HEADERSIZE - 1] = 0;	// suppress done above
+    //tp->th_stuff [TFTP_SEGSIZE - TFTP_DATA_HEADERSIZE - 1] = 0; // suppress done above
 
     // read or write request
     opcode = ntohs(tp->th_opcode);
@@ -378,7 +378,7 @@ static int DecodConnectData(struct LL_TftpInfo* pTftp) {
     // input file parsing
     //   --> change / to \, modify directory if VirtualRoot is on
     SecFileName(tp->th_stuff);
-    // Check if it passes security settings 
+    // Check if it passes security settings
     if (!SecAllowSecurity(tp->th_stuff, opcode)) {
         LOG(1, "Error EACCESS on file %s. Ext error %s", tp->th_stuff, LastErrorText());
         nak(pTftp, EACCESS);
@@ -402,9 +402,9 @@ static int DecodConnectData(struct LL_TftpInfo* pTftp) {
                                 FILE_SHARE_READ,
                                 NULL,
                                 opcode == TFTP_RRQ ? OPEN_EXISTING : CREATE_ALWAYS,
-                                // Feb 2019 : ISSUE #11 
+                                // Feb 2019 : ISSUE #11
                                 // FILE_FLAG_SEQUENTIAL_SCAN suppressed from flags to optimize caching behaviour
-                                // it seems that read is sequential 
+                                // it seems that read is sequential
                                 // however due to retransmissions, it is not
                                 FILE_ATTRIBUTE_ARCHIVE,
                                 NULL);
@@ -485,7 +485,7 @@ static int DecodConnectData(struct LL_TftpInfo* pTftp) {
 
         if (IS_OPT(p, TFTP_OPT_TSIZE)) {
             lstrcpy(pAck, p), pAck += lstrlen(p) + 1;
-            // vérue si read request -> on envoie la taille du fichier
+            // vï¿½rue si read request -> on envoie la taille du fichier
             if (opcode == TFTP_RRQ) {
                 wsprintf(pAck, "%d", pTftp->st.dwTransferSize);
                 pAck += lstrlen(pAck) + 1;
@@ -562,7 +562,7 @@ static int TftpSendOack(struct LL_TftpInfo* pTftp) {
         Rc = UdpSend(pTftp->c.nOAckPort,
                      (struct sockaddr*)&pTftp->b.from, sizeof pTftp->b.from,
                      pTftp->b.ackbuf, pTftp->c.dwBytes);
-    else // use file transfer socket 
+    else // use file transfer socket
         Rc = send(pTftp->r.skt, pTftp->b.ackbuf, pTftp->c.dwBytes, 0);
     if (Rc < 0 || (unsigned)Rc != pTftp->c.dwBytes) {
         Rc = GetLastError();
@@ -627,7 +627,7 @@ int ReportNewTrf(const struct LL_TftpInfo* pTftp) {
                         TRUE,   // block thread until msg sent
                         FALSE); // if no GUI return
     return Rc;
-} // ReportNewTrf 
+} // ReportNewTrf
 
 static int ReportEndTrf(const struct LL_TftpInfo* pTftp) {
     struct S_TftpTrfEnd gui_msg;
@@ -639,7 +639,7 @@ static int ReportEndTrf(const struct LL_TftpInfo* pTftp) {
                         (void*)&gui_msg,
                         sizeof gui_msg,
                         TRUE,   // block thread until msg sent
-                        FALSE); // if no GUI return	
+                        FALSE); // if no GUI return
     return Rc;
 } // ReportEndTrf
 

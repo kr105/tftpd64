@@ -14,7 +14,7 @@
 
 
 ///////////////////////////////////////////////////////
-// Création de la socket SNTP
+// Crï¿½ation de la socket SNTP
 ///////////////////////////////////////////////////////
 SOCKET SntpBindSocket (HWND hWnd)
 {
@@ -45,7 +45,7 @@ struct servent *lpServEnt;
        return INVALID_SOCKET;
    }
 return sSntpListenSocket;
-} // SntpBindSocket 
+} // SntpBindSocket
 
 
 ///////////////////////////////////////////////////////
@@ -86,7 +86,7 @@ HWND            hListBox = GetDlgItem (GetParent (hWnd), IDC_LB_SYSLOG);
            break;
 
     /////////////////////////
-    // Arrivée message
+    // Arrivï¿½e message
 
     case WM_SYSLOG_MSG :
         Rc = recv (sSntpListenSocket, szSyslogBuf, sizeof szSyslogBuf, 0);

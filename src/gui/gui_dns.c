@@ -15,7 +15,7 @@
 
 // ---------------------------------------------------------------------
 //
-// ListView Management 
+// ListView Management
 //
 // ---------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ void AddDNSItem(HWND hListV, char* szName, char* szIPv4, char* szIPv6) {
         ListView_SetItemText(hListV, itemPos, 1, szIPv4);
         ListView_SetItemText(hListV, itemPos, 2, szIPv6);
     } else {
-        // a new item should be inserted 	     
+        // a new item should be inserted
         // before that keep only MAX_MSG messages
         while (ListView_GetItemCount(hListV) >= MAX_MSG)
             ListView_DeleteItem(hListV, 0);
@@ -46,7 +46,7 @@ void AddDNSItem(HWND hListV, char* szName, char* szIPv4, char* szIPv6) {
         LvItem.state = 0;
         LvItem.stateMask = 0;
         LvItem.iItem = ListView_GetItemCount(hListV); // item pos
-        LvItem.lParam = 0;                            // sorting params   
+        LvItem.lParam = 0;                            // sorting params
         LvItem.iSubItem = 0;                          // column index
         // LvItem.pszText = "";
 

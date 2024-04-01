@@ -125,7 +125,7 @@ void CopyListBoxToClipboard(HWND hListBox) {
     int NbMsg, Ark, NbChar;
 
     NbMsg = (int)SendMessage(hListBox, LB_GETCOUNT, 0, 0);
-    // Nb chars in list box 
+    // Nb chars in list box
     for (NbChar = 0, Ark = 0; Ark < NbMsg; Ark++)
         NbChar += (int)SendMessage(hListBox, LB_GETTEXTLEN, Ark, 0);
 
@@ -161,7 +161,7 @@ void CopyListViewToClipboard(HWND hListV, int nbSubItems) {
     char buf[256];
 
     NbMsg = ListView_GetItemCount(hListV);
-    // Nb chars in list box 
+    // Nb chars in list box
     for (NbChar = 0, Ark = 0; Ark < NbMsg; Ark++)
         for (Evan = 0; Evan < nbSubItems; Evan++) {
             ListView_GetItemText(hListV, Ark, Evan, buf, sizeof buf);
@@ -197,7 +197,7 @@ void CopyListViewToClipboard(HWND hListV, int nbSubItems) {
 
 
 // Copy a string into Clipboard
-// used to copy file into Dir window, an IP address from IP combobox 
+// used to copy file into Dir window, an IP address from IP combobox
 // and copy buttons (log viewer and syslog)
 BOOL CopyTextToClipboard(const char* sz) {
     int nLength;
@@ -229,7 +229,7 @@ int CopyCBContent(HWND hFromCB, HWND hToCB, const char* lpszFind, int family) {
     struct S_If {
         char* descr;
         char* addr;
-    } // Struct S_If 
+    } // Struct S_If
         * pif;
     // erase content
     ComboBox_ResetContent(hToCB);

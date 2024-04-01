@@ -29,25 +29,25 @@ static HANDLE hTftpClientSemaphore;
 
 static struct S_TftpClient {
     unsigned char opcode;             // TFTP_RRQ ou TFTP_WRQ
-    char szFile[256];                 // nom du fichier à transférer
+    char szFile[256];                 // nom du fichier ï¿½ transfï¿½rer
     char szDestFile[256];             // nom du fichier en remote
     char szHost[256];                 // adresse du serveur
-    unsigned char BufSnd[MAXPKTSIZE]; // dernier datagram émis
-    unsigned char BufRcv[MAXPKTSIZE]; // dernier datagram reçu
+    unsigned char BufSnd[MAXPKTSIZE]; // dernier datagram ï¿½mis
+    unsigned char BufRcv[MAXPKTSIZE]; // dernier datagram reï¿½u
     SOCKADDR_STORAGE saFrom;          // Server address
     int nPort;                        // port pour la connexion (0 -> default)
-    DWORD nToSend;                    // nombre de caractères à envoyer
-    DWORD nRcvd;                      // nombre de caractères reçus
+    DWORD nToSend;                    // nombre de caractï¿½res ï¿½ envoyer
+    DWORD nRcvd;                      // nombre de caractï¿½res reï¿½us
     SOCKET s;                         // socket de communication
-    BOOL bConnected;                  // socket "connectée"
+    BOOL bConnected;                  // socket "connectï¿½e"
     HANDLE hFile;                     // Handler du fichier local
-    DWORD nCount;                     // nombre de block émis/reçus
+    DWORD nCount;                     // nombre de block ï¿½mis/reï¿½us
     DWORD nRetransmit;                // nombre de retransmissions
     DWORD dwTimeout;                  // Timeout en 1000e de secondes
     time_t StartTime;                 // Horodatage
     time_t dLastUpdate;
     DWORD dwFileSize;
-    DWORD nTotRetrans; // retransmissions complètes
+    DWORD nTotRetrans; // retransmissions complï¿½tes
     BOOL bBreak;       // break has been selected
     DWORD nPktSize;
     BOOL bMultiFile;      // several files are to be transferred
@@ -73,7 +73,7 @@ tBlkSize[] =
 
 
 ///////////////////////////////////////////////////////
-// End of transfer : 
+// End of transfer :
 ///////////////////////////////////////////////////////
 static void StopTransfer(void) {
     // stop transfer
@@ -216,7 +216,7 @@ static BOOL TftpSendConnect(char* szBlkSize, BOOL bFullPath) {
     Hints.ai_socktype = SOCK_DGRAM;
     Hints.ai_protocol = IPPROTO_UDP;
 
-    // first use port given as parameter, 
+    // first use port given as parameter,
     if (sTC.nPort == 0)
         lstrcpy(szPort, "tftp");
     else {
@@ -238,7 +238,7 @@ static BOOL TftpSendConnect(char* szBlkSize, BOOL bFullPath) {
                                 WSAGetLastError(), LastErrorText());
     }
 
-    // since remote port will change do not use either bind or connect 
+    // since remote port will change do not use either bind or connect
     Rc = sendto(sTC.s, sTC.BufSnd, sTC.nToSend, 0, ai->ai_addr, ai->ai_addrlen);
     if (Rc == SOCKET_ERROR) {
         freeaddrinfo(ai);
@@ -281,7 +281,7 @@ static SOCKET TftpProcessOACK(void) {
         } // option Tsize
 
         if (IS_OPT(pOpt, TFTP_OPT_BLKSIZE)) {
-            // prendre la valeur 
+            // prendre la valeur
             sTC.nPktSize = atoi(pValue);
         } // option BlkSize
 
@@ -424,7 +424,7 @@ static int Handle_VM_Command(HWND hWnd, WPARAM wParam, LPARAM lParam) {
         // init MD5 computation
             MD5Init(&sTC.m.ctx);
 
-        // récupérer les valeurs
+        // rï¿½cupï¿½rer les valeurs
             sTC.opcode = wItem == IDC_CLIENT_GET_BUTTON ? TFTP_RRQ : TFTP_WRQ;
             GetDlgItemText(hParentWnd, IDC_CLIENT_HOST, sTC.szHost, sizeof sTC.szHost);
             GetDlgItemText(hParentWnd, IDC_CLIENT_LOCALFILE, sTC.szFile, sizeof sTC.szFile);
@@ -554,7 +554,7 @@ LRESULT CALLBACK TftpClientFileNameProc(HWND hWnd, UINT message, WPARAM wParam, 
                 } // User do not cancel MessageBox warning
             }     // multi files have been dropped
             else {
-                // only one file selected : just put its name into control 
+                // only one file selected : just put its name into control
                 DragQueryFile(hDrop, 0, szFileName, MAX_PATH);
                 SetWindowText(hWnd, szFileName);
                 DragFinish(hDrop);
@@ -627,13 +627,13 @@ LRESULT CALLBACK TftpClientProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
             break;
 
         //////////////////////
-        // Download : fichier envoyé par le serveur
+        // Download : fichier envoyï¿½ par le serveur
         case WM_CLIENT_DATA:
             // WSAAsyncSelect (sTC.s, hWnd, 0, 0);  A SUPPRIMER
             KillTimer(hWnd, wParam);
             if (sTC.bBreak) return FALSE;
             sTC.nRcvd = 0;
-        // On est reveillé par un message reçu
+        // On est reveillï¿½ par un message reï¿½u
             tpr = (struct tftphdr*)sTC.BufRcv;
             if (WSAGETSELECTEVENT(lParam) == FD_READ) {
                 if (!UdpRecv())
@@ -667,8 +667,8 @@ LRESULT CALLBACK TftpClientProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
                     default:
                         return BadEndOfTransfer("Server sent illegal opcode %d", htons(tpr->th_opcode));
                 } // switch opcode
-            }     // il y a un message à recevoir
-        // La comparaison marche si le paquet est le bon ou une répétition du précédent message
+            }     // il y a un message ï¿½ recevoir
+        // La comparaison marche si le paquet est le bon ou une rï¿½pï¿½tition du prï¿½cï¿½dent message
             if (htons(tpr->th_block) == (unsigned short)sTC.nCount) {
                 if (sTC.nRetransmit) sTC.nTotRetrans++;
                 if (sTC.nRetransmit++ > TFTP_RETRANSMIT)
@@ -676,7 +676,7 @@ LRESULT CALLBACK TftpClientProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
                 send(sTC.s, sTC.BufSnd, sTC.nToSend, 0);
                 SetTimer(hWnd, WM_CLIENT_DATA, sTC.dwTimeout, NULL);
             }
-        // sTC.nRcvd ne peut être inférieur que si on a reçu un block
+        // sTC.nRcvd ne peut ï¿½tre infï¿½rieur que si on a reï¿½u un block
             if (htons(tpr->th_opcode) == TFTP_DATA
                 && sTC.nRcvd != 0
                 && sTC.nRcvd < sTC.nPktSize + TFTP_DATA_HEADERSIZE)
@@ -718,7 +718,7 @@ LRESULT CALLBACK TftpClientProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
                                     return BadEndOfTransfer("Error in reading file.\nError code is %d (%s)",
                                                             GetLastError(), LastErrorText());
                             }
-                            if (sTC.nRcvd == 0) // EOF 
+                            if (sTC.nRcvd == 0) // EOF
                             {
                                 if (sTC.nToSend < TFTP_DATA_HEADERSIZE + sTC.nPktSize)
                                     return TransferOK(dNow);
@@ -734,14 +734,14 @@ LRESULT CALLBACK TftpClientProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
                     default:
                         return BadEndOfTransfer("Server sent illegal opcode %d", htons(tpr->th_opcode));
                 } // switch opcode
-            }     // il y a un message à recevoir
+            }     // il y a un message ï¿½ recevoir
 
             // Timeout or ack of previous block
             else if (htons(tpr->th_block) == (unsigned short)(sTC.nCount - 1)) {
                 if (sTC.nRetransmit) sTC.nTotRetrans++;
                 if (sTC.nRetransmit++ > TFTP_RETRANSMIT)
                     return BadEndOfTransfer("Timeout while waiting ack block #%d", sTC.nCount);
-                // une possibilité : on est au dernier message et le serveur TFTP n'a pas acquitté
+                // une possibilitï¿½ : on est au dernier message et le serveur TFTP n'a pas acquittï¿½
                 // --> on renvoie, mais sur Timeout, on signale un transfert OK
                 if (sTC.nToSend < TFTP_DATA_HEADERSIZE + sTC.nPktSize && sTC.nRetransmit < TFTP_RETRANSMIT)
                     return TransferOK(dNow);

@@ -28,7 +28,7 @@ BOOL GuiIsActiveTFTPTransfer(HWND hMainWnd) {
     HWND hLV = GetDlgItem(hMainWnd, IDC_LV_TFTP);
     char szName[512];
 
-    // scan the TFTP list view, if an item does not begin with '.' 
+    // scan the TFTP list view, if an item does not begin with '.'
     // a transfer is in progress
     for (Ark = ListView_GetItemCount(hLV) - 1; Ark >= 0; Ark--) {
         // retrieve the field file
@@ -58,7 +58,7 @@ static int AddNewTftpItem(HWND hListV, const struct S_TftpGui* pTftpGui, int Pos
     LvItem.mask = LVIF_PARAM | LVIF_STATE;
     LvItem.state = 0;
     LvItem.stateMask = 0;
-    LvItem.iItem = Pos;                             // numéro de l'item
+    LvItem.iItem = Pos;                             // numï¿½ro de l'item
     LvItem.lParam = (LPARAM)pTftpGui->dwTransferId; // for Right-Click actions
     LvItem.iSubItem = 0;                            // index dans la ligne
     // LvItem.pszText = "";
@@ -86,7 +86,7 @@ static int AddNewTftpItem(HWND hListV, const struct S_TftpGui* pTftpGui, int Pos
     wsprintf(szTxt, "%c%s%c", cDel, pTftpGui->filename, cDel);
     ListView_SetItemText(hListV, itemPos, FD_FILE, szTxt);
     return itemPos;
-} // static int AddNewTftpItem 
+} // static int AddNewTftpItem
 
 
 static int UpdateTftpItem(HWND hListV, const struct S_TftpGui* pTftpGui, int itemPos) {
@@ -142,7 +142,7 @@ static int ManageTerminatedTransfers(HWND hListV, int itemPos) {
         if (ListView_GetItem(hListV, & LvItem)) {
             LvItem.lParam = sGuiSettings.nGuiRemanence + tNow;
             ListView_SetItem(hListV, & LvItem);
-            // SetTimer (hListV, 
+            // SetTimer (hListV,
         }
     } // transfer not already marked as termnated
     else {

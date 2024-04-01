@@ -18,23 +18,23 @@ static int SplitCmdLine(LPSTR lpszCmdLine) {
     argv[0] = APPLICATION;
     p = lpszCmdLine;
     while (p != NULL && *p) {
-        // for each argument 
-        while ((*p) && (*p == ' ')) p++; // skip over leading spaces 
+        // for each argument
+        while ((*p) && (*p == ' ')) p++; // skip over leading spaces
         if (*p == '"') {
             q = ++p; // skip double quotes
-            // scan to end of argument 
+            // scan to end of argument
             while ((*p) && (*p != '"')) p++;
             argv[++argc] = q;
             if (*p) *p++ = 0;
         } else if (*p) {
-            // delimited by spaces 
+            // delimited by spaces
             q = p;
             while ((*p) && (*p != ' ')) p++;
             argv[++argc] = q;
             if (*p) *p++ = 0;
         }
     } // parse all "words"
-    // create empty 
+    // create empty
     argv[++argc] = NULL;
     return argc;
 } // SplitCmdLine

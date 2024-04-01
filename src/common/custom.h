@@ -4,7 +4,7 @@
 // File custom.h:   general definitions
 //
 // released under European Union Public License
-// 
+//
 //////////////////////////////////////////////////////
 
 
@@ -34,7 +34,7 @@ extern const int g_VERSION;
 
 
 //////////////////////////
-// Commandes Générales
+// Commandes Gï¿½nï¿½rales
 //////////////////////////
 
 #define  MY_WARNING(a)  CMsgBox (hWnd, a, APPLICATION, MB_OK | MB_ICONEXCLAMATION)
@@ -64,7 +64,7 @@ extern const int g_VERSION;
 
 
 //////////////////////////
-// Commandes et paramètres TFTP
+// Commandes et paramï¿½tres TFTP
 //////////////////////////
 
 #  define SYSLOG_PORT           514
@@ -93,9 +93,9 @@ enum e_Services       { TFTPD32_NONE=0,
                         TFTPD32_SNTP_SERVER  = 0x0010,
                         TFTPD32_DNS_SERVER   = 0x0020,
 
-						TFTPD32_CONSOLE      = 0x1000,
-						TFTPD32_REGISTRY     = 0x2000,
-						TFTPD32_SCHEDULER    = 0x4000,
+                        TFTPD32_CONSOLE      = 0x1000,
+                        TFTPD32_REGISTRY     = 0x2000,
+                        TFTPD32_SCHEDULER    = 0x4000,
                       };
 // services presently provided
 #define TFTPD32_ALL_SERVICES  (TFTPD32_TFTP_SERVER  | TFTPD32_TFTP_CLIENT |  TFTPD32_SYSLOG_SERVER | TFTPD32_DHCP_SERVER | TFTPD32_DNS_SERVER )

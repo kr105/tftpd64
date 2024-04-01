@@ -20,11 +20,11 @@
 // -----------------------------------------------------------------------------------------------------
 // IPC mechanisms
 // The console is the thread which exports the data from the daemon part to the GUI
-// This thread waits for the 3 events 
+// This thread waits for the 3 events
 //      A msg is received from the GUI        --> read it and dispatch its processing
 //      One log (or more) is ready to be sent --> pop them from linked list and send them
 //      One msg is about to be sent           --> blocks caller thread and send it
-// 
+//
 // -----------------------------------------------------------------------------------------------------
 
 // First item -> structure belongs to the module and is shared by all threads
@@ -57,14 +57,14 @@ static int GetGuiStatus(void) { return gGuiStatus; }
 //        for the LOG function
 void StartAsyncMessagingFacility(void) {
     LL_Create(LL_ID_MSG_TO_GUI, MAX_MSG_IN_QUEUE);
-} // StartAsyncMessagingFacility 
+} // StartAsyncMessagingFacility
 
 void StopAsyncMessagingFacility(void) {
     void* p;
     // empties list and close it
     while ((p = LL_PopMsg(LL_ID_MSG_TO_GUI)) != NULL) free(p);
     LL_Destroy(LL_ID_MSG_TO_GUI);
-} // StopAsyncMessagingFacility 
+} // StopAsyncMessagingFacility
 
 int SendMsgRequest(int type, const void* msg_stuff, int size, BOOL bBlocking, BOOL bRetain) {
     int Rc;
@@ -86,7 +86,7 @@ int SendMsgRequest(int type, const void* msg_stuff, int size, BOOL bBlocking, BO
         // Request the lock to ensure all other threads are waiting
         if (Rc == WAIT_OBJECT_0) {
             WaitForMsgQueueToFinish(LL_ID_MSG_TO_GUI);
-            // push message 
+            // push message
             LL_PushTypedMsg(LL_ID_MSG_TO_GUI, msg_stuff, size, type | 0x10000);
             // wake up console thread and wait until it has got the msg
             WakeUpThread(TH_CONSOLE);
@@ -312,7 +312,7 @@ SOCKET WaitForGuiConnection(void) {
 
     do {
         sSettings.uConsolePort = TFTPD32_TCP_PORT;
-        // sListen is static --> don't reopen 
+        // sListen is static --> don't reopen
         if (sListen == INVALID_SOCKET)
             sListen = TcpGetListenSocket(AF_INET, "tftpd32", &sSettings.uConsolePort);
 #ifdef STANDALONE_EDITION
@@ -330,7 +330,7 @@ SOCKET WaitForGuiConnection(void) {
         } else {
             HANDLE tEvents[2];
             int nTriggeredEvent;
-            // Create Socket Event to process either wake up or accept 
+            // Create Socket Event to process either wake up or accept
             tEvents[0] = WSACreateEvent();
             WSAEventSelect(sListen, tEvents[0], FD_ACCEPT);
             // waits either internal sollicitation or msg recpetion
@@ -389,7 +389,7 @@ void TftpdConsole(void* param) {
         SetGuiStatus(NOT_CONNECTED);
         sDlg = WaitForGuiConnection(); // fail only if thread ends
         if (sDlg == INVALID_SOCKET) continue;
-        // Verify Versions 
+        // Verify Versions
         LogToMonitor("Verify Console/GUI parameters\n");
 
         Rc = TcpExchangeChallenge(sDlg, 0x56AE, CURRENT_PROTOCOL_VERSION, NULL, sSettings.szConsolePwd);
@@ -402,7 +402,7 @@ void TftpdConsole(void* param) {
 
 
         // Startup blocking service by creating
-        // one event and one semaphore to code the blocking sendmsgrequest    
+        // one event and one semaphore to code the blocking sendmsgrequest
         hMsgRequestSemaf = CreateMutex(NULL, 0, NULL);
         hEvMsgSent = CreateEvent(NULL,FALSE,FALSE,NULL);
         if (hMsgRequestSemaf == NULL)
@@ -410,7 +410,7 @@ void TftpdConsole(void* param) {
 
         tThreads[TH_CONSOLE].bInit = TRUE; // inits OK
 
-        // Create Socket Event 
+        // Create Socket Event
         tEvents[EV_FROMGUI] = WSACreateEvent();
         WSAEventSelect(sDlg, tEvents[EV_FROMGUI], FD_READ | FD_CLOSE);
 
@@ -462,4 +462,4 @@ void TftpdConsole(void* param) {
 
     LogToMonitor("End of console thread\n");
     _endthread();
-} // TftpdConsole 
+} // TftpdConsole

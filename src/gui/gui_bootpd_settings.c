@@ -50,7 +50,7 @@ int Text2MultipleInaddr(const char* sz, const char* sep, struct in_addr* pAddr, 
     return Ark;
 } // Text2MultipleInaddr
 
-// Utilitaire : Check a string if a valid inet address (IPv4) 
+// Utilitaire : Check a string if a valid inet address (IPv4)
 // by Jesus Soto : probably he was not happy with inet_addr
 int CheckInetAddress(HWND hWnd, char* szAddr, const char* szDescr, BOOL bStrict) {
     char szBuf[120];
@@ -145,8 +145,8 @@ int Gui_DHCPSaveConfig(HWND hWnd) {
     GetDlgItemText(hMainWnd, IDC_DHCP_MASK, sNewParamDHCP.szMask, sizeof sNewParamDHCP.szMask - 1);
     if (CheckInetAddress(hMainWnd, sNewParamDHCP.szMask, "DHCP Mask", sNewParamDHCP.nPoolSize != 0)) iErr = 1;
     //   GetDlgItemText (hWnd, IDC_DHCP_MASK,  szBuf, sizeof szBuf - 1);
-    //		 if (CheckInetAddress (hMainWnd, szBuf, "DHCP Mask", TRUE)) iErr=1;
-    //		 sNewParamDHCP.dwMask.s_addr= inet_addr (szBuf);
+    //   if (CheckInetAddress (hMainWnd, szBuf, "DHCP Mask", TRUE)) iErr=1;
+    //   sNewParamDHCP.dwMask.s_addr= inet_addr (szBuf);
     GetDlgItemText(hMainWnd, IDC_DHCP_WINS_SERVER, sNewParamDHCP.szWins, sizeof sNewParamDHCP.szWins - 1);
     if (CheckInetAddress(hMainWnd, sNewParamDHCP.szWins, "DHCP WINS Server", FALSE)) iErr = 1;
     GetDlgItemText(hMainWnd, IDC_DHCP_OPTION42, sNewParamDHCP.szOpt42, sizeof sNewParamDHCP.szOpt42 - 1);
@@ -178,9 +178,9 @@ int Gui_DHCPSaveConfig(HWND hWnd) {
                    sNewParamDHCP.t[0].szAddOption,
                    sizeof sNewParamDHCP.t[0].szAddOption - 1);
 
-    // Change 30 oct 2002 : Gateway can be empty 
+    // Change 30 oct 2002 : Gateway can be empty
     //     if ( strlen(sNewParamDHCP.szAddr)==0 || strlen(sNewParamDHCP.szMask)==0)
-    //		return FALSE;
+    //     return FALSE;
 
     // change: 2019 : do not warn if address is empty
     if (sNewParamDHCP.szAddr[0] != 0) {
@@ -194,10 +194,10 @@ int Gui_DHCPSaveConfig(HWND hWnd) {
             MY_WARNING("Gateway is empty.\nNo default route will be passed by DHCP server");
     }
 
-    //	 if (memcmp (& sGuiParamDHCP, & sNewParamDHCP, sizeof sNewParamDHCP) !=0)
-    //	 {
+    //   if (memcmp (& sGuiParamDHCP, & sNewParamDHCP, sizeof sNewParamDHCP) !=0)
+    //   {
     sGuiParamDHCP = sNewParamDHCP;
     return TRUE;
-    //	 }
+    //   }
     return FALSE;
 } // Gui_DHCPSaveConfig

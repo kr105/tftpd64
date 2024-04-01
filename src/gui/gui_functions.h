@@ -1,9 +1,9 @@
 /////////////////////////////////////////////////////////
-// 
+//
 // Tftpd32 March 2007
-// 
+//
 // Gui definitions and functions
-// 
+//
 /////////////////////////////////////////////////////////
 
 
@@ -27,10 +27,10 @@ enum {
        WM_RESIZE_MAIN_WINDOW = (WM_APP+100),
        WM_INIT_DISPLAY,
        WM_TIMER_HIDE_MAIN_WND,
-	   WM_TIMER_REPOS_MAIN_WND,
+       WM_TIMER_REPOS_MAIN_WND,
        WM_FREEMEM,
        WM_RECV_FROM_THREAD,
-	   WM_SOCKET_CLOSED,
+       WM_SOCKET_CLOSED,
        WM_SOCKET_ERROR,
        WM_TFTP_TRANFSER_TO_KILL,
        WM_DISPLAY_LISTEN,
@@ -39,20 +39,20 @@ enum {
        WM_SAVE_SETTINGS,
        WM_SAVE_DHCP_SETTINGS,
        WM_DELETE_ASSIGNATION,
-	   WM_DESTROY_SETTINGS,
-	   WM_START_SERVICES,
+       WM_DESTROY_SETTINGS,
+       WM_START_SERVICES,
 
-	   WM_CLOSE_2ND,
-	   WM_CLOSE_3RD,
-	   
-	   WM_ESC_EDITBOX,
-	   WM_TAB_EDITBOX,
-	   WM_ENTER_EDITBOX,
-	   
+       WM_CLOSE_2ND,
+       WM_CLOSE_3RD,
+
+       WM_ESC_EDITBOX,
+       WM_TAB_EDITBOX,
+       WM_ENTER_EDITBOX,
+
        WM_ANYBODY_HERE =(WM_APP + 591),
     };  // main window
 
-// messages reçus par la fenêtre Serveur TFTP
+// messages reï¿½us par la fenï¿½tre Serveur TFTP
 enum {
         WM_TFTP_CREATE  = (WM_APP+200),
         WM_TFTPD_INIT,
@@ -66,21 +66,21 @@ enum {
 
     };  // TFTP hidden window
 
-// messages reçus par la fenêtre Serveur BOOTP
+// messages reï¿½us par la fenï¿½tre Serveur BOOTP
 enum {
         WM_DHCP_INIT = (WM_APP+300),
         WM_DHCP_READCONFIG,
         WM_DHCP_MSG,
      }; // DHCP hidden window
 
-// messages reçus par la fenêtre Serveur SYSLOG
+// messages reï¿½us par la fenï¿½tre Serveur SYSLOG
 enum {
         WM_SYSLOG_INIT = (WM_APP+400),
         WM_SYSLOG_MSG,
         WM_SYSLOG_INVALIDATE,
      }; // SYSLOG hidden window
 
-// messages reçus par la fenêtre Serveur SNTP
+// messages reï¿½us par la fenï¿½tre Serveur SNTP
 enum {
         WM_SNTP_INIT = (WM_APP+500),
         WM_SNTP_MSG,
@@ -93,25 +93,25 @@ enum {
        WM_NEWCHOICE = (WM_USER+400),
 };
 
-// Message reçus par la fenêtre Gauge
+// Message reï¿½us par la fenï¿½tre Gauge
 enum {
        WM_NEWPOS = (WM_USER+500),
        WM_FILLWND,
 };
-// Message reçus par la fenêtre du Client TFTP
+// Message reï¿½us par la fenï¿½tre du Client TFTP
 enum {
        WM_INITCLIENT = (WM_USER+600),
        WM_CLIENT_DATA ,
        WM_CLIENT_ACK,
 };
 
-// messages reçus par la fenêtre adresse IP
+// messages reï¿½us par la fenï¿½tre adresse IP
 enum {
         WM_TFTP_GETIP = (WM_USER+700),
         WM_IPADDRESS,
 };
 
-// messages reçus par la fenêtre adresse CMsgBox
+// messages reï¿½us par la fenï¿½tre adresse CMsgBox
 enum {
         WM_INIT_MSGBOX = (WM_USER+800),
         NEW_MSGBOX,
@@ -128,7 +128,7 @@ enum {
         WM_INIT_LOG = (WM_APP+500),
         WM_ASYNC_LOG,
      };
-     
+
 /////////////////////////////////////////////////////////
 // Windows and Dialogs
 // LRESULT CALLBACK TftpAddIPProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -142,10 +142,10 @@ LRESULT  CALLBACK AsyncSaveKeyProc (HWND hWnd, UINT message, WPARAM wParam, LPAR
 LRESULT  CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 
-LRESULT  TR_ChangeTabControl (HWND hDlgWnd);	
+LRESULT  TR_ChangeTabControl (HWND hDlgWnd);
 int  TR_ChgTabControl (HWND hDlgWnd, int nService, int nStatus); // open one sub window
-int TR_OpenAllTabs (HWND hDlgWnd, int nService);	// open all sub windows
-DWORD TR_GetCurrentTab (HWND hDlgWnd);		// get service of current tab
+int TR_OpenAllTabs (HWND hDlgWnd, int nService); // open all sub windows
+DWORD TR_GetCurrentTab (HWND hDlgWnd); // get service of current tab
 
 int  FillCBLocalIP (HWND hCBWnd, BOOL bShowPassive, const char *szAddress);
 BOOL Tftpd32RetrieveWindowPos (HWND hMainWnd);
@@ -171,7 +171,7 @@ int TftpDir_SelectEntry (HWND hCBWnd);
 char *GetActiveDirectory (char *szActiveDirectory, int nSize);
 int StartExplorer (void);
 
-// gui_main 
+// gui_main
 int ChangeIPAddress (HWND hWnd, struct S_IPAddressList *pIf);
 
 

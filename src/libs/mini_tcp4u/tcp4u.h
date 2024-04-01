@@ -37,8 +37,8 @@ SOCKET TcpGetListenSocket (int family, LPCSTR szService, unsigned short *pPort);
 int TcpRecv (SOCKET s, LPSTR szBuf, unsigned uBufSize, unsigned uTimeOut, HANDLE hLogFile);
 int TcpSend (SOCKET s, LPCSTR szBuf, unsigned uBufSize, HANDLE hLogFile);
 SOCKET TcpConnect (LPCSTR  szHost,
-                   LPCSTR  szService, 
-				   int     family,
+                   LPCSTR  szService,
+                   int     family,
                    unsigned short nPort);
 int TcpPPSend (SOCKET s, LPCSTR szBuf, unsigned uBufSize, HANDLE hLogFile);
 int TcpPPRecv (SOCKET s, LPSTR szBuf, unsigned uBufSize, int uTimeOut, HANDLE hLogFile);
@@ -46,5 +46,3 @@ int TcpPPRecv (SOCKET s, LPSTR szBuf, unsigned uBufSize, int uTimeOut, HANDLE hL
 int TcpExchangeChallenge (SOCKET s, int seed, int nVersion, int *peerVersion, const char *key);
 
 int UdpSend (int nFromPort, struct sockaddr *sa_to, int sa_len, const char *data, int len);
-
-

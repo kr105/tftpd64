@@ -60,11 +60,11 @@ BOOL CheckSyslogMsg(char* SyslogTxt, int nSize) {
 
 
 /////////////////////////////
-// Background window 
+// Background window
 //
 void SyslogProc(void* param) {
     SOCKET sSyslogListenSocket = INVALID_SOCKET;
-    char szSyslogBuf[SYSLOG_MAXMSG + 1]; // Buffer 
+    char szSyslogBuf[SYSLOG_MAXMSG + 1]; // Buffer
     int Rc;
     SOCKADDR_STORAGE sSock;
     int nDummy;

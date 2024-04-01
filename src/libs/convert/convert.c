@@ -14,7 +14,7 @@ enum {
     E_STG_STRING  = 's',
 };
 
-#define MAX_STG_DATA	20
+#define MAX_STG_DATA 20
 
 struct S_Settings {
     char cType;

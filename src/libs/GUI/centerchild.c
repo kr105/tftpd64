@@ -6,7 +6,7 @@
 // Code from Microsoft Knowledge base Q180936
 //
 // Released under European Union Public License
-// 
+//
 ////////////////////////
 
 

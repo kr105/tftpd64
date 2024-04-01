@@ -76,7 +76,7 @@ void DhcpRefresh_ListView(int nbLeases, struct S_Lease tLeases[]) {
         LvItem.mask = LVIF_PARAM | LVIF_STATE;
         LvItem.state = 0;
         LvItem.stateMask = 0;
-        LvItem.iItem = Ark;                           // numéro de l'item
+        LvItem.iItem = Ark;                           // numï¿½ro de l'item
         LvItem.iSubItem = 0;                          // index dans la ligne
         LvItem.lParam = inet_addr(tLeases[Ark].szIP); // keep track of assignation
         itemPos = ListView_InsertItem(hListV, (LPARAM)&LvItem);
@@ -101,6 +101,6 @@ void DhcpRefresh_ListView(int nbLeases, struct S_Lease tLeases[]) {
             wsprintf(szDate, "%02d/%02d %02d:%02d:%02d",
                      ltime.tm_mon + 1, ltime.tm_mday, ltime.tm_hour, ltime.tm_min, ltime.tm_sec);
             ListView_SetItemText(hListV, itemPos, 3, szDate);
-        } // renew ! =0	   
+        } // renew ! =0
     }     // parse all alocations
-}         // DhcpRefresh_ListView 
+}         // DhcpRefresh_ListView

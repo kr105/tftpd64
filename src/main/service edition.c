@@ -1,4 +1,4 @@
-// 
+//
 // source released under European Union Public License
 //
 

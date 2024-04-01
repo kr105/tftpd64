@@ -18,10 +18,10 @@ static struct S_IPAddressList old_if;
 int AnswerIPList(void) {
     // change old_if structure ie : force a refresh
     memset(&old_if, 0, sizeof old_if);
-    // wake up scheduler thread 
+    // wake up scheduler thread
     WakeUpThread(TH_SCHEDULER);
     return 0;
-} // 
+} //
 
 // -----------------------
 // Get all interfaces. This function is restricted to IPv4 in order to run under XP
@@ -38,7 +38,7 @@ int PoolNetworkInterfaces(void) {
     outBufLen = sizeof(IP_ADAPTER_ADDRESSES);
     pAddresses = (IP_ADAPTER_ADDRESSES*)malloc(outBufLen);
 
-    // Make an initial call to GetAdaptersAddresses to get the 
+    // Make an initial call to GetAdaptersAddresses to get the
     // size needed into the outBufLen variable
     if (GetAdaptersAddresses(sSettings.bIPv6 ? AF_UNSPEC : AF_INET,
                              GAA_FLAG_INCLUDE_PREFIX,
@@ -115,7 +115,7 @@ int GetIPv4Address(const char* szIf, char* szIP) {
     outBufLen = sizeof(IP_ADAPTER_ADDRESSES);
     pAddresses = (IP_ADAPTER_ADDRESSES*)malloc(outBufLen);
 
-    // Make an initial call to GetAdaptersAddresses to get the 
+    // Make an initial call to GetAdaptersAddresses to get the
     // size needed into the outBufLen variable
     if (GetAdaptersAddresses(AF_INET,
                              GAA_FLAG_INCLUDE_PREFIX,

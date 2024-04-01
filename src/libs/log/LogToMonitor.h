@@ -12,4 +12,3 @@
 
 // Synchronous log via OutputDebugString
 void LogToMonitor (char *sz, ...);
-

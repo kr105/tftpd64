@@ -34,7 +34,7 @@ static const struct sMapping {
 }
 tMapping[] =
 {
-    // MB_OK is 0, MB_OKCANCEL is 1 and so on... 
+    // MB_OK is 0, MB_OKCANCEL is 1 and so on...
     // Mapping will be done directly using sMapping[style]
     {MB_OK, 1, {IDOK, -1, -1, -1}},
     {MB_OKCANCEL, 2, {IDOK, IDCANCEL, -1, -1}},
@@ -46,7 +46,7 @@ tMapping[] =
 };
 
 // mapping between button ID and its text
-// Agin:  should match IDOK, IDCANCEL, ...  since we index directly szButtonText[buttonid] 
+// Agin:  should match IDOK, IDCANCEL, ...  since we index directly szButtonText[buttonid]
 static const char* szButtonText[] = {
     "undefined",
     "OK",
@@ -76,29 +76,29 @@ static const LPCTSTR tIcon[] =
 // A custom messagebox to be displayed at the center of its parent window
 // without using SetWindowHook
 
-#define TEXT_X_POSITION  50	    // Place of the edittext control into the dialogbox
+#define TEXT_X_POSITION  50     // Place of the edittext control into the dialogbox
 #define TEXT_Y_POSITION  10
 #define ICON_X_POSITION   5
 #define ICON_Y_POSITION   5
 
 
-#define CX_MARGIN       80		// margin for icon
-#define CY_MARGIN       70		// margin for buttons
+#define CX_MARGIN       80      // margin for icon
+#define CY_MARGIN       70      // margin for buttons
 
-#define BUTTON_LENGTH   60		// size of a button
-#define BUTTON_SPACE    10		// inter button space
-#define BUTTON_HEIGHT   25		// size of a button
+#define BUTTON_LENGTH   60      // size of a button
+#define BUTTON_SPACE    10      // inter button space
+#define BUTTON_HEIGHT   25      // size of a button
 
-#define DLGTITLE  L"Debug"				// overwritten by INIT_DIALOG
+#define DLGTITLE  L"Debug"      // overwritten by INIT_DIALOG
 #define DLGFONT   L"MS Sans Serif"
 
 
-// 
+//
 // an empty dialog box template
 //
 #pragma pack(push, 4)
 const static struct {
-    // dltt 
+    // dltt
     DWORD style;
     DWORD dwExtendedStyle;
     WORD ccontrols;
@@ -123,13 +123,13 @@ sEmptyDialogBox =
     0,            // window class: none
     DLGTITLE,     // temporary Window caption
     8,            // font pointsize
-    DLGFONT,      // font 
+    DLGFONT,      // font
 };
 
 #pragma pack(pop)
 
 
-// resources created by OnInitDialog 
+// resources created by OnInitDialog
 // used by WM_PAINT, WM_COMMAND or WM_CLOSE
 static struct S_myMsgBoxResources {
     HICON hIcon;                 // system icon
@@ -173,16 +173,16 @@ static int MLGetTextExtentPoint(HWND hWnd, const char* lpText, int nLen, SIZE* l
         lpPrev = lpCur + 1;
     } while (Rc && n++ < nLen && *lpCur++ != 0);
 
-    // release 
+    // release
     ReleaseDC(hWnd, hDC);
     return Rc;
 } // MLGetTextExtentPoint
 
 
 //
-// Ok, now were are in 
+// Ok, now were are in
 // Tasks : determine the size of the window
-//         create the text window, 
+//         create the text window,
 //         create the buttons
 //         assign the default button
 //         paste text into the control
@@ -204,16 +204,16 @@ static int OnInitDialog(HWND hwndDlg, const struct sParam* lpData, struct S_myMs
 
     // retrieve the size cx and cy of the texte to be displayed
     MLGetTextExtentPoint(hwndDlg, lpData->text, lstrlen(lpData->text), &Size);
-    // PJO : 5/5/2018 : GetWindowRect(NULL,..) does not return anymore size of desktop 
+    // PJO : 5/5/2018 : GetWindowRect(NULL,..) does not return anymore size of desktop
     hParentWnd = GetParent(hwndDlg);
     if (hParentWnd == NULL)
         hParentWnd = GetDesktopWindow();
     GetWindowRect(hParentWnd, &sParentRect);
 
     // Create a passive multi line edit control to display the text
-    res->hwndText = CreateWindow("Edit", // Predefined class; Unicode assumed 
+    res->hwndText = CreateWindow("Edit", // Predefined class; Unicode assumed
                                  "",
-                                 WS_VISIBLE | WS_CHILD | ES_READONLY | ES_MULTILINE | WS_DISABLED, // Styles 
+                                 WS_VISIBLE | WS_CHILD | ES_READONLY | ES_MULTILINE | WS_DISABLED, // Styles
                                  TEXT_X_POSITION,
                                  TEXT_Y_POSITION,
                                  Size.cx,
@@ -232,7 +232,7 @@ static int OnInitDialog(HWND hwndDlg, const struct sParam* lpData, struct S_myMs
         + GetSystemMetrics(SM_CXPADDEDBORDER);
 
     // get the low 4 bits to have the index on tMapping
-    // for instance if we want a MB_OKCANCEL window, style will be 1 
+    // for instance if we want a MB_OKCANCEL window, style will be 1
     // and the resources to be created are in tMapping[1]
     res->style = lpData->uStyle & 0x0000F;
 
@@ -244,9 +244,9 @@ static int OnInitDialog(HWND hwndDlg, const struct sParam* lpData, struct S_myMs
     // Create the buttons and center them
     for (Ark = 0; Ark < tMapping[res->style].nButtons; Ark++) {
         int DefButtonStyle = HIBYTE(lpData->uStyle) == Ark ? BS_DEFPUSHBUTTON : 0;
-        res->hwndButton[Ark] = CreateWindow("BUTTON",                                            // Predefined class 
-                                            szButtonText [tMapping[res->style].tButtons[Ark]],   // Button text 
-                                            WS_TABSTOP | WS_VISIBLE | WS_CHILD | DefButtonStyle, // Styles 
+        res->hwndButton[Ark] = CreateWindow("BUTTON",                                            // Predefined class
+                                            szButtonText [tMapping[res->style].tButtons[Ark]],   // Button text
+                                            WS_TABSTOP | WS_VISIBLE | WS_CHILD | DefButtonStyle, // Styles
                                             Size.cx/2 - (tMapping[res->style].nButtons-2*Ark)*(BUTTON_LENGTH+
                                                 BUTTON_SPACE)/2,
                                             Size.cy - (BUTTON_LENGTH+BUTTON_SPACE),
@@ -262,7 +262,7 @@ static int OnInitDialog(HWND hwndDlg, const struct sParam* lpData, struct S_myMs
     if ((nDefButtonIdx = HIBYTE(lpData->uStyle)) < tMapping[res->style].nButtons)
         SetFocus(res->hwndButton[nDefButtonIdx]);
 
-    // now center the main window 
+    // now center the main window
     x = sParentRect.left + (sParentRect.right - sParentRect.left - Size.cx) / 2;
     y = sParentRect.top + (sParentRect.bottom - sParentRect.top - Size.cy) / 2;
     SetWindowPos(hwndDlg, NULL, x, y, Size.cx, Size.cy, SWP_NOZORDER | SWP_NOACTIVATE);
@@ -322,7 +322,7 @@ BOOL CALLBACK myMsgBoxCbk(HWND hwndDlg, UINT message, WPARAM wParam, LPARAM lPar
             return OnInitDialog(hwndDlg, (struct sParam*)lParam, &myMsgBoxResources);
 
         case WM_PAINT:
-            // text is already managed by the control, 
+            // text is already managed by the control,
             // but icon has to be drawn manually
             hDC = GetDC(hwndDlg);
             Rc = DrawIcon(hDC, ICON_X_POSITION, ICON_Y_POSITION, myMsgBoxResources.hIcon);

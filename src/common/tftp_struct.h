@@ -4,11 +4,11 @@
 // File tftp_struct.h:   Tftpd32 data structure
 //
 // released under artistic license (see license.txt)
-// 
+//
 //////////////////////////////////////////////////////
 
 
-#define MAX_TFTP_OPTIONS	16
+#define MAX_TFTP_OPTIONS 16
 
 
 ////////////////////////////////////////////////////////////
@@ -27,9 +27,9 @@ struct S_Trf_Settings
                                       // transfer is terminated
     DWORD           dwTimeout;        // Timeout
     unsigned        TftpMode;         // transfer mode, only binary mode is supported
-    unsigned        ExtraWinSize;     // Data to sent without waiting for ACK 
+    unsigned        ExtraWinSize;     // Data to sent without waiting for ACK
     DWORD           dwFileSize;       // -1 if not set
-    DWORD           dwMcastAddr;      // Multicast address   
+    DWORD           dwMcastAddr;      // Multicast address
 };      // struct S_Trf_Settings
 
 // Buffers
@@ -38,11 +38,11 @@ struct S_Trf_Buffers
     char           buf[MAXPKTSIZE];     // one piece of file
     char           ackbuf[PKTSIZE];
     SOCKADDR_STORAGE       from ;             // stack of address of remote peers
-    char           cnx_frame[PKTSIZE];		  // The 'connexion' datagram, contains file name
-	char		   padding[4];				  // set to zero before reading connect datagram
+    char           cnx_frame[PKTSIZE];        // The 'connexion' datagram, contains file name
+    char           padding[4];                // set to zero before reading connect datagram
 } ;         // struct S_Trf_Buffers
 
-// transfer stats and progress bar : not mandatory 
+// transfer stats and progress bar : not mandatory
 struct S_Trf_Statistics
 {
     DWORD          dwTransfert;     // number of simultaned trf
@@ -51,7 +51,7 @@ struct S_Trf_Statistics
     DWORD          dwTransferSize;  // transfer size (read from SIZE option)
     time_t         StartTime;
     time_t         dLastUpdate;     // Last gauge update (seconds)
-	DWORD          ret_code;
+    DWORD          ret_code;
 } ;         // struct S_Trf_Statistics
 // control data
 struct S_Trf_Control
@@ -64,7 +64,7 @@ struct S_Trf_Control
     DWORD           dwBytes;           // taille de la zone Data (th_stuff)
     unsigned        nTimeOut;          // # of consecutive timeouts
     unsigned        nRetries;          // same datagram resent # times
-	int             nOAckPort;         // OAck should be sent on this port
+    int             nOAckPort;         // OAck should be sent on this port
 };      // struct S_Trf_Control
 // resource allocated for the transfer
 struct S_Trf_Resource
@@ -77,14 +77,14 @@ struct S_Trf_Resource
 struct S_Thread_Management
 {
    // The thread which manages the transfer
-   BOOL            bActive ;           // act as a semaphore 
+   BOOL            bActive ;           // act as a semaphore
                                        // TRUE if thread is busy
    BOOL            bPermanentThread ;  // is thread permanent
-   HANDLE          dwThreadHandle; 
+   HANDLE          dwThreadHandle;
    DWORD           dwThreadHandleId;
    HANDLE          hEvent;            // Event used to activate permanent threads
    HWND            hWnd;              // identifiant of main window
-   DWORD           dwTransferId;       // transfer id 
+   DWORD           dwTransferId;       // transfer id
    int             N;
 } ;         // struct  S_Thread_Management
 // MD5 computation data

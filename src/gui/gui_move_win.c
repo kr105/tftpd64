@@ -9,7 +9,7 @@
 
 #include "headers.h"
 
-#define TOOLBAR_HEIGHT  0        // pas de fenêtre Toolbar
+#define TOOLBAR_HEIGHT  0        // pas de fenï¿½tre Toolbar
 
 
 // The tabs
@@ -52,7 +52,7 @@ tResize[] =
 #ifndef TFTP_CLIENT_ONLY
     {IDC_SETTINGS_BUTTON, 80, 141, 62, 12, 4, 10, 2, 0, TAB_ALL},
 #else
-	{ IDC_SETTINGS_BUTTON,  80, 141,  62,  12,    4, 10,  2,  0, 0 },
+    { IDC_SETTINGS_BUTTON,  80, 141,  62,  12,    4, 10,  2,  0, 0 },
 #endif
     {IDC_TFTPD_HELP, 154, 141, 62, 12, 9, 10, 1, 0, TAB_ALL},
     {IDC_BASE_DIRECTORY, 63, 7, 110, 12, 0, 0, 7, 0, 0},
@@ -198,7 +198,7 @@ static struct S_TabCtrlData {
 // for the TFTP client window in order to make the drag and drop work
 static int TR_ChgZOrder(HWND hDlgWnd, HWND hTabWnd) {
     int Ark;
-    // Ordonated list of the Client Controls 
+    // Ordonated list of the Client Controls
     static const int tTftpClientCtrl[] =
     {
         IDC_CLIENT_HOST, IDC_CLIENT_PORT, IDC_CLIENT_LOCALFILE, IDC_CLIENT_REMOTEFILE,
@@ -218,7 +218,7 @@ int TR_ChgTabControl(HWND hDlgWnd, int nService, int nStatus) {
     // Ark will point on the tTabCtrlData tab entry, nOnglet the position of the tab
     int nOnglet, Ark;
 
-    // Find position of the tab item 
+    // Find position of the tab item
     for (Ark = 0, nOnglet = 0;
          Ark < SizeOfTab(tTabCtrlData) && tTabCtrlData[Ark].service != nService;
          Ark++)
@@ -319,4 +319,4 @@ DWORD TR_GetCurrentTab(HWND hDlgWnd) {
     // retrieve index of array tTabCtrlData
     for (Ark = 0; Ark < SizeOfTab(tTabCtrlData) && TabCtrlItem.lParam != tTabCtrlData[Ark].tab; Ark++);
     return Ark >= SizeOfTab(tTabCtrlData) ? 0 : tTabCtrlData[Ark].service;
-} // TR_GetCurrentTab 
+} // TR_GetCurrentTab

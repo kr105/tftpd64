@@ -27,7 +27,7 @@
 
 #include "stdafx.h"
 #include "sdk_Service.h"
-#include <tchar.h>	// required for _stprintf
+#include <tchar.h> // required for _stprintf
 
 // internal variables
 SERVICE_STATUS          ssStatus;       // current status of the service
@@ -70,17 +70,17 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 {
 //void _CRTAPI1 main(int argc, char **argv)
 //{
-// 
-	int argc;
-	char ** argv;
+//
+    int argc;
+    char ** argv;
 
-	argc = 2;
-	argv = (char * *)calloc(2, sizeof(char *));
-	argv[0] = (char *)malloc(12);
-	argv[1] = (char *)malloc(12);
-	memset(argv[0], NULL, 12);
-	memset(argv[1], NULL, 12);
-	sscanf( (char *)lpCmdLine, "%s", argv[1]);
+    argc = 2;
+    argv = (char * *)calloc(2, sizeof(char *));
+    argv[0] = (char *)malloc(12);
+    argv[1] = (char *)malloc(12);
+    memset(argv[0], NULL, 12);
+    memset(argv[1], NULL, 12);
+    sscanf( (char *)lpCmdLine, "%s", argv[1]);
 
     SERVICE_TABLE_ENTRY dispatchTable[] =
     {
@@ -125,7 +125,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
         if (!StartServiceCtrlDispatcher(dispatchTable))
             AddToMessageLog(TEXT("StartServiceCtrlDispatcher failed."));
 
-		return(0);
+        return(0);
 }
 
 

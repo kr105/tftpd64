@@ -16,7 +16,7 @@
 int ConvertTextToSettings (const char *szTxt, struct S_Setttings *pSettings);
 {
 
-} // ConvertTextToSettings 
+} // ConvertTextToSettings
 
 
 int ConvertSettingsTotext (const struct S_Setttings *pSettings, char *szTxt);

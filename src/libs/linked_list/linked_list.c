@@ -15,9 +15,9 @@
 #include "linked_list.h"
 
 // ---------------------------------------------------------------
-// A multithread linked list 
+// A multithread linked list
 // This module exports the function LL_PushMsg and LL_PopMsg
-// which add (retrieve) a message to (from) a list 
+// which add (retrieve) a message to (from) a list
 // A Semaphore is defined in order to prevent corrupted data
 // ---------------------------------------------------------------
 
@@ -56,7 +56,7 @@ void LL_Destroy(int id) {
     CloseHandle(tLL[id].msglock);
 } // LL_Destroy
 
-// AddItem    
+// AddItem
 int LL_PushTypedMsg(int id, const void* lpData, int dwSize, int type) {
     struct savemsg* pmsg;
     int msg_id;
@@ -124,7 +124,7 @@ void WaitForMsgQueueToFinish(int id) {
     struct savemsg* pmsg = tLL[id].phead;
     int Rc;
     while (pmsg != NULL) {
-        Sleep(0); // Pass the hand to other threads for the queue to empty        
+        Sleep(0); // Pass the hand to other threads for the queue to empty
         Rc = WaitForSingleObject(tLL[id].msglock, INFINITE);
         assert(Rc==WAIT_OBJECT_0);
         pmsg = tLL[id].phead;
@@ -133,7 +133,7 @@ void WaitForMsgQueueToFinish(int id) {
 } // WaitForMsgQueueToFinish()
 
 
-//Assumes you have the lock 
+//Assumes you have the lock
 //Returns NULL if no message available
 void* LL_PopTypedMsg(int id, int* plen, int* pmsg_id, int* ptype) {
     struct savemsg* pcur;
@@ -155,7 +155,7 @@ void* LL_PopTypedMsg(int id, int* plen, int* pmsg_id, int* ptype) {
 
     ReleaseMutex(tLL[id].msglock);
 
-    // return only user data, forget container 
+    // return only user data, forget container
     lpData = pcur->data;
     if (pmsg_id != NULL) *pmsg_id = pcur->msg_id;
     if (ptype != NULL) *ptype = pcur->type;
@@ -165,7 +165,7 @@ void* LL_PopTypedMsg(int id, int* plen, int* pmsg_id, int* ptype) {
     return lpData;
 } // LL_PopTypedMsg
 
-//Assumes you have the lock 
+//Assumes you have the lock
 //Returns NULL if no message available
 void* LL_PopMsg(int id) {
     return LL_PopTypedMsg(id, NULL, NULL, NULL);

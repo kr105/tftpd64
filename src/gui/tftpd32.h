@@ -118,7 +118,7 @@
 #define    IDC_CHECK_SNTP_SERVER   1323
 #define    IDC_CHECK_DNS_SERVER    1324
 #define    IDC_CHECK_IPv6          1325
-#define    IDC_REDUCE_PATH		   1326
+#define    IDC_REDUCE_PATH         1326
 
 #define    IDC_CHECK_PXE           1330
 #define    IDC_CHECK_MD5           1331
@@ -131,8 +131,8 @@
 #define    IDC_TXT_TFTP_TIMEOUT    1356
 #define    IDC_TXT_TFTP_RETRANSMIT 1357
 #define    IDC_TXT_TFTP_PORT       1358
-#define    IDC_TXT_TFTP_PORTS	   1359
-#define    IDC_TXT_WINSIZE		   1360
+#define    IDC_TXT_TFTP_PORTS      1359
+#define    IDC_TXT_WINSIZE         1360
 
 #define    IDC_DIR_TEXT            1402
 #define    IDC_CHECK_PERS_LEASES   1403
@@ -215,9 +215,9 @@
 #define    IDC_DHCP_DOMAINNAME      3009
 #define    IDC_DHCP_ADDOPTION_NB    3010
 #define    IDC_DHCP_ADDOPTION_VALUE 3011
-#define	   IDC_DHCP_LEASE           3012
-#define	   IDC_DHCP_OPTION42        3013
-#define	   IDC_DHCP_OPTION120       3014
+#define    IDC_DHCP_LEASE           3012
+#define    IDC_DHCP_OPTION42        3013
+#define    IDC_DHCP_OPTION120       3014
 #define    IDC_DHCP_WINS_SERVER     3015
 
 #define    IDC_TXT_DEFAULT_ROUTER  3101
@@ -230,11 +230,11 @@
 #define    IDC_TXT_ADDOPTION       3108
 #define    IDC_TXT_LEASE           3109
 #define    IDC_TXT_OPTION42        3110
-#define    IDC_TXT_OPTION120	   3111
-#define    IDC_TXT_WINS_SERVER	   3112
+#define    IDC_TXT_OPTION120       3111
+#define    IDC_TXT_WINS_SERVER     3112
 
-#define   IDC_DHCP_OK     3200
-#define   IDC_LV_DHCP	  3300
+#define   IDC_DHCP_OK              3200
+#define   IDC_LV_DHCP              3300
 
 ////////////////////////////////////////////////////////////
 // SHOW DIR
@@ -267,5 +267,3 @@
 
 #define   IDC_TXT_BAD_SERVICES    10000
 #define   _APS_NEXT_COMMAND_VALUE 40001
-
-

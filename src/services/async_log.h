@@ -15,8 +15,3 @@
 void __cdecl LOG (int DebugLevel, const char *szFmt, ...);
 void __cdecl SVC_ERROR (const char *szFmt, ...);
 void __cdecl SVC_WARNING (const char *szFmt, ...);
-
-
-
-
-

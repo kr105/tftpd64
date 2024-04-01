@@ -46,7 +46,7 @@ static char* sym_crypt(char* sz, int nLen, const char* key) {
 } // crypt
 
 // ok : there was no need to use 2 exchanges.
-// however it can not be changed to support legacy 
+// however it can not be changed to support legacy
 int TcpExchangeChallenge(SOCKET s, int seed, int nVersion, int* peerVersion, const char* key) {
     FILETIME ft;
     struct S_Challenge Out1, In1, Out2, In2;
@@ -86,7 +86,7 @@ int TcpExchangeChallenge(SOCKET s, int seed, int nVersion, int* peerVersion, con
     if (Rc < 0) return Rc;
     /* un crypt In2 and compare with Out1 */
     sym_crypt(In2.challenge, sizeof In2.challenge, key);
-    // if 
+    // if
     if (!memcmp(In2.challenge, Out1.challenge, sizeof Out1.challenge) == 0)
         return TCP4U_BAD_AUTHENT;
 

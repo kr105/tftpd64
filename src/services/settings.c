@@ -59,7 +59,7 @@ tTftpd32Entry[] =
     {KEY_PORT_OPTION, &sSettings.bPortOption, REG_DWORD, sizeof sSettings.bPortOption},
     {KEY_GUI_REMANENCE, &sSettings.nGuiRemanence, REG_DWORD, sizeof sSettings.nGuiRemanence},
     {KEY_IGNORE_LASTBLOCK_ACK, &sSettings.bIgnoreLastBlockAck, REG_DWORD, sizeof sSettings.bIgnoreLastBlockAck},
-    //	{ KEY_IPv4,                  & sSettings.bIPv4,                     REG_DWORD,   sizeof sSettings.bIPv4             },
+    // { KEY_IPv4,                  & sSettings.bIPv4,                     REG_DWORD,   sizeof sSettings.bIPv4             },
     {KEY_IPv6, &sSettings.bIPv6, REG_DWORD, sizeof sSettings.bIPv6},
     {KEY_REDUCE_PATH, &sSettings.bReduceTFTPPath, REG_DWORD, sizeof sSettings.bReduceTFTPPath},
 
@@ -144,7 +144,7 @@ BOOL Tftpd32ReadSettings(void) {
                 szTftpd32IniFile);
     if (sSettings.uServices == TFTPD32_NONE) sSettings.uServices = TFTPD32_ALL_SERVICES;
 
-    // field WorkingDirectory : 
+    // field WorkingDirectory :
     // try env variable then szBaseDir and current dir
     if (GetEnvironmentVariable(TFTP_DIR, szCurDir, sizeof szCurDir) != 0
         && IsValidDirectory(szCurDir))
@@ -186,7 +186,7 @@ BOOL Tftpd32SaveSettings(void) {
 
 
 /////////////////////////////////////////////////////////
-// Delete all Tftpd32's settings 
+// Delete all Tftpd32's settings
 /////////////////////////////////////////////////////////
 BOOL Tftpd32DestroySettings(void) {
     int Rc;

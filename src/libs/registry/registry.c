@@ -6,7 +6,7 @@
 //
 //
 // source released under European Union Public License
-// 
+//
 //////////////////////////////////////////////////////
 
 
@@ -73,7 +73,7 @@ int ReadKey(const char* szRegPath, const char* szKey,
             }
         } else // key found in ini file
         {
-            // * (char *) buf = 0 ; 
+            // * (char *) buf = 0 ;
             Rc = 0;
         }
     }

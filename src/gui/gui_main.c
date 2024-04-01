@@ -57,7 +57,7 @@ char* GetActiveDirectory(char* szActiveDirectory, int nSize) {
 /* The control of the edit box IDC_CB_DIR            */
 /* just intercept ESC & ENTER Key from edit box ctrl */
 /* ------------------------------------------------- */
-static WNDPROC lpfnCBDirEditWndProc; // original wndproc for the combo box 
+static WNDPROC lpfnCBDirEditWndProc; // original wndproc for the combo box
 LRESULT CALLBACK CBDirSubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     HWND hwndMain = GetParent(GetParent(hwnd));
     switch (msg) {
@@ -74,7 +74,7 @@ LRESULT CALLBACK CBDirSubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
                     return 0;
             }
     }
-    // Call the original window procedure for default processing. 
+    // Call the original window procedure for default processing.
     return CallWindowProc(lpfnCBDirEditWndProc, hwnd, msg, wParam, lParam);
 } // CBDirSubClassProc
 
@@ -98,7 +98,7 @@ int ChangeIPAddress(HWND hWnd, struct S_IPAddressList* pIf) {
     int Ark = 0;
     static struct S_If sif[MAX_IP_ADDR];
     DWORD nService;
-    char* szFind; // string to be put on top 
+    char* szFind; // string to be put on top
 
 
     // get the string to be match --> will be put on top
@@ -121,7 +121,7 @@ int ChangeIPAddress(HWND hWnd, struct S_IPAddressList* pIf) {
         ComboBox_ResetContent(hCBWnd);
 
 
-        // sort address 
+        // sort address
         qsort(pIf->addr, pIf->nb_addr, sizeof pIf->addr[0], (int (*)(const void*, const void*))comp);
 
         // translate list coming from service to a string
@@ -161,7 +161,7 @@ static int SubClassCombo(HWND hMainWnd, int nId, WNDPROC cbk) {
     // code copied from MSDN "Creating a Combo Box Toolbar"
     hWndCBBox = GetDlgItem(hMainWnd, nId);
     hWndEdit = ChildWindowFromPoint(hWndCBBox, pt);
-    // lpfnCBDirEditWndProc = (WNDPROC) SetWindowLong (hWndEdit, GWL_WNDPROC, (DWORD) cbk); 
+    // lpfnCBDirEditWndProc = (WNDPROC) SetWindowLong (hWndEdit, GWL_WNDPROC, (DWORD) cbk);
     lpfnCBDirEditWndProc = (WNDPROC)SetWindowLongPtr(hWndEdit, GWLP_WNDPROC, (LONG_PTR)cbk);
     return 0;
 } // SubClassCombo
@@ -205,7 +205,7 @@ static int Handle_VM_Command(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 
         case IDC_SHDIR_BUTTON:
             // Ask directory content to the service
-            // dialog window will be displayed once the 
+            // dialog window will be displayed once the
             // message C_REPLY_DIRECTORY_CONTENT is rcvd
             Gui_RequestListDirectory(sService);
             break;
@@ -441,7 +441,7 @@ int Tftpd32InitGui(HWND hWnd, HICON* phIcon, HMENU* phMenu) {
     Gui_RequestWorkingDir(sService);
 
     // WM_RESIZE_MAIN_WINDOW
-    // Inits Windows : Register our (beautiful) Icon 
+    // Inits Windows : Register our (beautiful) Icon
     *phIcon = LoadIcon(GetWindowInstance(hWnd), MAKEINTRESOURCE(IDI_TFTPD32));
     // SetClassLong (hWnd, GCL_HICON, (LONG) *phIcon );
     SetClassLongPtr(hWnd, GCLP_HICON, (LONG_PTR)*phIcon);
@@ -465,7 +465,7 @@ int Tftpd32InitGui(HWND hWnd, HICON* phIcon, HMENU* phMenu) {
     if (sGuiSettings.uServices & TFTPD32_TFTP_CLIENT)
         TR_ChgTabControl(hWnd, TFTPD32_TFTP_CLIENT, SERVICE_RUNNING);
 
-    // Call the resize window. 
+    // Call the resize window.
     // Hmm its done in RetrievWindowPos : To be removed ???
     TR_ResizeWindow(hWnd, TRUE);
 
@@ -703,7 +703,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
             Gui_StartAllServices(sService);
             break;
 
-        // The edit box of the combo box IDC_CB_DIR has been modified 
+        // The edit box of the combo box IDC_CB_DIR has been modified
         // Change working directory
         case WM_ENTER_EDITBOX: {
             char sz[MAX_PATH];
@@ -803,7 +803,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
             LogToMonitor("------ services stopped\n");
 #endif
         // Save window pos and size
-        // To be comment out to create a new Tftpd32-Portable version 
+        // To be comment out to create a new Tftpd32-Portable version
             Tftpd32SaveWindowPos(hWnd);
 
             TrayMessage(hWnd, NIM_DELETE, hIcon, TASKTRAY_ID, WM_NOTIFYTASKTRAY);
@@ -912,7 +912,7 @@ int InitsConsoleConnection(const char* szHost) {
     }
 
 
-    // // Verify Versions 
+    // // Verify Versions
     lstrcpy(sGuiSettings.szConsolePwd, DFLT_CONSOLE_PWD);
     if (g_VERSION == SERVICE_EDITION_VALUE)
         GetEnvironmentVariable(TFTP_PWD, sGuiSettings.szConsolePwd, sizeof sGuiSettings.szConsolePwd);
@@ -974,16 +974,16 @@ int InitsConsoleConnection(const char* szHost) {
 
     // services should be started : ask settings and what is started
     Gui_AskTFTPSettings(sService);
-    //	 Gui_GetMessage (NULL, sService, TRUE, C_TFTP_RPLY_SETTINGS);
+    // Gui_GetMessage (NULL, sService, TRUE, C_TFTP_RPLY_SETTINGS);
     Gui_AskDHCPSettings(sService);
-    //	 Gui_GetMessage (NULL, sService, TRUE, C_DHCP_RPLY_SETTINGS);
+    // Gui_GetMessage (NULL, sService, TRUE, C_DHCP_RPLY_SETTINGS);
     Gui_RequestRunningServices(sService);
-    //	 Gui_GetMessage (NULL, sService, TRUE, C_REPLY_GET_SERVICES);
+    // Gui_GetMessage (NULL, sService, TRUE, C_REPLY_GET_SERVICES);
 #ifdef SERVICE_EDITION
     Gui_RequestFullReport(sService);
 #endif
     return 1;
-} // InitsConsoleConnection 
+} // InitsConsoleConnection
 
 
 int GuiMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
@@ -1029,4 +1029,4 @@ int GuiMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     CloseHandle(myMutEx);
 
     return 1;
-} // GuiMain 
+} // GuiMain

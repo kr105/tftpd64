@@ -59,7 +59,7 @@ void SetViewMode(HWND hwndLV, DWORD dwView, DWORD dwExtStyle) {
 } //  SetViewMode
 
 
-// InitTftpd32ListView : Creates a ListView in the Tftpd32 style : LVS_REPORT 
+// InitTftpd32ListView : Creates a ListView in the Tftpd32 style : LVS_REPORT
 // An array gives the text headers, the text alignment and the columns width
 BOOL InitTftpd32ListView(HWND hListV, const struct S_LVHeader* tCol, int nb, DWORD dwExtStyle) {
     int Ark;
@@ -83,7 +83,7 @@ BOOL InitTftpd32ListView(HWND hListV, const struct S_LVHeader* tCol, int nb, DWO
 } // InitTftpd32ListView
 
 
-// Alternates background 
+// Alternates background
 LRESULT ProcessCustomDraw(LPARAM lParam) {
     LPNMLVCUSTOMDRAW lplvcd = (LPNMLVCUSTOMDRAW)lParam;
 

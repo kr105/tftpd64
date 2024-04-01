@@ -22,7 +22,7 @@
      SendDlgItemMessage (hWnd, Ctrl, BM_SETCHECK, BST_UNCHECKED, 0);
 
 
-#include <stdio.h>		// use of sscanf
+#include <stdio.h> // use of sscanf
 #include "headers.h"
 
 
@@ -67,7 +67,7 @@ static struct S_Show {
 }
 tResize[] =
 {
-    // GLOBAL 
+    // GLOBAL
     {IDC_GRP_GLOBAL, 6, 36, 228, 86, TAB_SETTINGS_GLOBAL,},
     {IDC_CHECK_TFTP_SERVER, 14, 48, 60, 10, TAB_SETTINGS_GLOBAL,},
     {IDC_CHECK_TFTP_CLIENT, 14, 60, 60, 10, TAB_SETTINGS_GLOBAL,},
@@ -301,7 +301,7 @@ static int ReadNewSettings(HWND hWnd) {
     }
     sNewSettings.bSyslogPipe = ISDLG_CHECKED(hWnd, IDC_CHECK_PIPE_SYSLOG);
 
-    // DHCP options 
+    // DHCP options
     if (ISDLG_CHECKED(hWnd, IDC_CHECK_LOCALIP_DHCP)) {
         char* p;
         ComboBox_GetText(GetDlgItem(hWnd, IDC_CB_LOCALIP_DHCP), sNewSettings.szDHCPLocalIP,
@@ -338,7 +338,7 @@ static int ReadNewSettings(HWND hWnd) {
     sNewSettings.bVirtualRoot = ISDLG_CHECKED(hWnd, IDC_CHECK_VROOT);
     sNewSettings.bPXECompatibility = ISDLG_CHECKED(hWnd, IDC_CHECK_PXE);
 
-    // Sécurité sur l'accès
+    // Sï¿½curitï¿½ sur l'accï¿½s
     if (ISDLG_CHECKED(hWnd, IDC_CHECK_TFTPLOCALIP))
         ComboBox_GetText(GetDlgItem(hWnd, IDC_CB_TFTPLOCALIP), sNewSettings.szTftpLocalIP,
                      sizeof sNewSettings.szTftpLocalIP);
@@ -393,7 +393,7 @@ static int ReadNewSettings(HWND hWnd) {
 } // ReadNewSettings
 
 
-// Helper functions which takes input from IP combo box and outputs 
+// Helper functions which takes input from IP combo box and outputs
 // to TFTP/DHCP settings combo box
 
 // to be moved into global header
@@ -482,7 +482,7 @@ BOOL FormMain_OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
     CHECK_DLG_IF(hWnd, IDC_CHECK_PERS_LEASES, sGuiSettings.bPersLeases);
     CHECK_DLG_IF(hWnd, IDC_CHECK_PING, sGuiSettings.bPing);
     CHECK_DLG_IF(hWnd, IDC_CHECK_DOUBLE_ANSWER, sGuiSettings.bDoubleAnswer);
-    //	       FillCBLocalIP (GetDlgItem (hWnd, IDC_CB_LOCALIP_DHCP), FALSE, sGuiSettings.szDHCPLocalIP);
+    // FillCBLocalIP (GetDlgItem (hWnd, IDC_CB_LOCALIP_DHCP), FALSE, sGuiSettings.szDHCPLocalIP);
 
 
     // show IPv4 address for DHCP
@@ -525,7 +525,7 @@ BOOL FormMain_OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
     CHECK_DLG_IF(hWnd, IDC_CHECK_TFTPLOCALIP, sGuiSettings.szTftpLocalIP[0]!=0);
     ComboBox_Enable(GetDlgItem (hWnd, IDC_CB_TFTPLOCALIP), ISDLG_CHECKED (hWnd, IDC_CHECK_TFTPLOCALIP));
 
-    // Fenêtre d'anticipation
+    // Fenï¿½tre d'anticipation
     CHECK_DLG_IF(hWnd, IDC_CHECK_WINSIZE, sGuiSettings.WinSize>0);
     Edit_Enable(GetDlgItem (hWnd, IDC_WINSIZE), sGuiSettings.WinSize > 0);
     // local ports
@@ -535,7 +535,7 @@ BOOL FormMain_OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
         SetDlgItemText(hWnd, IDC_LOCAL_PORTS, sz);
     }
 
-    // DHCP 
+    // DHCP
     Gui_LoadDHCPConfig(hWnd);
 
     CenterChildWindow(hWnd, CCW_VISIBLE);
@@ -683,7 +683,7 @@ BOOL Tftpd32SaveWindowPos(HWND hMainWnd) {
 #ifdef  _WIN64
         HKEY_CURRENT_USER,
 #else
-						 HKEY_LOCAL_MACHINE,
+                         HKEY_LOCAL_MACHINE,
 #endif
         TFTPD32_MAIN_KEY,
         0,
@@ -712,13 +712,13 @@ BOOL Tftpd32RetrieveWindowPos(HWND hMainWnd) {
 #ifdef  _WIN64
         HKEY_CURRENT_USER,
 #else
-					  HKEY_LOCAL_MACHINE,
+                      HKEY_LOCAL_MACHINE,
 #endif
         TFTPD32_MAIN_KEY, // Path name of child key.
         0,                // Reserved.
         KEY_READ,         // Requesting read access.
         &hKey);           // Address of key to be returned.
-    // Lire les données dans cette entrée
+    // Lire les donnï¿½es dans cette entrï¿½e
     READKEY(KEY_WINDOW_POS, sz);
     if (hKey != INVALID_HANDLE_VALUE)
         RegCloseKey(hKey);

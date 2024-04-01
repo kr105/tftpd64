@@ -3,9 +3,9 @@
 // Projet TFTPD32.   Mai 98 Ph.jounin
 // File SVC main.c:  The MAIN program for the service edition
 //
-// derivative work from sdk_service.cpp 
+// derivative work from sdk_service.cpp
 //                 by Craig Link - Microsoft Developer Support
-// 
+//
 //
 // source released under European Union Public License
 //
@@ -36,10 +36,10 @@ BOOL bDebug = FALSE;
 /* WinMain                       */
 /* ----------------------------- */
 #ifdef WINMAIN
-int PASCAL WinMain ( HINSTANCE hInstance, 
-					 HINSTANCE hPrevInstance,
-                     LPSTR lpszCmdLine, 
-					 int nCmdShow )
+int PASCAL WinMain ( HINSTANCE hInstance,
+                     HINSTANCE hPrevInstance,
+                     LPSTR lpszCmdLine,
+                     int nCmdShow )
 #endif
 int main(int argc, char* argv[]) {
     LPSTR lpszCmdLine = argv[1];
@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
         bDebug = TRUE;
         CmdDebugService();
     } else if (lstrcmpi("-uninstall", lpszCmdLine) == 0) {
-        // destroy the registry entries but not the ini file 
+        // destroy the registry entries but not the ini file
         Tftpd32DestroySettings();
     } else {
         // this is just to be friendly

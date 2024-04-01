@@ -10,15 +10,15 @@
 //
 //////////////////////////////////////////////////////
 
-// Quick documentation for the 
+// Quick documentation for the
 // The first thread started fork the thread StartTftpd32Services then call OpenDialogBox
 // and act as the GUI
 // StartTftpd32Services start one thread by service (DHCP, DNS, TFTP server, Syslog, ...)
-// and 3 utility threads : 
-//		- The console which controls the messages between GUI and threads
-//		- The registry threads which is in charge to read and write the settings
-//		- The Scheduler which logs the status of the worker threads
-// Tftpd32UpdateServices may be launched by the console thread in order to kill or start 
+// and 3 utility threads :
+// - The console which controls the messages between GUI and threads
+// - The registry threads which is in charge to read and write the settings
+// - The Scheduler which logs the status of the worker threads
+// Tftpd32UpdateServices may be launched by the console thread in order to kill or start
 // some threads.
 
 
@@ -45,7 +45,7 @@ static const struct S_MultiThreadingConfig {
     int serv_mask;              // identify service into sSettings.uServices
     void (*thread_proc)(void*); // the service main thread
     BOOL manual_event;          // automatic/manual reset of its event
-    int stack_size;             // 
+    int stack_size;             //
     int family;                 // socket family
     int type;                   // socket type
     char* service;              // the port to be bound ascii
@@ -53,7 +53,7 @@ static const struct S_MultiThreadingConfig {
     int rfc_port;               // default port taken from RFC
     char* sz_interface;         // the interface to be opened
     int wake_up_by_ev;          // would a SetEvent wake up the thread, FALSE if thread blocked on recvfrom
-    int restart;                // should the thread by restarted  
+    int restart;                // should the thread by restarted
     BOOL gui;                   // thread is linked to a tab in the GUI
 }
 tThreadsConfig[] =
@@ -95,7 +95,7 @@ BOOL IsIPv6Enabled(void) {
 //     - send a fake message on its listen port
 /////////////////////////////////////////////////////////////////
 
-// bind the thread socket 
+// bind the thread socket
 SOCKET BindServiceSocket(const char* name, int family, int type, const char* service, int def_port, int rfc_port,
                          const char* sz_if) {
     SOCKET sListenSocket = INVALID_SOCKET;
@@ -105,7 +105,7 @@ SOCKET BindServiceSocket(const char* name, int family, int type, const char* ser
 
     memset(&Hints, 0, sizeof Hints);
     if (sSettings.bIPv4 && !sSettings.bIPv6 && (family == AF_INET6 || family == AF_UNSPEC))
-        Hints.ai_family = AF_INET; // force IPv4 
+        Hints.ai_family = AF_INET; // force IPv4
     else if (sSettings.bIPv6 && !sSettings.bIPv4 && (family == AF_INET || family == AF_UNSPEC))
         Hints.ai_family = AF_INET6; // force IPv6
     else Hints.ai_family = family;  // use IPv4 or IPv6, whichever
@@ -159,7 +159,7 @@ SOCKET BindServiceSocket(const char* name, int family, int type, const char* ser
                     szServ, sizeof szServ,
                     NI_NUMERICHOST | AI_NUMERICSERV);
         SetLastError(KeepLastError); // getnameinfo has reset LastError !
-        // 3 causes : access violation, socket already bound, bind on an adress 
+        // 3 causes : access violation, socket already bound, bind on an adress
         switch (GetLastError()) {
             case WSAEADDRNOTAVAIL: // 10049
                 SVC_ERROR("Error %d\n%s\n\n"
@@ -201,7 +201,7 @@ static void FreeThreadResources(int Idx) {
 
 /////////////////////////////////////////////////
 // Wake up a thread :
-// two methods : either use SetEvent or 
+// two methods : either use SetEvent or
 //               send a "fake" message (thread blocked on recvfrom)
 /////////////////////////////////////////////////
 
@@ -214,7 +214,7 @@ static int FakeServiceMessage(const char* name, int family, int type, const char
 
     memset(&Hints, 0, sizeof Hints);
     if (sSettings.bIPv4 && !sSettings.bIPv6 && (family == AF_INET6 || family == AF_UNSPEC))
-        Hints.ai_family = AF_INET; // force IPv4 
+        Hints.ai_family = AF_INET; // force IPv4
     else if (sSettings.bIPv6 && !sSettings.bIPv4 && (family == AF_INET || family == AF_UNSPEC))
         Hints.ai_family = AF_INET6; // force IPv6
     else Hints.ai_family = family;  // use IPv4 or IPv6, whichever
@@ -329,12 +329,12 @@ int StartMultiWorkerThreads(BOOL bSoft) {
 #endif
 
     for (Ark = 0; Ark < TH_NUMBER; Ark++) {
-        // process mangement threads and 
+        // process mangement threads and
         if ((!bSoft && TFTPD32_MNGT_THREADS & tThreadsConfig[Ark].serv_mask)
             || sSettings.uServices & tThreadsConfig[Ark].serv_mask) {
             StartSingleWorkerThread(Ark);
 #ifdef SERVICE_EDITION
-            // for service, do not wait for console to be connected to GUI 
+            // for service, do not wait for console to be connected to GUI
             // bInit set by console only when TCP connection between service and gui done
             if (tThreadsConfig[Ark].serv_mask != TFTPD32_CONSOLE)
 #endif
@@ -483,7 +483,7 @@ void Scheduler(void* param) {
         Rc = WaitForMultipleObjects(nCount, tHdle, FALSE, 30000);
         if (Rc == WAIT_TIMEOUT)
             PoolNetworkInterfaces(); // so not trigger messages to GUI
-            // a process has terminated 
+            // a process has terminated
         else if (Rc - WAIT_OBJECT_0 < nCount) {
             struct S_Chg_Service chgmsg;
 

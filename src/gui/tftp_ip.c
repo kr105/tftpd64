@@ -30,8 +30,8 @@ static char buf[MAXGETHOSTSTRUCT];
     // IP address list to be refreshed every 20 seconds.
     ////////////////////////
     case WM_TFTP_GETIP :
-        {char szName [256];          
-          if (     gethostname (szName, sizeof szName)==SOCKET_ERROR 
+        {char szName [256];
+          if (     gethostname (szName, sizeof szName)==SOCKET_ERROR
                ||  WSAAsyncGetHostByName (hWnd, WM_IPADDRESS, szName, buf, sizeof buf) ==0 )
                         PostMessage (GetParent (hWnd), WM_ADD_IP_CB, 0, 0);
         }
@@ -50,12 +50,9 @@ static char buf[MAXGETHOSTSTRUCT];
             KillTimer(hWnd, wParam);
             PostMessage (hWnd, wParam, 0, 0);
             break;
-  
+
   }
 
 return DefWindowProc (hWnd, message, wParam, lParam);
 
 } // TftpAddIPProc
-
-
-

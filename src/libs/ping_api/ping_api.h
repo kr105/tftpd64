@@ -5,17 +5,17 @@
 //
 //
 // source released under artistic License (see license.txt)
-// 
+//
 //////////////////////////////////////////////////////
 
 // return codes
-enum {  PINGAPI_SOCKERROR = -1000, 
-        PINGAPI_INITERROR, 
-        PINGAPI_PRIVERROR, 
-        PINGAPI_TIMEOUT, 
-        PINGAPI_UNKNOWNPKT, 
-        PINGAPI_UNREACHABLE, 
-        PINGAPI_TTLEXPIRE 
+enum {  PINGAPI_SOCKERROR = -1000,
+        PINGAPI_INITERROR,
+        PINGAPI_PRIVERROR,
+        PINGAPI_TIMEOUT,
+        PINGAPI_UNKNOWNPKT,
+        PINGAPI_UNREACHABLE,
+        PINGAPI_TTLEXPIRE
      };
 
 #ifdef _MSC_VER
@@ -24,7 +24,7 @@ enum {  PINGAPI_SOCKERROR = -1000,
 #pragma pack(1)
 #endif
 
-// PingApi : 
+// PingApi :
 // Params : pAddr       : address of destination
 //          dwTimeout  : Timeout in msec
 //          pTTL        : init TTL

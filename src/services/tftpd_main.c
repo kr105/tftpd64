@@ -31,12 +31,12 @@ struct LL_TftpInfo* pTftpFirst;
 static int gSendFullStat = FALSE; // full report should be sent
 
 
-// statistics requested by console 
+// statistics requested by console
 // do not answer immediately since we are in console thread
 // and pTftp data may change
 void ConsoleTftpGetStatistics(void) {
     gSendFullStat = TRUE;
-} // 
+} //
 
 
 ////////////////////////////////////////////////////////////
@@ -53,7 +53,7 @@ static SOCKET TftpBindLocalInterface(void) {
 
     memset(&Hints, 0, sizeof Hints);
     if (sSettings.bIPv4 && !sSettings.bIPv6)
-        Hints.ai_family = AF_INET; // force IPv4 
+        Hints.ai_family = AF_INET; // force IPv4
     else if (sSettings.bIPv6 && !sSettings.bIPv4)
         Hints.ai_family = AF_INET6;   // force IPv6
     else Hints.ai_family = AF_UNSPEC; // use IPv4 or IPv6, whichever
@@ -126,7 +126,7 @@ static SOCKET TftpBindLocalInterface(void) {
                     szServ, sizeof szServ,
                     NI_NUMERICHOST | AI_NUMERICSERV);
         SetLastError(KeepLastError); // getnameinfo has reset LastError !
-        // 3 causes : access violation, socket already bound, bind on an adress 
+        // 3 causes : access violation, socket already bound, bind on an adress
         switch (GetLastError()) {
             case WSAEADDRNOTAVAIL: // 10049
                 SVC_ERROR("Error %d\n%s\n\n"
@@ -249,7 +249,7 @@ static int TftpMainFilter(SOCKADDR_STORAGE* from, int from_len, char* data, int 
 }                 // TftpMainFilter
 
 
-// activate a new thread and pass control to it 
+// activate a new thread and pass control to it
 static int TftpdChooseNewThread(SOCKET sListenerSocket) {
     struct LL_TftpInfo *pTftp, *pTmp;
     int fromlen;
@@ -497,7 +497,7 @@ void TftpdMain(void* param) {
 
     tThreads[TH_TFTP].bInit = TRUE; // inits OK
 
-    // Socket was not opened at the start since we have to use interface 
+    // Socket was not opened at the start since we have to use interface
     // once an address as been assigned
     while (tThreads[TH_TFTP].gRunning) {
         // if socket as not been created before

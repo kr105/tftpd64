@@ -2,11 +2,11 @@
 //////////////////////////////////////////////////////
 // Projet TFTPD32.  Mars 2000 Ph.jounin
 //
-// File settings.h 
-// settings structure declaration 
+// File settings.h
+// settings structure declaration
 //
 // released under artistic license (see license.txt)
-// 
+//
 //////////////////////////////////////////////////////
 
 #define DFLT_CONSOLE_PWD "tftpd32"
@@ -34,7 +34,7 @@ struct S_Tftpd32Settings
     BOOL                  bUnixStrings;
     BOOL                  bBeep;
     BOOL                  bVirtualRoot;
-	// changed in release 4 : szTftpLocalIP is either an IP address or an interface descriptor
+    // changed in release 4 : szTftpLocalIP is either an IP address or an interface descriptor
     char                  szTftpLocalIP [max (MAXLEN_IPv6, MAX_ADAPTER_DESCRIPTION_LENGTH+4)];
     unsigned              uServices;
     unsigned              nTftpLowPort;
@@ -46,29 +46,29 @@ struct S_Tftpd32Settings
     DWORD                 dwMCastPort;
     DWORD                 bPersLeases;
     DWORD                 bUnicastBOOTP;
-	DWORD                 bPing;
-	DWORD                 bDoubleAnswer;
+    DWORD                 bPing;
+    DWORD                 bDoubleAnswer;
     char                  szDHCPLocalIP [MAXLEN_IPv6];
-	BOOL				  bEventLog;
+    BOOL                  bEventLog;
     char                  szConsolePwd [12];    // password for GUI
-	BOOL                  bPortOption;			// experimental port option
-	DWORD				  nGuiRemanence;
-	BOOL                  bIgnoreLastBlockAck;
-	BOOL                  bIPv4;
-	BOOL                  bIPv6;
-	BOOL                  bReduceTFTPPath;
+    BOOL                  bPortOption;          // experimental port option
+    DWORD                 nGuiRemanence;
+    BOOL                  bIgnoreLastBlockAck;
+    BOOL                  bIPv4;
+    BOOL                  bIPv6;
+    BOOL                  bReduceTFTPPath;
 
-	char				  szHttpDirectory [_MAX_PATH];
-	
-	// unsaved settings
-	DWORD				  dwMaxTftpTransfers;
+    char                  szHttpDirectory [_MAX_PATH];
+
+    // unsaved settings
+    DWORD                 dwMaxTftpTransfers;
     char                  szWorkingDirectory [_MAX_PATH];
     DWORD                 dwRefreshInterval;
-	unsigned short		  uConsolePort;
-	BOOL                  bTftpOnPhysicalIf;
+    unsigned short        uConsolePort;
+    BOOL                  bTftpOnPhysicalIf;
 
-	// should be last
-	unsigned              uRunningServices;
+    // should be last
+    unsigned              uRunningServices;
 };
 
 extern struct S_Tftpd32Settings sSettings;          // The settings,used anywhere in the code
@@ -121,7 +121,7 @@ BOOL Tftpd32DestroySettings (void);
 #define KEY_IGNORE_LASTBLOCK_ACK   "Ignore ack for last TFTP packet"
 #define KEY_IPv4                   "Enable IPv4"
 #define KEY_IPv6                   "Enable IPv6"
-#define KEY_REDUCE_PATH			   "Reduce TFTP Path"
+#define KEY_REDUCE_PATH            "Reduce TFTP Path"
 #define KEY_DONOTCHECK_FIREWALL    "Donot verify firewall"
 
 #define KEY_HTTP_DIR                "HttpBaseDirectory"

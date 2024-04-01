@@ -56,8 +56,8 @@ static struct sSntpPkt sSntpDefaultData =
     SNTP_VERSION,
     SNTP_NO_WARNING,
     10,           // stratum
-    10,           // pool each 1024 seconds 
-    0,            // precision -> 1 second 
+    10,           // pool each 1024 seconds
+    0,            // precision -> 1 second
     0x00100000,   // root delay : 0,1 sec (byte order)
     0x00800000,   // root dispersion : 0,5 sec (byte order)
     TO_BE_FIILED, // reference
@@ -105,7 +105,7 @@ struct sSntpPkt* SntpFillMessage(struct sSntpPkt* pSntpData) {
             + rand() & 0xFFFF);
 
     return pSntpData;
-} // SntpFillMessage 
+} // SntpFillMessage
 
 
 // --------------------------------------

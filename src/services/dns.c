@@ -13,12 +13,12 @@
 #define IPv6
 
 #define MAX_IPV6_ADDRESS 10
-#define DNS_CNAME     5			// canonical name	
-#define DNS_A         1			// ipv4 translation
-#define DNS_AAAA      2		// ipv6 translation
+#define DNS_CNAME     5         // canonical name
+#define DNS_A         1         // ipv4 translation
+#define DNS_AAAA      2         // ipv6 translation
 #define DNS_IPV4_ADDR 1
 #define DNS_IPV6_ADDR 2
-#define CLASS_IN      1			// internet
+#define CLASS_IN      1         // internet
 #define DNS_NOTIMPLEMENTED 4
 
 #pragma pack(1)
@@ -95,7 +95,7 @@ static int CreateAnswerMsg(const DNS_HEADER* req,
                            int* anslen);
 
 /////////////////////////////
-// Background window 
+// Background window
 //
 void ListenDNSMessage(void* param) {
     SOCKET sDNSSocket = INVALID_SOCKET;
@@ -140,7 +140,7 @@ int AnswerDnsQuery(const DNS_HEADER* header, int len, char* buf, int* anslen) {
     memset(&ans, 0, sizeof ans);
     // check that message is a query and only one host is required
     if (htons(header->opcode) == 0 && htons(header->q_count) == 1) {
-        // go to request 
+        // go to request
         Rc = ExplodeQname(&sDNSQuestion,
                           (char*)header + sizeof(DNS_HEADER),
                           len - sizeof(DNS_HEADER));
@@ -234,15 +234,15 @@ int Rc;
    if (lpHostEnt!=NULL)
    {
        memcpy (& ans->ipv4 , lpHostEnt->h_addr, lpHostEnt->h_length);
-	   ans->qclass = req->qclass;
-	   ans->qtype = req->qtype;
+       ans->qclass = req->qclass;
+       ans->qtype = req->qtype;
 
-	   return TRUE;
-	}
-	else
-	{
-		Rc = GetLastError ();
-	}
+       return TRUE;
+    }
+    else
+    {
+        Rc = GetLastError ();
+    }
 return FALSE;
 } // ProcessDnsQuery
 #endif  // IPv6 or IPv4
@@ -304,7 +304,7 @@ static int CreateAnswerMsg(const DNS_HEADER* req,
     if (nb_ans == 0) {
         msg->rcode = DNS_NOTIMPLEMENTED;
     } else {
-        // send message to GUI   
+        // send message to GUI
         lstrcpy(guimsg.name, reqexp->name);
         lstrcpy(guimsg.ipv4, inet_ntoa(*(struct in_addr*)&ans->ipv4));
         guimsg.ipv6[0] = 0;

@@ -17,7 +17,7 @@ int  OpenNewDialogBox ( HWND       hParentWnd,
 void TrayMessage(HWND hDlg, DWORD dwMessage, HICON hIcon, int TaskTrayId, int uCallBackMsg);
 
 /* Create an hidden background window                */
-HWND CreateBckgWindow (HWND hWnd, WORD wMessage, WNDPROC CbkProc, 
+HWND CreateBckgWindow (HWND hWnd, WORD wMessage, WNDPROC CbkProc,
                        const char *szName, const char *szAppli);
 
 

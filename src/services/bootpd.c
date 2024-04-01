@@ -698,21 +698,21 @@ int ProcessDHCPMessage(struct dhcp_packet* pDhcpPkt, int* pSize, struct sockaddr
             p = DHCPSearchOptionsField(pDhcpPkt->options, DHO_DHCP_REQUESTED_ADDRESS, NULL);
             if (p != NULL) {
                 // Change to avoid ciaddr to be returned if not comming. ciaddr returned will be the received one
-                //				pDhcpPkt->ciaddr = * (struct in_addr *) p;
+                // pDhcpPkt->ciaddr = * (struct in_addr *) p;
                 in_RequestedAddr = *(struct in_addr*)p;
             }
-            //			if(AddrFitsPool(&pDhcpPkt->ciaddr))
+            // if(AddrFitsPool(&pDhcpPkt->ciaddr))
             if (AddrFitsPool(&in_RequestedAddr)) {
                 //Look up the address, if it's not found, or the owner is this macaddr,
                 //or the lease was expired, allow the serving.
                 BOOL wasexpired = FALSE;
-                //				pProposedIP = DHCPSearchByIP(&pDhcpPkt->ciaddr, &wasexpired);
+                // pProposedIP = DHCPSearchByIP(&pDhcpPkt->ciaddr, &wasexpired);
                 pProposedIP = DHCPSearchByIP(&in_RequestedAddr, &wasexpired);
                 bSERVER = !pProposedIP || wasexpired || (0 == memcmp(pProposedIP->sMacAddr, pDhcpPkt->chaddr, 6));
             }
 
             if (bSERVER || (pDhcpPkt->ciaddr.S_un.S_addr == 0 && sSettings.bPXECompatibility)) {
-                //				pProposedIP  = DHCP_IPAllocate (nDhcpType, & pDhcpPkt->ciaddr, pDhcpPkt->chaddr, pDhcpPkt->hlen);
+                // pProposedIP  = DHCP_IPAllocate (nDhcpType, & pDhcpPkt->ciaddr, pDhcpPkt->chaddr, pDhcpPkt->hlen);
                 pProposedIP = DHCP_IPAllocate(nDhcpType, &in_RequestedAddr, pDhcpPkt->chaddr, pDhcpPkt->hlen);
                 if (pProposedIP == NULL) {
                     LOG(1, "no more addresses or address previously allocated by another server");

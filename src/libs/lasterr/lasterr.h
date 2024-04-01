@@ -10,6 +10,5 @@
 
 
 // Function LastErrorText
-// A wrapper for FormatMessage : retrieve the message text for a system-defined error 
+// A wrapper for FormatMessage : retrieve the message text for a system-defined error
 char *LastErrorText (void);
-

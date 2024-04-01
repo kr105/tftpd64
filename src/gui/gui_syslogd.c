@@ -15,7 +15,7 @@
 
 // ---------------------------------------------------------------------
 //
-// ListView Management 
+// ListView Management
 //
 // ---------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ void AddSyslogItem(HWND hListV, const char* szIP, const char* szTxt) {
     LvItem.state = 0;
     LvItem.stateMask = 0;
     LvItem.iItem = ListView_GetItemCount(hListV); // item pos
-    LvItem.lParam = 0;                            // sorting params   
+    LvItem.lParam = 0;                            // sorting params
     LvItem.iSubItem = 0;                          // column index
     // LvItem.pszText = "";
 

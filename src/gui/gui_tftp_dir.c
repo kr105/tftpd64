@@ -39,7 +39,7 @@ int StartExplorer(void) {
     CloseHandle(pInfo.hProcess);
     CloseHandle(pInfo.hThread);
     return Rc;
-} // StartExplorer 
+} // StartExplorer
 
 
 ////////////////////////

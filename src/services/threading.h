@@ -12,17 +12,17 @@
 
 
 // Starts one thread per service (Tftpd, Sntpd, dhcpd)
-// Order is the same than tThreadsConfig array 
+// Order is the same than tThreadsConfig array
 // pseudo service should be first
-enum e_Threads { TH_CONSOLE, 
-                 TH_ASYNCSAVEKEY, 
-				 TH_SCHEDULER,
-				 TH_DHCP, 
-				 TH_TFTP, 
-				 TH_SNTP, 
-				 TH_DNS,
-				 TH_SYSLOG, 
-				 TH_NUMBER };
+enum e_Threads { TH_CONSOLE,
+                 TH_ASYNCSAVEKEY,
+                 TH_SCHEDULER,
+                 TH_DHCP,
+                 TH_TFTP,
+                 TH_SNTP,
+                 TH_DNS,
+                 TH_SYSLOG,
+                 TH_NUMBER };
 
 // Events created for main threads
 struct S_ThreadMonitoring
@@ -31,16 +31,16 @@ struct S_ThreadMonitoring
     HANDLE  tTh;         // thread handle
     HANDLE  hEv;         // wake up event
     SOCKET  skt;         // Listening SOCKET
-	int     bSoftReset;  // Thread will be reset
-	BOOL    bInit;		 // inits are terminated
-}  
+    int     bSoftReset;  // Thread will be reset
+    BOOL    bInit;       // inits are terminated
+}
 tThreads [TH_NUMBER];
 
 struct S_RestartTable
 {
-	int oldservices;
-	int newservices;
-	int flapservices;
+    int oldservices;
+    int newservices;
+    int flapservices;
 };
 
 
@@ -63,11 +63,11 @@ void TerminateWorkerThreads (BOOL bSoft);
 int GetRunningThreads (void);
 
 // Access to console
-int SendMsgRequest (int type,				// msg type
-					const void *msg_stuff,	// data
-					int size,				// size of data
-					BOOL bBlocking,			// block thread until msg sent
-					BOOL bRetain );			// retain msg if GUI not connected
+int SendMsgRequest (int type,               // msg type
+                    const void *msg_stuff,  // data
+                    int size,               // size of data
+                    BOOL bBlocking,         // block thread until msg sent
+                    BOOL bRetain );         // retain msg if GUI not connected
 
 BOOL Tftpd32ReadSettings (void);
 BOOL Tftpd32SaveSettings (void);
@@ -75,7 +75,7 @@ BOOL Tftpd32DestroySettings (void);
 void Tftpd32UpdateServices (void *lparam);
 
 // Send the IP interfaces
-int	AnswerIPList (void);
+int AnswerIPList (void);
 
 // Complex actions handled by console thread
 void SendDirectoryContent (void);

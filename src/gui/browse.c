@@ -21,7 +21,7 @@ static int CALLBACK BrowseCallbackProc(HWND hWnd, UINT uMsg, LPARAM lParam, LPAR
             return FALSE;
     }
     return FALSE;
-} // BrowseCallbackProc 
+} // BrowseCallbackProc
 
 
 //////////////////////////////////////////////

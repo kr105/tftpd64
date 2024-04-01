@@ -2,7 +2,7 @@
 //
 // Projet DHCPD32.  November 2006 Ph.jounin
 //                  A free DHCP server for Windows
-// File registry_thread.c: asynchrously write configuration 
+// File registry_thread.c: asynchrously write configuration
 //                                        to either ini file or registry
 //                                        from Nick Wagner
 //
@@ -22,7 +22,7 @@ struct S_ini {
     int bufsize;
     int type;
     char* inifile;
-}; //      
+}; //
 
 
 // ---------------------------------------------------------------

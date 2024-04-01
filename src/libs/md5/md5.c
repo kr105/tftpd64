@@ -270,7 +270,7 @@ unsigned char block[64]; {
     state[3] += d;
 
     /* Zeroize sensitive information.
-  
+
   */
     MD5_memset((POINTER)x, 0, sizeof (x));
 }
