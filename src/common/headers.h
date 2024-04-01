@@ -74,7 +74,3 @@ typedef unsigned long  u_int32_t;
 #pragma pack(1)
 #include "services\dhcp.h"
 #pragma pack()
-
-#ifndef MSVC
-#  define sscanf_s sscanf
-#endif

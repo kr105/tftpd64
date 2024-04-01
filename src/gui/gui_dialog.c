@@ -236,11 +236,7 @@ static int GuiTFTPNew(HWND hMainWnd, const struct S_TftpTrfNew* pTrf) {
     if (sGuiSettings.bProgressBar)
         pTftpGui->hGaugeWnd = Gui_CreateGaugeWindow(hMainWnd, pTftpGui);
     pTftpGui->stat = pTrf->stat;
-#ifdef MSVC
     pTftpGui->filename = _strdup(pTrf->szFile);
-#else
-    pTftpGui->filename = strdup (pTrf->szFile);
-#endif
     pTftpGui->opcode = pTrf->opcode;
     pTftpGui->stg_addr = pTrf->from_addr;
 

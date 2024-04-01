@@ -98,7 +98,6 @@ void __cdecl LOG(int DebugLevel, const char* szFmt, ...) {
     szBuf[sizeof szBuf - 1] = 0;
     GetLocalTime(&sTime);
     va_start(marker, szFmt); /* Initialize variable arguments. */
-#ifdef MSVC
     lpTxt += vsprintf_s(lpTxt,
                         szBuf + sizeof szBuf - lpTxt - 1,
                         szFmt,
@@ -108,12 +107,6 @@ void __cdecl LOG(int DebugLevel, const char* szFmt, ...) {
               " [%02d/%02d %02d:%02d:%02d.%03d]",
               sTime.wDay, sTime.wMonth,
               sTime.wHour, sTime.wMinute, sTime.wSecond, sTime.wMilliseconds);
-#else
-    lpTxt += vsprintf (lpTxt, szFmt, marker);
-    wsprintf (lpTxt, " [%02d/%02d %02d:%02d:%02d.%03d]",
-              sTime.wDay, sTime.wMonth,
-              sTime.wHour, sTime.wMinute, sTime.wSecond, sTime.wMilliseconds );
-#endif
     lpTxt += sizeof (" [00/00 00:00:00.000]");
 
     // push the message into queue
@@ -136,14 +129,10 @@ void __cdecl SVC_ERROR(const char* szFmt, ...) {
 
     szBuf[LOGSIZE - 1] = 0;
     va_start(marker, szFmt); /* Initialize variable arguments. */
-#ifdef MSVC
     vsprintf_s(szBuf,
                sizeof szBuf - 1,
                szFmt,
                marker);
-#else
-    vsprintf (szBuf, szFmt, marker);
-#endif
 
     // push the message into queue -> don't block thread but retain msg
     SendMsgRequest(C_ERROR, szBuf, lstrlen(szBuf), FALSE, TRUE);
@@ -161,14 +150,10 @@ void __cdecl SVC_WARNING(const char* szFmt, ...) {
 
     szBuf[LOGSIZE - 1] = 0;
     va_start(marker, szFmt); /* Initialize variable arguments. */
-#ifdef MSVC
     vsprintf_s(szBuf,
                sizeof szBuf - 1,
                szFmt,
                marker);
-#else
-    vsprintf (szBuf, szFmt, marker);
-#endif
 
     // push the message into queue -> block until msg sent
     SendMsgRequest(C_WARNING, szBuf, lstrlen(szBuf), FALSE, FALSE);

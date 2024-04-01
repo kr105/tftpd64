@@ -27,12 +27,7 @@ void LogToMonitor(char* fmt, ...) {
 
     sz[sizeof sz - 1] = 0;
     va_start(args, fmt);
-#ifdef MSVC
     n = sprintf_s(sz, sizeof sz - 1, "Th%5d :", GetCurrentThreadId());
     vsprintf_s(&sz[n], sizeof sz - n - 1, fmt, args);
-#else
-     n = sprintf (sz, "Th%5d :", GetCurrentThreadId ());
-     wvsprintf (& sz[n], fmt, args );
-#endif
     OutputDebugString(sz);
 } // LogToFile

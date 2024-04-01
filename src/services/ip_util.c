@@ -14,10 +14,6 @@
 #include <stdio.h>
 #include "bootpd_util.h"
 
-#ifndef MSVC
-#  define sscanf_s sscanf
-#endif
-
 
 //quick smart increment function to avoid addresses ending in 0 or 255.
 //in is in network order, but what is returned is in host order
@@ -139,11 +135,7 @@ time_t atotime(char* str) {
     struct tm t;
     memset(&t, 0, sizeof(t));
     t.tm_isdst = -1; //For daylight savings calculation
-#ifdef MSVC
     sscanf_s(str, "%d/%d/%d/%d:%d:%d", &t.tm_mon, &t.tm_mday, &t.tm_year, &t.tm_hour, &t.tm_min, &t.tm_sec);
-#else
-   sscanf(str, "%d/%d/%d/%d:%d:%d", &t.tm_mon, &t.tm_mday, &t.tm_year, &t.tm_hour, &t.tm_min, &t.tm_sec);
-#endif
     t.tm_mon -= 1;
     t.tm_year -= 1900;
     return mktime(&t);
