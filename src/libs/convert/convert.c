@@ -8,22 +8,19 @@
 //////////////////////////////////////////////////////
 
 enum {
-		E_STG_ADDRIP   =  'a',
-		E_STG_CHAR     =  'c',
-		E_STG_INTEGER  =  'i',
-		E_STG_STRING   =  's',
-     };
+    E_STG_ADDRIP  = 'a',
+    E_STG_CHAR    = 'c',
+    E_STG_INTEGER = 'i',
+    E_STG_STRING  = 's',
+};
 
 #define MAX_STG_DATA	20
 
-struct S_Settings
-{
-	char		 cType;
-	unsigned int nLen;
-	char		 cData [MAX_STG_DATA];
-}; 
+struct S_Settings {
+    char cType;
+    unsigned int nLen;
+    char cData[MAX_STG_DATA];
+};
 
-int ConvertTextToSettings (const char *szTxt, struct S_Setttings *pSettings);
-int ConvertSettingsTotext (const struct S_Setttings *pSettings, char *szTxt);
-
-
+int ConvertTextToSettings(const char* szTxt, struct S_Setttings* pSettings);
+int ConvertSettingsTotext(const struct S_Setttings* pSettings, char* szTxt);

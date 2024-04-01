@@ -50,12 +50,10 @@
 
 #include "dump.h"
 
-void OutputDebugStringW95 (LPCTSTR lpOutputString)
-{
-
-    HANDLE heventDBWIN;  /* DBWIN32 synchronization object */
-    HANDLE heventData;   /* data passing synch object */
-    HANDLE hSharedFile;  /* memory mapped file shared data */
+void OutputDebugStringW95(LPCTSTR lpOutputString) {
+    HANDLE heventDBWIN; /* DBWIN32 synchronization object */
+    HANDLE heventData;  /* data passing synch object */
+    HANDLE hSharedFile; /* memory mapped file shared data */
     LPSTR lpszSharedMem;
     /*
         Do a regular OutputDebugString so that the output is
@@ -75,30 +73,27 @@ void OutputDebugStringW95 (LPCTSTR lpOutputString)
         OSVERSIONINFO VerInfo;
         VerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
         GetVersionEx(&VerInfo);
-        if ( VerInfo.dwPlatformId != VER_PLATFORM_WIN32_WINDOWS )
+        if (VerInfo.dwPlatformId != VER_PLATFORM_WIN32_WINDOWS)
             return;
     }
 
     /* make sure DBWIN is open and waiting */
     heventDBWIN = OpenEvent(EVENT_MODIFY_STATE, FALSE, "DBWIN_BUFFER_READY");
-    if ( !heventDBWIN )
-    {
+    if (!heventDBWIN) {
         //MessageBox(NULL, "DBWIN_BUFFER_READY nonexistent", NULL, MB_OK);
         return;
     }
 
     /* get a handle to the data synch object */
     heventData = OpenEvent(EVENT_MODIFY_STATE, FALSE, "DBWIN_DATA_READY");
-    if ( !heventData )
-    {
+    if (!heventData) {
         // MessageBox(NULL, "DBWIN_DATA_READY nonexistent", NULL, MB_OK);
         CloseHandle(heventDBWIN);
         return;
     }
 
     hSharedFile = CreateFileMapping((HANDLE)-1, NULL, PAGE_READWRITE, 0, 4096, "DBWIN_BUFFER");
-    if (!hSharedFile)
-    {
+    if (!hSharedFile) {
         //MessageBox(NULL, "DebugTrace: Unable to create file mapping object DBWIN_BUFFER", "Error", MB_OK);
         CloseHandle(heventDBWIN);
         CloseHandle(heventData);
@@ -106,8 +101,7 @@ void OutputDebugStringW95 (LPCTSTR lpOutputString)
     }
 
     lpszSharedMem = (LPSTR)MapViewOfFile(hSharedFile, FILE_MAP_WRITE, 0, 0, 512);
-    if (!lpszSharedMem)
-    {
+    if (!lpszSharedMem) {
         //MessageBox(NULL, "DebugTrace: Unable to map shared memory", "Error", MB_OK);
         CloseHandle(heventDBWIN);
         CloseHandle(heventData);
@@ -119,7 +113,7 @@ void OutputDebugStringW95 (LPCTSTR lpOutputString)
 
     /* write it to the shared memory */
     *((LPDWORD)lpszSharedMem) = _getpid();
-    lstrcpy (lpszSharedMem + sizeof(DWORD), lpOutputString);
+    lstrcpy(lpszSharedMem + sizeof(DWORD), lpOutputString);
 
     /* signal data ready event */
     SetEvent(heventData);
@@ -133,47 +127,45 @@ void OutputDebugStringW95 (LPCTSTR lpOutputString)
 }
 
 
-
 /* -------------------------------------------------------------- */
 /* dump a binary or text frame. The output is the debug window    */
 /* for Windows system and stderr for unix                         */
 /* The code is a port of the xdump function from the cmu snmp lib */
 /* Ajout du cast (unsigned char)                                  */
 /* -------------------------------------------------------------- */
-void BinDump (LPCSTR cp, int nLen, LPCSTR szPrefix)
-{
-int   col, count, nPos;
-char  szLine [128];
-static const char tCvtHex[] = "0123456789ABCDEF";
+void BinDump(LPCSTR cp, int nLen, LPCSTR szPrefix) {
+    int col, count, nPos;
+    char szLine[128];
+    static const char tCvtHex[] = "0123456789ABCDEF";
 
-    if (nLen==0)    /* Empty message -> has to be dumped */
+    if (nLen == 0) /* Empty message -> has to be dumped */
     {
-        if (szPrefix!=NULL)   lstrcpyn  (szLine, szPrefix, 20);
-        else                  szLine[0]=0;
-        lstrcat (szLine, " Empty Message\n");
-        OutputDebugString (szLine);
+        if (szPrefix != NULL)
+            lstrcpyn(szLine, szPrefix, 20);
+        else szLine[0] = 0;
+        lstrcat(szLine, " Empty Message\n");
+        OutputDebugString(szLine);
         return;
     }
 
     count = 0;
-    while (count < nLen)
-    {
-        if (szPrefix!=NULL)   lstrcpyn  (szLine, szPrefix, 20);
-        else                  szLine[0]=0;
-        nPos = lstrlen (szLine);
+    while (count < nLen) {
+        if (szPrefix != NULL)
+            lstrcpyn(szLine, szPrefix, 20);
+        else szLine[0] = 0;
+        nPos = lstrlen(szLine);
         szLine[nPos++] = ' ';
 
-        for (col = 0 ;   count + col < nLen   &&   col < 16 ;   col++)
-        {
-            if (col == 8)   szLine[nPos++] = '-', szLine[nPos++] = ' ' ;
-            szLine [nPos++] = tCvtHex [(unsigned char ) cp[count + col] >> 4];
-            szLine [nPos++] = tCvtHex [(unsigned char ) cp[count + col] & 0x0F];
-            szLine [nPos++] = ' ';
+        for (col = 0; count + col < nLen && col < 16; col++) {
+            if (col == 8) szLine[nPos++] = '-', szLine[nPos++] = ' ';
+            szLine[nPos++] = tCvtHex[(unsigned char)cp[count + col] >> 4];
+            szLine[nPos++] = tCvtHex[(unsigned char)cp[count + col] & 0x0F];
+            szLine[nPos++] = ' ';
         }
 
-        while(col++ < 16)      /* pad end of buffer with zeros */
+        while (col++ < 16) /* pad end of buffer with zeros */
         {
-            if (col == 8)  szLine[nPos++] = ' ', szLine[nPos++] = ' ';
+            if (col == 8) szLine[nPos++] = ' ', szLine[nPos++] = ' ';
             szLine[nPos++] = ' ';
             szLine[nPos++] = ' ';
             szLine[nPos++] = ' ';
@@ -181,16 +173,12 @@ static const char tCvtHex[] = "0123456789ABCDEF";
         szLine[nPos++] = ' ';
         szLine[nPos++] = ' ';
 
-        for (col = 0;  count + col < nLen && col < 16 ;   col++)
-        {
-          szLine[nPos++] = isprint(cp[count + col]) ? cp[count + col] : '.';
+        for (col = 0; count + col < nLen && col < 16; col++) {
+            szLine[nPos++] = isprint(cp[count + col]) ? cp[count + col] : '.';
         }
-        lstrcpy (& szLine[nPos], "\n");
-        OutputDebugStringW95 (szLine);
+        lstrcpy(&szLine[nPos], "\n");
+        OutputDebugStringW95(szLine);
 
         count += col;
     } /* while buffer nor printed */
-
 } /* BinDump */
-
-

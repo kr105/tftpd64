@@ -245,5 +245,3 @@ BOOL IsEnabled = 0xcc,  bOn=0xcc;
 } // main
 
 #endif
-
-

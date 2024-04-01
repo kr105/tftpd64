@@ -17,41 +17,39 @@
 /////////////////////////////////////////////////////////////////////////
 // A Window centered on its parent
 /////////////////////////////////////////////////////////////////////////
-BOOL CenterChildWindow (HWND hChildWnd, int uType)
-{
-HWND hParentWnd ;
-RECT sParentRect, sChildRect, sWorkArea;
-int  x, y;
+BOOL CenterChildWindow(HWND hChildWnd, int uType) {
+    HWND hParentWnd;
+    RECT sParentRect, sChildRect, sWorkArea;
+    int x, y;
 
-    hParentWnd = GetParent (hChildWnd);
-    if (hParentWnd == NULL)  return FALSE;
+    hParentWnd = GetParent(hChildWnd);
+    if (hParentWnd == NULL) return FALSE;
 
-    if ( (uType & CCW_VISIBLE) && ! IsWindowVisible (hParentWnd) ) return FALSE;
+    if ((uType & CCW_VISIBLE) && !IsWindowVisible(hParentWnd)) return FALSE;
 
-       // compute child position
-    GetWindowRect (hParentWnd, & sParentRect);
-    GetWindowRect (hChildWnd, & sChildRect);
-    SystemParametersInfo (SPI_GETWORKAREA, 0, & sWorkArea, 0);
+    // compute child position
+    GetWindowRect(hParentWnd, &sParentRect);
+    GetWindowRect(hChildWnd, &sChildRect);
+    SystemParametersInfo(SPI_GETWORKAREA, 0, &sWorkArea, 0);
 
     x = sParentRect.left + (sParentRect.right - sParentRect.left) / 2 - (sChildRect.right - sChildRect.left) / 2;
-    y = sParentRect.top + (sParentRect.bottom - sParentRect.top) / 2  - (sChildRect.bottom - sChildRect.top) / 2;
+    y = sParentRect.top + (sParentRect.bottom - sParentRect.top) / 2 - (sChildRect.bottom - sChildRect.top) / 2;
 
     // Child larger than its parent ?
-    if ( (uType & CCW_INSIDE)  &&
-         (    x < sParentRect.left  ||  y < sParentRect.top )
-       )
-      return FALSE;
+    if ((uType & CCW_INSIDE) &&
+        (x < sParentRect.left || y < sParentRect.top)
+    )
+        return FALSE;
 
     // Child window outside the screen ?
-    if (  (uType & CCW_VISIBLE) &&
-        (     x<sWorkArea.left  || x+sChildRect.right-sChildRect.left>sWorkArea.right
-           || y<sWorkArea.top   || y+sChildRect.bottom-sChildRect.top>sWorkArea.bottom ) )
-           return FALSE;
+    if ((uType & CCW_VISIBLE) &&
+        (x < sWorkArea.left || x + sChildRect.right - sChildRect.left > sWorkArea.right
+            || y < sWorkArea.top || y + sChildRect.bottom - sChildRect.top > sWorkArea.bottom))
+        return FALSE;
 
     // OK : change window Pos
-    SetWindowPos (hChildWnd, NULL, x,  y, 0, 0,
-                  SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE );
+    SetWindowPos(hChildWnd, NULL, x, y, 0, 0,
+                 SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
 
-return TRUE;
+    return TRUE;
 } // CenterChildWindow
-

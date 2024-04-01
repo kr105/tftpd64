@@ -8,7 +8,6 @@
 //////////////////////////////////////////////////////
 
 
-
 #include <windows.h>
 #include <stdio.h>
 #include <stdarg.h>
@@ -21,21 +20,19 @@
 // use DBwin to display debug strings
 ///////////////////////////////
 
-void LogToMonitor (char *fmt, ...)
-{
-va_list args;
-char sz [LOGSIZE];
-int n;
+void LogToMonitor(char* fmt, ...) {
+    va_list args;
+    char sz[LOGSIZE];
+    int n;
 
     sz[sizeof sz - 1] = 0;
-     va_start (args, fmt );
+    va_start(args, fmt);
 #ifdef MSVC
-     n = sprintf_s (sz, sizeof sz - 1, "Th%5d :", GetCurrentThreadId ());
-     vsprintf_s (& sz[n], sizeof sz - n - 1, fmt, args );
+    n = sprintf_s(sz, sizeof sz - 1, "Th%5d :", GetCurrentThreadId());
+    vsprintf_s(&sz[n], sizeof sz - n - 1, fmt, args);
 #else
      n = sprintf (sz, "Th%5d :", GetCurrentThreadId ());
      wvsprintf (& sz[n], fmt, args );
 #endif
-     OutputDebugString (sz);
-    
-}  // LogToFile
+    OutputDebugString(sz);
+} // LogToFile

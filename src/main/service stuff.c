@@ -18,10 +18,10 @@
 #include "libs/log/LogToMonitor.h"
 
 
-static SERVICE_STATUS_HANDLE   sshStatusHandle;
-static SERVICE_STATUS          ssStatus;       // current status of the service
-static DWORD                   dwErr = 0;
-static TCHAR                   szErr[256];
+static SERVICE_STATUS_HANDLE sshStatusHandle;
+static SERVICE_STATUS ssStatus; // current status of the service
+static DWORD dwErr = 0;
+static TCHAR szErr[256];
 
 //
 //  FUNCTION: service_main
@@ -40,12 +40,10 @@ static TCHAR                   szErr[256];
 //    the user defined ServiceStart() routine to perform majority
 //    of the work.
 //
-void WINAPI service_main(DWORD dwArgc, LPTSTR *lpszArgv)
-{
-
+void WINAPI service_main(DWORD dwArgc, LPTSTR* lpszArgv) {
     // register our service control handler:
     //
-    sshStatusHandle = RegisterServiceCtrlHandler( TEXT(SZSERVICENAME), service_ctrl);
+    sshStatusHandle = RegisterServiceCtrlHandler(TEXT(SZSERVICENAME), service_ctrl);
 
     if (!sshStatusHandle)
         goto cleanup;
@@ -66,7 +64,7 @@ void WINAPI service_main(DWORD dwArgc, LPTSTR *lpszArgv)
 
 
     ServiceStart();
-	ssStatus.dwCurrentState = SERVICE_RUNNING;
+    ssStatus.dwCurrentState = SERVICE_RUNNING;
 
 cleanup:
 
@@ -74,13 +72,12 @@ cleanup:
     //
     if (sshStatusHandle)
         (VOID)ReportStatusToSCMgr(
-                            SERVICE_RUNNING,
-                            dwErr,
-                            0);
+            SERVICE_RUNNING,
+            dwErr,
+            0);
 
     return;
 } // service_main
-
 
 
 //
@@ -97,12 +94,10 @@ cleanup:
 //
 //  COMMENTS:
 //
-void WINAPI service_ctrl(DWORD dwCtrlCode)
-{
+void WINAPI service_ctrl(DWORD dwCtrlCode) {
     // Handle the requested control code.
     //
-    switch(dwCtrlCode)
-    {
+    switch (dwCtrlCode) {
         // Stop the service.
         //
         // SERVICE_STOP_PENDING should be reported before
@@ -113,7 +108,7 @@ void WINAPI service_ctrl(DWORD dwCtrlCode)
         case SERVICE_CONTROL_STOP:
             ReportStatusToSCMgr(SERVICE_STOP_PENDING, NO_ERROR, 0);
             ServiceStop();
-			ssStatus.dwCurrentState = SERVICE_STOPPED;
+            ssStatus.dwCurrentState = SERVICE_STOPPED;
             break;
 
         // Update the service status.
@@ -125,13 +120,10 @@ void WINAPI service_ctrl(DWORD dwCtrlCode)
         //
         default:
             break;
-
     }
 
     ReportStatusToSCMgr(ssStatus.dwCurrentState, NO_ERROR, 0);
 } // service_ctrl
-
-
 
 
 //
@@ -153,13 +145,12 @@ void WINAPI service_ctrl(DWORD dwCtrlCode)
 //
 BOOL ReportStatusToSCMgr(DWORD dwCurrentState,
                          DWORD dwWin32ExitCode,
-                         DWORD dwWaitHint)
-{
+                         DWORD dwWaitHint) {
     static DWORD dwCheckPoint = 1;
     BOOL fResult = TRUE;
 
 
-    if ( !bDebug ) // when debugging we don't report to the SCM
+    if (!bDebug) // when debugging we don't report to the SCM
     {
         if (dwCurrentState == SERVICE_START_PENDING)
             ssStatus.dwControlsAccepted = 0;
@@ -170,8 +161,8 @@ BOOL ReportStatusToSCMgr(DWORD dwCurrentState,
         ssStatus.dwWin32ExitCode = dwWin32ExitCode;
         ssStatus.dwWaitHint = dwWaitHint;
 
-        if ( ( dwCurrentState == SERVICE_RUNNING ) ||
-             ( dwCurrentState == SERVICE_STOPPED ) )
+        if ((dwCurrentState == SERVICE_RUNNING) ||
+            (dwCurrentState == SERVICE_STOPPED))
             ssStatus.dwCheckPoint = 0;
         else
             ssStatus.dwCheckPoint = dwCheckPoint++;
@@ -179,9 +170,9 @@ BOOL ReportStatusToSCMgr(DWORD dwCurrentState,
 
         // Report the status of the service to the service control manager.
         //
-LogToMonitor ("reporting service status %d\n", ssStatus.dwCurrentState);
-        if (!(fResult = SetServiceStatus( sshStatusHandle, &ssStatus))) {
-            AddToMessageLog ("SetServiceStatus");
+        LogToMonitor("reporting service status %d\n", ssStatus.dwCurrentState);
+        if (!(fResult = SetServiceStatus(sshStatusHandle, &ssStatus))) {
+            AddToMessageLog("SetServiceStatus");
         }
     }
     return fResult;
@@ -201,28 +192,25 @@ LogToMonitor ("reporting service status %d\n", ssStatus.dwCurrentState);
 //
 //  COMMENTS:
 //
-void CmdInstallService()
-{
-    SC_HANDLE   schService;
-    SC_HANDLE   schSCManager;
-	OSVERSIONINFO OsVer;
-	SERVICE_DESCRIPTION ServiceDesc;
+void CmdInstallService() {
+    SC_HANDLE schService;
+    SC_HANDLE schSCManager;
+    OSVERSIONINFO OsVer;
+    SERVICE_DESCRIPTION ServiceDesc;
 
     TCHAR szPath[512];
 
-    if ( GetModuleFileName( NULL, szPath, 512 ) == 0 )
-    {
+    if (GetModuleFileName(NULL, szPath, 512) == 0) {
         _tprintf(TEXT("Unable to install %s - %s\n"), TEXT(SZSERVICEDISPLAYNAME), GetLastErrorText(szErr, 256));
         return;
     }
 
     schSCManager = OpenSCManager(
-                        NULL,                   // machine (NULL == local)
-                        NULL,                   // database (NULL == default)
-                        SC_MANAGER_ALL_ACCESS   // access required
-                        );
-    if ( schSCManager )
-    {
+        NULL,                 // machine (NULL == local)
+        NULL,                 // database (NULL == default)
+        SC_MANAGER_ALL_ACCESS // access required
+    );
+    if (schSCManager) {
         schService = CreateService(
             schSCManager,               // SCManager database
             TEXT(SZSERVICENAME),        // name of service
@@ -238,32 +226,27 @@ void CmdInstallService()
             NULL,                       // LocalSystem account
             NULL);                      // no password
 
-        if ( schService )
-        {
-			OsVer.dwOSVersionInfoSize = sizeof(OsVer);
-			if(     GetVersionEx(&OsVer) != 0
-				&&  OsVer.dwMajorVersion >= 5
-				&&  OsVer.dwPlatformId == VER_PLATFORM_WIN32_NT )
-				// Add a description if OS >= Win2k
-			{
-					ServiceDesc.lpDescription = SZSERVDESCRIPTION;
-					ChangeServiceConfig2 (schService, SERVICE_CONFIG_DESCRIPTION, &ServiceDesc);
-			} // OS > win2k
+        if (schService) {
+            OsVer.dwOSVersionInfoSize = sizeof(OsVer);
+            if (GetVersionEx(&OsVer) != 0
+                && OsVer.dwMajorVersion >= 5
+                && OsVer.dwPlatformId == VER_PLATFORM_WIN32_NT)
+            // Add a description if OS >= Win2k
+            {
+                ServiceDesc.lpDescription = SZSERVDESCRIPTION;
+                ChangeServiceConfig2(schService, SERVICE_CONFIG_DESCRIPTION, &ServiceDesc);
+            } // OS > win2k
 
-            _tprintf(TEXT("%s installed.\n"), TEXT(SZSERVICEDISPLAYNAME) );
+            _tprintf(TEXT("%s installed.\n"), TEXT(SZSERVICEDISPLAYNAME));
             CloseServiceHandle(schService);
-        }
-        else
-        {
+        } else {
             _tprintf(TEXT("CreateService failed - %s\n"), GetLastErrorText(szErr, 256));
         }
 
         CloseServiceHandle(schSCManager);
-    }
-    else
-        _tprintf(TEXT("OpenSCManager failed - %s\n"), GetLastErrorText(szErr,256));
+    } else
+        _tprintf(TEXT("OpenSCManager failed - %s\n"), GetLastErrorText(szErr, 256));
 } // CmdInstallService
-
 
 
 //
@@ -279,62 +262,52 @@ void CmdInstallService()
 //
 //  COMMENTS:
 //
-void CmdRemoveService()
-{
-    SC_HANDLE   schService;
-    SC_HANDLE   schSCManager;
+void CmdRemoveService() {
+    SC_HANDLE schService;
+    SC_HANDLE schSCManager;
 
     schSCManager = OpenSCManager(
-                        NULL,                   // machine (NULL == local)
-                        NULL,                   // database (NULL == default)
-                        SC_MANAGER_ALL_ACCESS   // access required
-                        );
-    if ( schSCManager )
-    {
+        NULL,                 // machine (NULL == local)
+        NULL,                 // database (NULL == default)
+        SC_MANAGER_ALL_ACCESS // access required
+    );
+    if (schSCManager) {
         schService = OpenService(schSCManager, TEXT(SZSERVICENAME), SERVICE_ALL_ACCESS);
 
-        if (schService)
-        {
+        if (schService) {
             // try to stop the service
-            if ( ControlService( schService, SERVICE_CONTROL_STOP, &ssStatus ) )
-            {
+            if (ControlService(schService, SERVICE_CONTROL_STOP, &ssStatus)) {
                 _tprintf(TEXT("Stopping %s."), TEXT(SZSERVICEDISPLAYNAME));
-                Sleep( 1000 );
+                Sleep(1000);
 
-                while( QueryServiceStatus( schService, &ssStatus ) )
-                {
-                    if ( ssStatus.dwCurrentState == SERVICE_STOP_PENDING )
-                    {
+                while (QueryServiceStatus(schService, &ssStatus)) {
+                    if (ssStatus.dwCurrentState == SERVICE_STOP_PENDING) {
                         _tprintf(TEXT("."));
-                        Sleep( 1000 );
-                    }
-                    else
+                        Sleep(1000);
+                    } else
                         break;
                 }
 
-                if ( ssStatus.dwCurrentState == SERVICE_STOPPED )
-                    _tprintf(TEXT("\n%s stopped.\n"), TEXT(SZSERVICEDISPLAYNAME) );
+                if (ssStatus.dwCurrentState == SERVICE_STOPPED)
+                    _tprintf(TEXT("\n%s stopped.\n"), TEXT(SZSERVICEDISPLAYNAME));
                 else
-                    _tprintf(TEXT("\n%s failed to stop.\n"), TEXT(SZSERVICEDISPLAYNAME) );
-
+                    _tprintf(TEXT("\n%s failed to stop.\n"), TEXT(SZSERVICEDISPLAYNAME));
             }
 
             // now remove the service
-            if( DeleteService(schService) )
-                _tprintf(TEXT("%s removed.\n"), TEXT(SZSERVICEDISPLAYNAME) );
+            if (DeleteService(schService))
+                _tprintf(TEXT("%s removed.\n"), TEXT(SZSERVICEDISPLAYNAME));
             else
-                _tprintf(TEXT("DeleteService failed - %s\n"), GetLastErrorText(szErr,256));
+                _tprintf(TEXT("DeleteService failed - %s\n"), GetLastErrorText(szErr, 256));
 
 
             CloseServiceHandle(schService);
-        }
-        else
-            _tprintf(TEXT("OpenService failed - %s\n"), GetLastErrorText(szErr,256));
+        } else
+            _tprintf(TEXT("OpenService failed - %s\n"), GetLastErrorText(szErr, 256));
 
         CloseServiceHandle(schSCManager);
-    }
-    else
-        _tprintf(TEXT("OpenSCManager failed - %s\n"), GetLastErrorText(szErr,256));
+    } else
+        _tprintf(TEXT("OpenSCManager failed - %s\n"), GetLastErrorText(szErr, 256));
 } // CmdRemoveService
 
 
@@ -358,11 +331,10 @@ void CmdRemoveService()
 //
 //  COMMENTS:
 //
-void CmdDebugService()
-{
+void CmdDebugService() {
     _tprintf(TEXT("Debugging %s.\n"), TEXT(SZSERVICEDISPLAYNAME));
 
-    SetConsoleCtrlHandler( ControlHandler, TRUE );
+    SetConsoleCtrlHandler(ControlHandler, TRUE);
 
     ServiceStart();
 } // CmdDebugService
@@ -382,17 +354,14 @@ void CmdDebugService()
 //
 //  COMMENTS:
 //
-BOOL WINAPI ControlHandler ( DWORD dwCtrlType )
-{
-    switch( dwCtrlType )
-    {
-        case CTRL_BREAK_EVENT:  // use Ctrl+C or Ctrl+Break to simulate
-        case CTRL_C_EVENT:      // SERVICE_CONTROL_STOP in debug mode
+BOOL WINAPI ControlHandler(DWORD dwCtrlType) {
+    switch (dwCtrlType) {
+        case CTRL_BREAK_EVENT: // use Ctrl+C or Ctrl+Break to simulate
+        case CTRL_C_EVENT:     // SERVICE_CONTROL_STOP in debug mode
             _tprintf(TEXT("Stopping %s.\n"), TEXT(SZSERVICEDISPLAYNAME));
             ServiceStop();
-            exit (0);
+            exit(0);
             break;
-
     }
     return FALSE;
 } // ControlHandler
@@ -411,30 +380,28 @@ BOOL WINAPI ControlHandler ( DWORD dwCtrlType )
 //
 //  COMMENTS:
 //
-LPTSTR GetLastErrorText( LPTSTR lpszBuf, DWORD dwSize )
-{
+LPTSTR GetLastErrorText(LPTSTR lpszBuf, DWORD dwSize) {
     DWORD dwRet;
     LPTSTR lpszTemp = NULL;
 
-    dwRet = FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |FORMAT_MESSAGE_ARGUMENT_ARRAY,
-                           NULL,
-                           GetLastError(),
-                           LANG_NEUTRAL,
-                           (LPTSTR)&lpszTemp,
-                           0,
-                           NULL );
+    dwRet = FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ARGUMENT_ARRAY,
+                          NULL,
+                          GetLastError(),
+                          LANG_NEUTRAL,
+                          (LPTSTR)&lpszTemp,
+                          0,
+                          NULL);
 
     // supplied buffer is not long enough
-    if ( !dwRet || ( (long)dwSize < (long)dwRet+14 ) )
+    if (!dwRet || ((long)dwSize < (long)dwRet + 14))
         lpszBuf[0] = TEXT('\0');
-    else
-    {
-        lpszTemp[lstrlen(lpszTemp)-2] = TEXT('\0');  //remove cr and newline character
-        _stprintf( lpszBuf, TEXT("%s (0x%x)"), lpszTemp, GetLastError() );
+    else {
+        lpszTemp[lstrlen(lpszTemp) - 2] = TEXT('\0'); //remove cr and newline character
+        _stprintf(lpszBuf, TEXT("%s (0x%x)"), lpszTemp, GetLastError());
     }
 
-    if ( lpszTemp )
-        LocalFree((HLOCAL) lpszTemp );
+    if (lpszTemp)
+        LocalFree((HLOCAL)lpszTemp);
 
     return lpszBuf;
 } // GetLastErrorText
@@ -453,15 +420,13 @@ LPTSTR GetLastErrorText( LPTSTR lpszBuf, DWORD dwSize )
 //
 //  COMMENTS:
 //
-void AddToMessageLog(LPTSTR lpszMsg)
-{
-    TCHAR   szMsg[256];
-    HANDLE  hEventSource;
-    LPTSTR  lpszStrings[2];
+void AddToMessageLog(LPTSTR lpszMsg) {
+    TCHAR szMsg[256];
+    HANDLE hEventSource;
+    LPTSTR lpszStrings[2];
 
 
-    if ( !bDebug )
-    {
+    if (!bDebug) {
         dwErr = GetLastError();
 
         // Use event logging to log the error.
@@ -473,17 +438,17 @@ void AddToMessageLog(LPTSTR lpszMsg)
         lpszStrings[1] = lpszMsg;
 
         if (hEventSource != NULL) {
-            ReportEvent(hEventSource, // handle of event source
-                EVENTLOG_ERROR_TYPE,  // event type
-                0,                    // event category
-                0,                    // event ID
-                NULL,                 // current user's SID
-                2,                    // strings in lpszStrings
-                0,                    // no bytes of raw data
-                (const char * *)lpszStrings,          // array of error strings
-                NULL);                // no raw data
+            ReportEvent(hEventSource,               // handle of event source
+                        EVENTLOG_ERROR_TYPE,        // event type
+                        0,                          // event category
+                        0,                          // event ID
+                        NULL,                       // current user's SID
+                        2,                          // strings in lpszStrings
+                        0,                          // no bytes of raw data
+                        (const char* *)lpszStrings, // array of error strings
+                        NULL);                      // no raw data
 
-            (VOID) DeregisterEventSource(hEventSource);
+            (VOID)DeregisterEventSource(hEventSource);
         }
     }
 } // AddToMessageLog

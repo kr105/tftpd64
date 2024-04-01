@@ -8,7 +8,6 @@
 //////////////////////////////////////////////////////
 
 
-
 #include "headers.h"
 
 #ifdef _M_X64
@@ -48,22 +47,22 @@ const char LICENSE_TFTPD32 [] =
 "(see either the help file or the file EUPL-EN.pdf for the full text of the license)\r\n\r\n"
 "Official site: http://tftpd32.jounin.net\r\n\r\n";
 #elif defined STANDALONE_EDITION
-const char LICENSE_TFTPD32 [] =
-"TFTPD32 and TFTPD64 are copyrighted 1998-2019 by Philippe Jounin (philippe@jounin.net) "
-"and released under the European Union Public License 1.1 "
-"(see either the help file or the file EUPL-EN.pdf for the full text of the license)\r\n\r\n"
-"Official site: http://tftpd32.jounin.net\r\n\r\n"
-"Tftpd32 and Tftpd64 use the following copyrights or contributions\r\n"
-"  - MD5 part is from RSA Data Security\r\n"
-"  - Icon designed by Marco\r\n"
-"  - IP checksum computation is from Mike Muss\r\n"
-"  - DHCP lease persistance is from Nick Wagner\r\n" 
-"  - DHCP opts 82, 42 and 120 from Jesus Soto\r\n" 
-"  - DHCP header file from The Internet Software\r\n    Consortium\r\n";
+const char LICENSE_TFTPD32[] =
+    "TFTPD32 and TFTPD64 are copyrighted 1998-2019 by Philippe Jounin (philippe@jounin.net) "
+    "and released under the European Union Public License 1.1 "
+    "(see either the help file or the file EUPL-EN.pdf for the full text of the license)\r\n\r\n"
+    "Official site: http://tftpd32.jounin.net\r\n\r\n"
+    "Tftpd32 and Tftpd64 use the following copyrights or contributions\r\n"
+    "  - MD5 part is from RSA Data Security\r\n"
+    "  - Icon designed by Marco\r\n"
+    "  - IP checksum computation is from Mike Muss\r\n"
+    "  - DHCP lease persistance is from Nick Wagner\r\n"
+    "  - DHCP opts 82, 42 and 120 from Jesus Soto\r\n"
+    "  - DHCP header file from The Internet Software\r\n    Consortium\r\n";
 #elif defined SERVICE_EDITION
 #  ifdef _M_X64
-const char LICENSE_TFTPD32 [] =
-"Tftpd64 Service Edition copyrighted 2007-2018 by Philippe Jounin\r\n";
+const char LICENSE_TFTPD32[] =
+    "Tftpd64 Service Edition copyrighted 2007-2018 by Philippe Jounin\r\n";
 #  else
 const char LICENSE_TFTPD32 [] =
 "Tftpd32 Service Edition copyrighted 2007-2018 by Philippe Jounin\r\n";
@@ -71,39 +70,32 @@ const char LICENSE_TFTPD32 [] =
 #endif
 
 
+LRESULT CALLBACK AboutProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+    switch (message) {
+        case WM_INITDIALOG:
+            SetWindowText(hWnd, TFTPD_ABOUT_TITLE);
+            SetDlgItemText(hWnd, IDC_TFTPD_STRING, TFTPD_STRING);
+            SetDlgItemText(hWnd, IDC_ABOUT_TFTPD32, LICENSE_TFTPD32);
+            CenterChildWindow(hWnd, CCW_INSIDE | CCW_VISIBLE);
+            break;
 
-LRESULT CALLBACK AboutProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-  switch (message)
-  {
-       case WM_INITDIALOG :
-		   SetWindowText (hWnd, TFTPD_ABOUT_TITLE);
-           SetDlgItemText (hWnd, IDC_TFTPD_STRING, TFTPD_STRING);
-           SetDlgItemText (hWnd, IDC_ABOUT_TFTPD32, LICENSE_TFTPD32);
-           CenterChildWindow (hWnd, CCW_INSIDE | CCW_VISIBLE);
-           break;
-
-       case WM_COMMAND :
-           switch (wParam)
-           {
-                case IDOK :
-                    EndDialog (hWnd, 0);
+        case WM_COMMAND:
+            switch (wParam) {
+                case IDOK:
+                    EndDialog(hWnd, 0);
                     break;
-           }
-           break;
+            }
+            break;
 
 
-       case WM_CLOSE :
+        case WM_CLOSE:
 #if (defined INTERIM_VERSION  && defined STANDALONE_VERSION)
             sSettings.LogLvl=15;
 #endif // INTERIM_VERSION
-       case WM_DESTROY :
-            EndDialog (hWnd, 0);
+        case WM_DESTROY:
+            EndDialog(hWnd, 0);
             break;
+    } // switch
 
-  } // switch
-
-return FALSE;
+    return FALSE;
 } // AboutProc
-
-

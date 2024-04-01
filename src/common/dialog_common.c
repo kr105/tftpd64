@@ -11,22 +11,18 @@
 //////////////////////////////////////////////////////
 
 
-
 #include "headers.h"
 #include <process.h>
 #include <stdio.h>
 
 
-int SendMsg (SOCKET s, int type, const void *data, int size)
-{
-int Rc=1;
-unsigned short full_size = htons (size + sizeof type);
-    if (data==NULL)  size=0;
+int SendMsg(SOCKET s, int type, const void* data, int size) {
+    int Rc = 1;
+    unsigned short full_size = htons(size + sizeof type);
+    if (data == NULL) size = 0;
     // send length of message
-    Rc = send (s, (char *) & full_size, sizeof full_size, 0);
-    Rc = send (s, (char *) & type, sizeof type, 0);
-    if (size>0) Rc = TcpSend (s, data, size, 0);
-return Rc;
+    Rc = send(s, (char*)&full_size, sizeof full_size, 0);
+    Rc = send(s, (char*)&type, sizeof type, 0);
+    if (size > 0) Rc = TcpSend(s, data, size, 0);
+    return Rc;
 } // SendMsg
-
-
