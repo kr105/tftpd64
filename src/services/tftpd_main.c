@@ -523,9 +523,6 @@ void TftpdMain(void* param) {
                                     tObjects,
                                     FALSE,
                                     sSettings.dwRefreshInterval);
-#ifdef RT
-if (Rc!=WAIT_TIMEOUT) LogToMonitor ( "exit wait, object %d\n", Rc);
-#endif
         if (!tThreads[TH_TFTP].gRunning) break;
 
         switch (Rc) {

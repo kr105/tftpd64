@@ -704,11 +704,6 @@ static int TftpSendFile(struct LL_TftpInfo* pTftp) {
                 tp->th_opcode = htons(TFTP_DATA);
                 tp->th_block = htons((unsigned short)pTftp->c.nLastToSend);
                 DoDebugSendBlock(pTftp); // empty ifndef DEBUG
-#ifdef TEST_DROPP
-    if (pTftp->c.nRetries<3  &&  pTftp->c.nCount==4)
-        { LOG (1, "dropping 4th packet"), Rc=pTftp->c.dwBytes + TFTP_DATA_HEADERSIZE; }
-    else
-#endif
                 Rc = send(pTftp->r.skt, pTftp->b.buf, pTftp->c.dwBytes + TFTP_DATA_HEADERSIZE, 0);
 
                 if (Rc < 0 || (unsigned)Rc != pTftp->c.dwBytes + TFTP_DATA_HEADERSIZE)
@@ -854,10 +849,6 @@ static int TftpRecvFile(struct LL_TftpInfo* pTftp, BOOL bOACK) {
                 return FALSE;
             }
             // some client have a bug and sent data block #0 --> accept it anyway after one resend
-#ifdef YYYYY
-LOG (1, "block %d, previous acked %d, rcvd bytes %d, retries %d",
-ntohs(tp->th_block), pTftp->c.nCount, pTftp->st.dwTotalBytes, pTftp->c.nRetries);
-#endif
             if (ntohs(tp->th_block) == 0 && pTftp->c.nCount == 0) {
                 pTftp->c.dwBytes = Rc - TFTP_DATA_HEADERSIZE;
                 if (pTftp->st.dwTotalBytes == 0 && pTftp->c.nRetries == 0) {

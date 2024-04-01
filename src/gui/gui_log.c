@@ -31,9 +31,6 @@ void LB_LOG(HWND hListBox, const char* szTxt) {
     =
     FALSE;
 
-#define CROLLBAR
-#ifdef CROLLBAR
-
     if (!bInit) {
         SendMessage(hListBox, LB_INITSTORAGE, dwMaxMsg, 0);
         bInit = TRUE;
@@ -67,7 +64,6 @@ void LB_LOG(HWND hListBox, const char* szTxt) {
     SendMessage(hListBox, LB_SETHORIZONTALEXTENT, dwMaxExtent, 0);
     // scroll to the end of the list box
     SendMessage(hListBox, LB_SETTOPINDEX, NbMsg - 1, 0);
-#endif
 } // LB_LOG
 
 //////////////////////////////////////

@@ -14,66 +14,6 @@ static struct S_TftpGui* pTftpGuiFirst = NULL;
 const struct S_TftpGui* Gui_GetFirstGuiItem(void) { return pTftpGuiFirst; }
 
 
-#ifdef OLD_CODE
-// A debugging tool
-// for debugging only
-int CS_LogToDebugFile (const char *sz);
-
-
-int CS_LogToDebugFile (const char *sz)
-{
-HANDLE hLog;
-int dummy;
-static bInit=FALSE;
-static CRITICAL_SECTION CriticalSection;
-
-		if (!bInit) 
-		{int Rc;
-			Rc = InitializeCriticalSectionAndSpinCount( & CriticalSection, 0x00000400);
-			assert (Rc);
-			bInit = TRUE;
-		}
-
-
-		EnterCriticalSection (& CriticalSection);
-
-	    hLog = CreateFile ( "C:\\temp\\tftpd32_debug.txt", 
-							GENERIC_WRITE, 
-							FILE_SHARE_READ,	// permit read operations
-							NULL, 
-							OPEN_ALWAYS,		// open or create
-							FILE_ATTRIBUTE_NORMAL,
-							NULL );
-		if (hLog==INVALID_HANDLE_VALUE) 
-			  OutputDebugString ("unable to open debug log file");
-		// stop if file has not been opened
-		assert (hLog!=INVALID_HANDLE_VALUE);
-
-
-		SetFilePointer (hLog, 0, NULL, FILE_END);
-		WriteFile (hLog, sz, strlen(sz), & dummy, NULL);
-		CloseHandle (hLog);
-
-
-	   LeaveCriticalSection(&CriticalSection);
-} // CS_LogToDebugFile
-
-
-int CS_ParseLL (const char *header, int nId)
-{ char sz[10240];
-struct S_TftpGui *pTftpGui;
-	// Logs LL states :
-    int n;
-    n = wsprintf (sz, "\n%s for transfert Id %d\n",header, nId );
-    for ( pTftpGui=pTftpGuiFirst ;  pTftpGui != NULL  ; pTftpGui = pTftpGui->next )
-		n += wsprintf (sz+n, "pointer %p, trf %d\n", pTftpGui, pTftpGui->dwTransferId );
-    CS_LogToDebugFile (sz);
-
-	return n;
-}
-#endif
-
-
 // return TRUE if GUI is connected to a remote Host
 int IsGuiConnectedToRemoteService(void) {
     return GetEnvironmentVariable(TFTP_HOST, NULL, 0);
@@ -215,16 +155,6 @@ int Gui_RequestListDirectory(SOCKET sService) {
 ////////////////////////////////////////////
 // Messages receivd FROM the services
 ////////////////////////////////////////////
-
-#ifdef OLD_CODE
-CRITICAL_SECTION CriticalSection; 
-static int bDone=0;
-
-   if (!bDone)     // Initialize the critical section one time only.
-			bDone = InitializeCriticalSectionAndSpinCount(&CriticalSection, 0x00000400);
-	EnterCriticalSection(&CriticalSection);
-#endif
-
 
 // Create a pTftpGui structure and fill it with the msg
 static int GuiTFTPNew(HWND hMainWnd, const struct S_TftpTrfNew* pTrf) {
@@ -375,12 +305,6 @@ int Gui_GetMessage(HWND hWnd, SOCKET sService, int bBlocking, int nMsgType) {
                     LogToMonitor("GUI: receive TFTP settings\n");
                     sGuiSettings = pmsg->u.tftp_settings;
                 // TftpDir_AddEntry (GetDlgItem (hWnd, IDC_CB_DIR), sGuiSettings.szWorkingDirectory);
-#ifdef PREVIOUS
-				if (sGuiSettings.uServices & TFTPD32_TFTP_CLIENT)
-				{
-					 TR_ChgTabControl (hWnd, TFTPD32_TFTP_CLIENT, SERVICE_RUNNING);
-				}
-#endif
                     TR_ChgTabControl(hWnd, TFTPD32_TFTP_CLIENT,
                                      sGuiSettings.uServices & TFTPD32_TFTP_CLIENT ? SERVICE_RUNNING : SERVICE_STOPPED);
                     break;

@@ -22,18 +22,7 @@
 #  define TFTPD_ABOUT_TITLE   "About TFTPD32"
 #endif
 
-//#define INTERIM_VERSION
-
-#ifdef INTERIM_VERSION
-   const char LICENSE_TFTPD32 [] =
-            "Tftpd32 and Tftpd64 are\r\n"
-			"copyrighted by Ph. Jounin\r\n"
-            "This in an Interim Release\r\n"
-            "Please do not distribute\r\n"
-            "NO WARRANTY\r\n\r\n"
-            "Full credits will be given into release version\r\n"
-            "Offical site: http://tftpd32.jounin.net";
-#elif defined TFTP_CLIENT_ONLY
+#ifdef TFTP_CLIENT_ONLY
 const char LICENSE_TFTPD32 [] =
 "TFTPD32_Client is copyrighted 2019 by Philippe Jounin (philippe@jounin.net) "
 "and released under the European Union Public License 1.1 "
@@ -82,9 +71,6 @@ LRESULT CALLBACK AboutProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
 
 
         case WM_CLOSE:
-#if (defined INTERIM_VERSION  && defined STANDALONE_VERSION)
-            sSettings.LogLvl=15;
-#endif // INTERIM_VERSION
         case WM_DESTROY:
             EndDialog(hWnd, 0);
             break;

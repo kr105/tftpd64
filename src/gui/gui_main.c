@@ -253,14 +253,6 @@ static int Handle_VM_Command(HWND hWnd, WPARAM wParam, LPARAM lParam) {
                 PostMessage(hWnd, WM_TFTP_CHG_WORKING_DIR, 0, 0);
             }
             break;
-#ifdef ALL_RELEASES_UNTIL_3_35
-	  // DHCP controls
-      case IDC_DHCP_OK :
-               if (Gui_DHCPSaveConfig (hWnd))
-                  CMsgBox (hWnd, "DHCP Configuration has been saved", APPLICATION, MB_OK);
-               PostMessage (hWnd, WM_SAVE_DHCP_SETTINGS, 0, 0);
-               break;
-#endif
 
         case ID_DELETE_ASSIGNATION: {
             HWND hListV = GetDlgItem(hWnd, IDC_LV_DHCP);
@@ -400,12 +392,6 @@ int Gui_CreateAndSubclassWindow(HWND hWnd) {
     // if (sGuiSettings.uServices & TFTPD32_TFTP_CLIENT)
     {
         hNW = CreateBckgWindow(hWnd, WM_INITCLIENT, (WNDPROC)TftpClientProc, TFTP_CLIENT_CLASS, APPLICATION);
-#ifdef ONLY32BITS
-       SetWindowLong (GetDlgItem (hWnd, IDC_CLIENT_BROWSE),      GWL_USERDATA, (LONG) hNW);
-       SetWindowLong (GetDlgItem (hWnd, IDC_CLIENT_GET_BUTTON),  GWL_USERDATA, (LONG) hNW);
-       SetWindowLong (GetDlgItem (hWnd, IDC_CLIENT_SEND_BUTTON), GWL_USERDATA, (LONG) hNW);
-       SetWindowLong (GetDlgItem (hWnd, IDC_CLIENT_BREAK_BUTTON),GWL_USERDATA, (LONG) hNW);
-#endif
         SetWindowLongPtr(GetDlgItem(hWnd, IDC_CLIENT_BROWSE), GWLP_USERDATA, (LONG_PTR)hNW);
         SetWindowLongPtr(GetDlgItem(hWnd, IDC_CLIENT_GET_BUTTON), GWLP_USERDATA, (LONG_PTR)hNW);
         SetWindowLongPtr(GetDlgItem(hWnd, IDC_CLIENT_SEND_BUTTON), GWLP_USERDATA, (LONG_PTR)hNW);
@@ -740,18 +726,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
             ComboBox_SetText((HWND) lParam, sGuiSettings.szWorkingDirectory);
             break;
 
-
-#ifdef OLD_CODE
-       ////////////////////////////////
-       // Sent by IP address background window
-       case WM_ADD_IP_CB :
-           if ( (void *) lParam!=NULL )    HostEntry = * (struct hostent *) lParam;
-           Rc = FillCBLocalIP (GetDlgItem (hWnd, IDC_CB_IP), TRUE, sGuiSettings.szLocalIP);
-           SetDlgItemText (hWnd, IDC_TXT_ADDRESS, Rc>=2 ? "Server interface" : "Server interfaces" );
-           // Settings button can be safely allowed
-           Button_Enable (GetDlgItem (hWnd, IDC_SETTINGS_BUTTON), TRUE);
-           break;
-#endif
 
         ////////////////////////////////////////////////////
         // GUI

@@ -170,7 +170,6 @@
     <ClCompile Include=".\services\tftpd_util.c" />
     <ClCompile Include=".\services\tftp_dbg.c" />
     <ClCompile Include=".\services\to_console.c" />
-    <ClCompile Include="main\firewall.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include=".\gui\tftpd32.rc" />

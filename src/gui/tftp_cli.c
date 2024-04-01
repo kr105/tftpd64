@@ -283,16 +283,6 @@ static SOCKET TftpProcessOACK(void) {
         if (IS_OPT(pOpt, TFTP_OPT_BLKSIZE)) {
             // prendre la valeur 
             sTC.nPktSize = atoi(pValue);
-#ifdef JKKLLKJLKJLKLKJKLLKJ
-      // If read -> send a ack of block #0
-           if (sTC.opcode==TFTP_RRQ)
-      {
-          tps->th_opcode = htons (TFTP_ACK);
-         tps->th_block = htons (0);
-         SetTimer (hTftpClientWnd, WM_CLIENT_DATA, sTC.dwTimeout, NULL);
-            send (sTC.s, (char *) tps, TFTP_DATA_HEADERSIZE, 0);
-       }
-#endif
         } // option BlkSize
 
         if (IS_OPT(pOpt, TFTP_OPT_PORT)) {
