@@ -9,4 +9,4 @@ Tftpd64 is a lightweight multi-threaded set of servers : TFTP, DNS, SNTP, SYSLOG
 
 
 
-![tftpd64](https://github.com/kr105/tftpd64/raw/master/images/Documentation_tftpd32.jpg)
+![tftpd64](https://github.com/kr105/tftpd64/raw/main/images/Documentation_tftpd32.jpg)
