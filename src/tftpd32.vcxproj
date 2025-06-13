@@ -1,17 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|x64">
-      <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{D473F930-F0BE-4F67-9941-280EBD6D0026}</ProjectGuid>
     <RootNamespace>tftpd32</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -27,236 +29,150 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>NotSet</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>NotSet</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
-    <UseOfMfc>false</UseOfMfc>
-    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  <ImportGroup Label="Shared">
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
-    <TargetExt>.exe</TargetExt>
-    <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.</IncludePath>
-    <LibraryPath>$(SolutionDir)obj\$(PlatformShortName)\libs\$(Configuration);$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IntDir>$(SolutionDir)obj\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
-    <TargetExt>.exe</TargetExt>
-    <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
-    <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
-    <LibraryPath>$(SolutionDir)obj\$(PlatformShortName)\libs\$(Configuration);$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
-    <TargetExt>.exe</TargetExt>
-    <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
-    <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.</IncludePath>
-    <LibraryPath>$(SolutionDir)obj\$(PlatformShortName)\libs\$(Configuration);$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>$(SolutionDir)obj\$(PlatformShortName)\$(ProjectName)\$(Configuration)\</IntDir>
-    <TargetExt>.exe</TargetExt>
-    <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
-    <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);_common;.;E:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include;E:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</IncludePath>
-    <LibraryPath>$(SolutionDir)obj\$(PlatformShortName)\libs\$(Configuration);$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;MSVC;TFTPD32;STANDALONE_EDITION;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>STANDALONE_EDITION;TFTPD32;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>common;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>shell32.lib;ws2_32.lib;comctl32.lib;iphlpapi.lib;mswsock.lib;libs.$(PlatformShortName).lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <Version>4.64</Version>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalOptions>/SUBSYSTEM:WINDOWS,"5.01" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>libs.lib;comctl32.lib;iphlpapi.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(PlatformShortName)\$(Configuration)\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <Manifest>
-      <OutputManifestFile>
-      </OutputManifestFile>
-    </Manifest>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;MSVC;TFTPD32;STANDALONE_EDITION;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>shell32.lib;ws2_32.lib;comctl32.lib;iphlpapi.lib;mswsock.lib;libs.$(PlatformShortName).lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <Version>4.64</Version>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalOptions>/SUBSYSTEM:WINDOWS,"5.02" %(AdditionalOptions)</AdditionalOptions>
-    </Link>
-    <Manifest>
-      <OutputManifestFile>
-      </OutputManifestFile>
-    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalUsingDirectories>
-      </AdditionalUsingDirectories>
-      <PreprocessorDefinitions>WIN32;MSVC;TFTPD32;STANDALONE_EDITION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <PreprocessorDefinitions>STANDALONE_EDITION;TFTPD32;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>common;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>shell32.lib;ws2_32.lib;comctl32.lib;iphlpapi.lib;mswsock.lib;libs.$(PlatformShortName).lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <Version>4.64</Version>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalOptions>/SUBSYSTEM:WINDOWS,"5.01" %(AdditionalOptions)</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libs.lib;comctl32.lib;iphlpapi.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(PlatformShortName)\$(Configuration)\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <Manifest>
-      <OutputManifestFile>
-      </OutputManifestFile>
-    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>STANDALONE_EDITION;TFTPD32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>common;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libs.lib;comctl32.lib;iphlpapi.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(PlatformShortName)\$(Configuration)\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalUsingDirectories>
-      </AdditionalUsingDirectories>
-      <PreprocessorDefinitions>WIN32;MSVC;TFTPD32;STANDALONE_EDITION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <DebugInformationFormat>
-      </DebugInformationFormat>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <StringPooling>true</StringPooling>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <CompileAs>CompileAsC</CompileAs>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <PreprocessorDefinitions>STANDALONE_EDITION;TFTPD32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>common;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-      <EnableCOMDATFolding>
-      </EnableCOMDATFolding>
-      <OptimizeReferences>
-      </OptimizeReferences>
-      <AdditionalDependencies>shell32.lib;ws2_32.lib;comctl32.lib;iphlpapi.lib;mswsock.lib;libs.$(PlatformShortName).lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <Version>4.64</Version>
-      <AdditionalLibraryDirectories>\tftpd32\BIN\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <IgnoreSpecificDefaultLibraries>
-      </IgnoreSpecificDefaultLibraries>
       <SubSystem>Windows</SubSystem>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalOptions>/SUBSYSTEM:WINDOWS,"5.02" %(AdditionalOptions)</AdditionalOptions>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libs.lib;comctl32.lib;iphlpapi.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(PlatformShortName)\$(Configuration)\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <Manifest>
-      <OutputManifestFile>
-      </OutputManifestFile>
-    </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include=".\_common\dialog_common.c" />
-    <ClCompile Include=".\_common\setinifilename.c" />
-    <ClCompile Include=".\_gui\about.c" />
-    <ClCompile Include=".\_gui\browse.c" />
-    <ClCompile Include=".\_gui\gui_bootpd.c" />
-    <ClCompile Include=".\_gui\gui_bootpd_settings.c" />
-    <ClCompile Include=".\_gui\gui_dialog.c" />
-    <ClCompile Include=".\_gui\gui_dns.c" />
-    <ClCompile Include=".\_gui\gui_gauges.c" />
-    <ClCompile Include=".\_gui\gui_log.c" />
-    <ClCompile Include=".\_gui\gui_main.c" />
-    <ClCompile Include=".\_gui\gui_move_win.c" />
-    <ClCompile Include=".\_gui\gui_settings.c" />
-    <ClCompile Include=".\_gui\gui_syslogd.c" />
-    <ClCompile Include=".\_gui\gui_tftpd.c" />
-    <ClCompile Include=".\_gui\gui_tftp_dir.c" />
-    <ClCompile Include=".\_gui\tftp_cli.c" />
-    <ClCompile Include=".\_main\cmd_line.c" />
-    <ClCompile Include=".\_main\main.c" />
-    <ClCompile Include=".\_main\outofthebox.c" />
-    <ClCompile Include=".\_services\async_log.c" />
-    <ClCompile Include=".\_services\bootpd.c" />
-    <ClCompile Include=".\_services\bootpd_console.c" />
-    <ClCompile Include=".\_services\bootpd_util.c" />
-    <ClCompile Include=".\_services\console_actions.c" />
-    <ClCompile Include=".\_services\dns.c" />
-    <ClCompile Include=".\_services\ip_thread.c" />
-    <ClCompile Include=".\_services\ip_util.c" />
-    <ClCompile Include=".\_services\registry_thread.c" />
-    <ClCompile Include=".\_services\service_main.c" />
-    <ClCompile Include=".\_services\settings.c" />
-    <ClCompile Include=".\_services\sntpd.c" />
-    <ClCompile Include=".\_services\start_threads.c" />
-    <ClCompile Include=".\_services\syslogd.c" />
-    <ClCompile Include=".\_services\tftpd_main.c" />
-    <ClCompile Include=".\_services\tftpd_thread.c" />
-    <ClCompile Include=".\_services\tftpd_util.c" />
-    <ClCompile Include=".\_services\tftp_dbg.c" />
-    <ClCompile Include=".\_services\to_console.c" />
-    <ClCompile Include="_main\firewall.c" />
+    <ClCompile Include="common\dialog_common.c" />
+    <ClCompile Include="common\setinifilename.c" />
+    <ClCompile Include="gui\about.c" />
+    <ClCompile Include="gui\browse.c" />
+    <ClCompile Include="gui\gui_bootpd_settings.c" />
+    <ClCompile Include="gui\gui_bootpd.c" />
+    <ClCompile Include="gui\gui_dialog.c" />
+    <ClCompile Include="gui\gui_dns.c" />
+    <ClCompile Include="gui\gui_gauges.c" />
+    <ClCompile Include="gui\gui_log.c" />
+    <ClCompile Include="gui\gui_main.c" />
+    <ClCompile Include="gui\gui_move_win.c" />
+    <ClCompile Include="gui\gui_settings.c" />
+    <ClCompile Include="gui\gui_syslogd.c" />
+    <ClCompile Include="gui\gui_tftp_dir.c" />
+    <ClCompile Include="gui\gui_tftpd.c" />
+    <ClCompile Include="gui\tftp_cli.c" />
+    <ClCompile Include="main\cmd_line.c" />
+    <ClCompile Include="main\main.c" />
+    <ClCompile Include="main\outofthebox.c" />
+    <ClCompile Include="services\async_log.c" />
+    <ClCompile Include="services\bootpd_console.c" />
+    <ClCompile Include="services\bootpd_util.c" />
+    <ClCompile Include="services\bootpd.c" />
+    <ClCompile Include="services\console_actions.c" />
+    <ClCompile Include="services\dns.c" />
+    <ClCompile Include="services\ip_thread.c" />
+    <ClCompile Include="services\ip_util.c" />
+    <ClCompile Include="services\registry_thread.c" />
+    <ClCompile Include="services\service_main.c" />
+    <ClCompile Include="services\settings.c" />
+    <ClCompile Include="services\sntpd.c" />
+    <ClCompile Include="services\start_threads.c" />
+    <ClCompile Include="services\syslogd.c" />
+    <ClCompile Include="services\tftp_dbg.c" />
+    <ClCompile Include="services\tftpd_main.c" />
+    <ClCompile Include="services\tftpd_thread.c" />
+    <ClCompile Include="services\tftpd_util.c" />
+    <ClCompile Include="services\to_console.c" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include=".\_gui\tftpd32.rc" />
+    <ResourceCompile Include="gui\tftpd32.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

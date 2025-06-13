@@ -1,0 +1,15 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Store intermediate outputs in a shared top-level obj/ directory -->
+  <PropertyGroup Condition=" '$(IntDir)' == '' AND '$(IntermediateOutputPath)' == '' ">
+    <IntDir Condition=" '$(Platform)' == 'Win32' ">$(SolutionDir)obj\x86\$(Configuration)\$(MSBuildProjectName)\</IntDir>
+    <IntDir Condition=" '$(Platform)' != 'Win32' ">$(SolutionDir)obj\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</IntDir>
+  </PropertyGroup>
+
+  <!-- Store build outputs in a shared top-level bin/ directory -->
+  <PropertyGroup Condition=" '$(OutDir)' == '' AND '$(SolutionDir)' != '' ">
+    <OutDir Condition=" '$(Platform)' == 'Win32' ">$(SolutionDir)bin\x86\$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    <OutDir Condition=" '$(Platform)' != 'Win32' ">$(SolutionDir)bin\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
+  </PropertyGroup>
+
+</Project>
