@@ -31,8 +31,8 @@ jobs:
     - name: Copy the readme and license files
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: |
-        cp license.md ./bin/Release/license.txt
-        cp readme.txt ./bin/Release/readme.txt
+        cp license.md ./bin/${{ matrix.architecture }}/Release/license.txt
+        cp readme.txt ./bin/${{ matrix.architecture }}/Release/readme.txt
     - name: Get short SHA
       run: echo "SHORT_SHA=$("${{ github.sha }}".SubString(0, 8))" >> $env:GITHUB_ENV
     - name: Upload Artifacts
@@ -40,4 +40,4 @@ jobs:
       if: ${{ github.event_name == 'push' }}
       with:
         name: tftpd64-${{ matrix.architecture }}-${{ env.SHORT_SHA }}
-        path: ./bin/Release/
+        path: ./bin/${{ matrix.architecture }}/Release/
